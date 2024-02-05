@@ -1,18 +1,13 @@
 from models.constants.employee_role import EmployeeRole
 
 class Employee():
-    def __init__(self, id:int, username:str, first_name:str, last_name:str, password:str, employee_role : EmployeeRole = 'employee') -> None:
-        self._id = id
+    def __init__(self, username:str, first_name:str, last_name:str, password:str, employee_role : EmployeeRole = 'employee') -> None:
         self.username = username
         self.first_name = first_name
         self.last_name = last_name
         self.password = password
         self._employee_role = employee_role
-    
-    @property
-    def id (self):
-        return self._id
-    
+
     @property
     def username(self):
         return self._username
@@ -31,7 +26,7 @@ class Employee():
     def first_name(self):
         return self._first_name
     
-    @first_name.setter
+    @first_name.setter #ELIF FOR TYPE
     def first_name(self, value):
         if len(value) < 2 or len(value) > 15:
             raise ValueError('Name should be between 3 and 10 symbols.')
@@ -41,7 +36,7 @@ class Employee():
     def last_name(self):
         return self._last_name
     
-    @last_name.setter
+    @last_name.setter #ELIF for type
     def last_name(self, value):
         if len(value) < 2 or len(value) > 15:
             raise ValueError('Name should be between 3 and 10 symbols.')

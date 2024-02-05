@@ -1,5 +1,6 @@
 from models.constants.make import Make
-class Actros:
+class Actros: # Create base class Trucks
+
         
     CAPACITY = 26000
     MAX_RANGE = 13000

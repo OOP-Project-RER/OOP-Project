@@ -1,5 +1,5 @@
 from models.constants.make import Make
-class Scania:
+class Scania: # Create base class Trucks
         
     CAPACITY = 42000
     MAX_RANGE = 8000

@@ -1,8 +1,8 @@
 class PackageStatus:
-    CREATED = 'Shipment created'
-    TRANSIT = 'Package in transit'
-    DELIVERED = 'Package deliveretd'
-    keys = ['Shipment created', 'Package in transit', 'Package deliveretd']
+    IN_THE_HUB = 'In the hub' 
+    ON_THE_WAY = 'On the way'
+    FINAL_DESTINATION_REACHED = 'Final destination reached'
+    keys = ['In the hub', 'On the way', 'Final destination reached']
     
     @classmethod
     def next(cls, current: str):
