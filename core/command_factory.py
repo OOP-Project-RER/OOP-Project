@@ -3,6 +3,7 @@ from core.models_factory import ModelsFactory
 from commands.register_employee import RegisterEmployee
 from commands.logout_command import LogoutCommand
 from commands.login_command import LoginCommand
+from commands.add_package import AddPackageCommand
 
 class CommandFactory:
     def __init__(self, data: ApplicationData):
@@ -19,3 +20,7 @@ class CommandFactory:
         if cmd.lower() == 'login':
             return LoginCommand(params, self._app_data)
         
+        if cmd.lower() == "registeremployee":
+            return RegisterEmployee(params, self._app_data)
+        if cmd.lower() == "addpackage":
+            return AddPackageCommand(params, self._app_data)
