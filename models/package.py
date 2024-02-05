@@ -1,10 +1,11 @@
 from errors.application_error import ApplicationError
 from models.constants.status import PackageStatus
 from models.constants.locations import Locations
+from models.customer import Customer
 
 
 class Package:
-    def __init__(self, package_id: int, start_location: Locations, end_location: Locations, package_weight: float, contact_customer: str) -> None:
+    def __init__(self, package_id: int, start_location: Locations, end_location: Locations, package_weight: float, contact_customer: Customer) -> None:
         
         if package_weight <= 0:
             raise ApplicationError('Invalid value for package_weight!')

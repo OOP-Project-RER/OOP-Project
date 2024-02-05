@@ -21,6 +21,6 @@ class CommandFactory:
         if cmd.lower() == 'login':
             return LoginCommand(params, self._app_data)
         if cmd.lower() == "addpackage":
-            return AddPackageCommand(params, self._app_data)
+            return AddPackageCommand(params, self._app_data, self._app_data)
         
         raise ApplicationError(f'Invalid command name: {cmd}!')

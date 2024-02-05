@@ -18,6 +18,13 @@ class Locations:
     darwin = {SYD: 3935, MEL: 3752, ADL: 3027, ASP: 1497, BRI: 3426, PER: 4025}
     perth = {SYD: 4016, MEL: 3509, ADL: 2785, ASP: 2481, BRI: 4311, DAR: 4025}
 
+    def __init__(self, city) -> None:
+        self._city = city
+
+    @property
+    def city(self):
+        return self._city
+
     @classmethod
     def from_string(cls, location_string):
         if location_string not in [cls.SYD, cls.MEL, cls.ADL, cls.ASP, cls.BRI, cls.DAR, cls.PER]:
