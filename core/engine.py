@@ -9,11 +9,14 @@ class Engine:
     def start(self):
         output: list[str] = []
         while True:
-            input_line = input()
-            if input_line.lower() == 'end':
-                break
+            try:
+                input_line = input()
+                if input_line.lower() == 'end':
+                    break
 
-            command = self._command_factory.create(input_line)
-            output.append(command.execute())
+                command = self._command_factory.create(input_line)
+                output.append(command.execute())
+            except Exception as err:
+                output.append(err.args[0])
 
         print('\n'.join(output))
