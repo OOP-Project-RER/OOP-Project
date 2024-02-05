@@ -21,13 +21,13 @@ class Customer:
     
     def check_first_name(self, value):
         if len(value) < 2 or len(value) > 15:
-            raise ApplicationError( 'Firstname must be between 2 and 20 characters long!')
+            raise ApplicationError('Firstname must be between 2 and 20 characters long!')
     
         return value
     
     def check_last_name(self, value):
         if len(value) < 2 or len(value) > 15:
-            raise ApplicationError( 'Firstname must be between 2 and 20 characters long!')
+            raise ApplicationError('Firstname must be between 2 and 20 characters long!')
     
         return value
     
