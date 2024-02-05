@@ -1,6 +1,8 @@
 from errors.application_error import ApplicationError
-from models.status import PackageStatus
+from models.constants.status import PackageStatus
 from models.constants.locations import Locations
+
+
 class Package:
     def __init__(self, package_id: int, start_location: Locations, end_location: Locations, package_weight: float, contact_customer: str) -> None:
         self._package_id = package_id
@@ -8,7 +10,9 @@ class Package:
         self._end_location = end_location
         self._package_weight = package_weight
         self._contact_customer = contact_customer
-        self._status = PackageStatus.CREATED
+        self._status = PackageStatus.IN_THE_HUB
+        if package_weight <= 0:
+            raise ApplicationError('Invalid value for package_weight!')
 
     @property
     def package_id(self):
@@ -33,6 +37,8 @@ class Package:
     
     
     def __str__(self) -> str:
-        pass
-
-    #Create function that check the package_weight is more than 0
+        return f'''Package №: {self.package_id}
+From: {self._start_location}
+To: {self._end_location}
+Weight: {self._package_weight}
+Status: {self._status}'''
