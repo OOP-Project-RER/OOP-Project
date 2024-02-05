@@ -7,6 +7,7 @@ class Route:
         self._route_id = route_id
         self._locations: list[Locations] = []
         self._truck_list: list[Trucks] = []
+        
 
     @property
     def route_id(self):
