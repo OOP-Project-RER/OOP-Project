@@ -1,3 +1,4 @@
+from errors.application_error import ApplicationError
 from core.application_data import ApplicationData
 from core.models_factory import ModelsFactory
 from commands.register_employee import RegisterEmployee
@@ -23,3 +24,4 @@ class CommandFactory:
             return RegisterEmployee(params, self._app_data)
         if cmd.lower() == "addpackage":
             return AddPackageCommand(params, self._app_data)
+        raise ApplicationError(f'Invalid command name: {cmd}!')
