@@ -1,4 +1,5 @@
 from models.constants.employee_role import EmployeeRole
+from errors.application_error import ApplicationError
 
 class Employee():
     def __init__(self, username:str, first_name:str, last_name:str, password:str, employee_role : EmployeeRole = 'employee') -> None:
@@ -16,9 +17,9 @@ class Employee():
     def username(self, value):
         special_symbols = ['!','£','$','%','&','(',')','<','>','/']
         if len(value) < 2 or len(value) > 20:
-            raise  ValueError('Username must be between 2 and 20 characters long!')
+            raise  ApplicationError('Username must be between 2 and 20 characters long!')
         elif [sym for sym in value if sym in special_symbols]:
-            raise ValueError('Username contains invalid symbols!')
+            raise ApplicationError('Username contains invalid symbols!')
         else:
             self._username = value
     
@@ -26,22 +27,26 @@ class Employee():
     def first_name(self):
         return self._first_name
     
-    @first_name.setter #ELIF FOR TYPE
+    @first_name.setter 
     def first_name(self, value):
         if len(value) < 2 or len(value) > 15:
-            raise ValueError('Name should be between 3 and 10 symbols.')
-
-        self._first_name = value
+            raise ApplicationError('Name should be between 3 and 10 symbols.')
+        elif type(value) != str:
+            raise ApplicationError('Name should be  letters')
+        else:
+            self._first_name = value
     @property
     def last_name(self):
         return self._last_name
     
-    @last_name.setter #ELIF for type
+    @last_name.setter 
     def last_name(self, value):
         if len(value) < 2 or len(value) > 15:
-            raise ValueError('Name should be between 3 and 10 symbols.')
-
-        self._last_name = value
+            raise ApplicationError('Name should be between 3 and 10 symbols.')
+        elif type(value) != str:
+            raise ApplicationError('Name should be letters')
+        else:
+            self._last_name = value
     @property
     def password(self):
         return self._password
@@ -50,10 +55,10 @@ class Employee():
     def password(self, value):
         special_symbols = ['!','£','$','%','&','(',')','<','>','/']
         if len(value) < 5 or len(value) > 30:
-            raise ValueError('Password must be between 5 and 30 characters long!')
+            raise ApplicationError('Password must be between 5 and 30 characters long!')
         
         elif [sym for sym in value if sym in special_symbols]:
-            raise ValueError('Password contains invalid symbols!')
+            raise ApplicationError('Password contains invalid symbols!')
         
         else:
             self._password = value
