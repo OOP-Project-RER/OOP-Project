@@ -18,7 +18,7 @@ class AddPackageCommand(BaseCommand):
         package_id_str, start_location, end_location, package_weight_str, contact_customer_str = self._params
         package_id = try_parse_int(package_id_str)
         package_weight = try_parse_float(package_weight_str)
-        contact_customer = Customer(contact_customer_str)
+        contact_customer = Customer((contact_customer_str).split())
         package = self.models_factory.create_package(package_id, start_location, end_location, package_weight, contact_customer)
         self.app_data.add_package(package)
 
