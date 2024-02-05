@@ -6,7 +6,7 @@ class Route:
     def __init__(self, route_id: int) -> None:
         self._route_id = route_id
         self._locations: list[Locations] = []
-        self._truck_list: list[Trucks]
+        self._truck_list: list[Trucks] = []
 
     @property
     def route_id(self):
