@@ -37,6 +37,8 @@ class Package:
     
     
     def __str__(self) -> str:
-        pass
-
-    #Create function that check the package_weight is more than 0
+        return f'''Package №: {self.package_id}
+From: {self._start_location}
+To: {self._end_location}
+Weight: {self._package_weight}
+Status: {self._status}'''
