@@ -2,15 +2,14 @@ from commands.base.base_command import BaseCommand
 from core.application_data import ApplicationData
 from models.constants.employee_role import EmployeeRole
 
-
-
-
 class RegisterEmployee(BaseCommand):
     def __init__(self, params: list[str], app_data: ApplicationData):
         super().__init__(params, app_data)
 
     def execute(self):
-        #super().execute()
+        super().execute()
+        self._throw_if_employee_logged_in()
+
         username, firstname, lastname, password, *rest = self.params
 
         if rest == []:
@@ -18,8 +17,14 @@ class RegisterEmployee(BaseCommand):
         else:
             employee_role = EmployeeRole.from_string(rest[0])
 
-        user = self._app_data.create_user(
+        employee = self._app_data.create_employee(
             username, firstname, lastname, password, employee_role)
-        #self._app_data.login(user)
+        self._app_data.login(employee)
 
-        return f'User {user.username} registered successfully!'
+        return f'User {employee.username} registered successfully!'
+    
+    def _requires_login(self) -> bool:
+        return False
+
+    def _expected_params_count(self) -> int:
+        return 4

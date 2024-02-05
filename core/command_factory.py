@@ -1,6 +1,8 @@
 from core.application_data import ApplicationData
 from core.models_factory import ModelsFactory
 from commands.register_employee import RegisterEmployee
+from commands.logout_command import LogoutCommand
+from commands.login_command import LoginCommand
 
 class CommandFactory:
     def __init__(self, data: ApplicationData):
@@ -10,5 +12,10 @@ class CommandFactory:
     def create(self, input_line):
         cmd, *params = input_line.split()
 
-        if cmd.lower() == "registeremployee":
+        if cmd.lower() == 'registeremployee':
             return RegisterEmployee(params, self._app_data)
+        if cmd.lower() == 'logout':
+            return LogoutCommand(params, self._app_data)
+        if cmd.lower() == 'login':
+            return LoginCommand(params, self._app_data)
+        

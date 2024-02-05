@@ -9,7 +9,7 @@ class ApplicationData:
     def employees(self):
         return tuple(self._employees)
 
-    def create_user(self, username, firstname, lastname, password, user_role) -> Employee:
+    def create_employee(self, username, firstname, lastname, password, user_role) -> Employee:
         if len([u for u in self._employees if u.username == username]) > 0:
             raise ValueError(
                 f'User {username} already exist. Choose a different username!')
@@ -18,3 +18,27 @@ class ApplicationData:
         self._employees.append(employee)
 
         return employee
+    
+    def find_employee_by_username(self, username: str) -> Employee:
+        filtered = [employee for employee in self._employees if employee.username == username]
+        if filtered == []:
+            raise ValueError(f'There is no employee with username {username}!')
+
+        return filtered[0]
+    
+    @property
+    def logged_in_employee(self):
+        if self.has_logged_in_employee:
+            return self._logged_employee
+        else:
+            raise ValueError('There is no logged in employee.')
+
+    @property
+    def has_logged_in_employee(self):
+        return self._logged_employee is not None
+
+    def login(self, employee: Employee):
+        self._logged_employee = employee
+
+    def logout(self):
+        self._logged_employee = None
