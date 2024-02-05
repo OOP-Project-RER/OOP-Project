@@ -14,7 +14,7 @@ class Package:
         self._end_location = end_location
         self._package_weight = package_weight
         self._contact_customer = contact_customer
-        self._status = PackageStatus.IN_THE_HUB
+        self._status = PackageStatus.STENDING
         # list with packages
         
 
