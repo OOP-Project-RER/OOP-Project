@@ -1,5 +1,5 @@
 
-from models.trucks import Trucks
+from models.scania import Trucks
 
 
 class ApplicationData:
