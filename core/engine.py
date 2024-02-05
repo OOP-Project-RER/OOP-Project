@@ -1,4 +1,4 @@
-
+from errors.application_error import ApplicationError
 from core.command_factory import CommandFactory
 
 
@@ -19,6 +19,8 @@ class Engine:
                 print('-----------------------')
                 print(command.execute())
                 print()
+            except ApplicationError as e:
+                print(e)
             except Exception as err:
                 #output.append(err.args[0])
                 print(err.args[0])
