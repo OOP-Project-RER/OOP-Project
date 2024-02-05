@@ -1,6 +1,6 @@
 from errors.application_error import ApplicationError
 from models.constants.locations import Locations
-from models.truck import Trucks
+from models.trucks.trucks import Trucks
 
 class Route:
     def __init__(self, route_id: int) -> None:
