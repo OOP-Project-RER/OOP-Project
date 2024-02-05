@@ -13,3 +13,15 @@ class Man(Trucks):
         self.capacity = Man.CAPACITY
         self.max_range = Man.MAX_RANGE
         self.num_of_trucks = Man.NUMBER_OF_TRUCKS
+
+    @property
+    def capacity(self):
+        return self._capacity
+    
+    @property
+    def max_range(self):
+        return self._max_range
+    
+    @property
+    def num_of_trucks(self):
+        return self._num_of_trucks
