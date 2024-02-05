@@ -1,7 +1,7 @@
 from core.application_data import ApplicationData
 from core.models_factory import ModelsFactory
 from commands.register_employee import RegisterEmployee
-from commands.create_package import CreatePackage
+from commands.add_package import AddPackageCommand
 
 class CommandFactory:
     def __init__(self, data: ApplicationData):
@@ -14,4 +14,4 @@ class CommandFactory:
         if cmd.lower() == "registeremployee":
             return RegisterEmployee(params, self._app_data)
         if cmd.lower() == "addpackage":
-            return CreatePackage(params, self._app_data)
+            return AddPackageCommand(params, self._app_data)
