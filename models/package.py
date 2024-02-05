@@ -5,14 +5,19 @@ from models.constants.locations import Locations
 
 class Package:
     def __init__(self, package_id: int, start_location: Locations, end_location: Locations, package_weight: float, contact_customer: str) -> None:
+        
+        if package_weight <= 0:
+            raise ApplicationError('Invalid value for package_weight!')
+
         self._package_id = package_id
         self._start_location = start_location
         self._end_location = end_location
         self._package_weight = package_weight
         self._contact_customer = contact_customer
         self._status = PackageStatus.IN_THE_HUB
-        if package_weight <= 0:
-            raise ApplicationError('Invalid value for package_weight!')
+        # list with packages
+        
+
 
     @property
     def package_id(self):
