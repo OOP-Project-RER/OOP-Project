@@ -1,8 +1,8 @@
 class PackageStatus:
-    IN_THE_HUB = 'In the hub' 
-    ON_THE_WAY = 'On the way'
-    FINAL_DESTINATION_REACHED = 'Final destination reached'
-    keys = ['In the hub', 'On the way', 'Final destination reached']
+    STENDING = 'Stending' 
+    IN_PROGRESS = 'In_porgress'
+    FINISHED = 'Finished'
+    keys = ['Stending', 'In_porgress', 'Finished']
     
     @classmethod
     def next(cls, current: str):
