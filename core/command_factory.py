@@ -19,8 +19,5 @@ class CommandFactory:
             return LogoutCommand(params, self._app_data)
         if cmd.lower() == 'login':
             return LoginCommand(params, self._app_data)
-        
-        if cmd.lower() == "registeremployee":
-            return RegisterEmployee(params, self._app_data)
         if cmd.lower() == "addpackage":
             return AddPackageCommand(params, self._app_data)
