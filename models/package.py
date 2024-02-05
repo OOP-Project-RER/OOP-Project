@@ -1,6 +1,8 @@
 from errors.application_error import ApplicationError
-from models.status import PackageStatus
+from models.constants.status import PackageStatus
 from models.constants.locations import Locations
+
+
 class Package:
     def __init__(self, package_id: int, start_location: Locations, end_location: Locations, package_weight: int, contact_customer: str) -> None:
         self._package_id = package_id
