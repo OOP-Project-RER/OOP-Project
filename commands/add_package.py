@@ -1,7 +1,7 @@
-from comands.base.base_command import BaseCommand
+from commands.base.base_command import BaseCommand
 from core.application_data import ApplicationData
 from core.models_factory import ModelsFactory
-from comands.validation_helpers import validate_params_count, try_parse_float, try_parse_int
+from commands.validation_helpers import validate_params_count, try_parse_float, try_parse_int
 from models.customer import Customer
 
 class AddPackageCommand(BaseCommand):
