@@ -1,41 +1,44 @@
 from commands.base.base_command import BaseCommand
 from core.application_data import ApplicationData
 from commands.validation_helpers import validate_params_count
-from models.constants.locations import Locations
-from models.constants.status import PackageStatus
+from models.constants.status import Status
 from itertools import groupby
 
 
 class ViewUnsentPackagesCommand(BaseCommand):
-    def __init__(self, params: list[str], app_data: ApplicationData, surched_location = None):
+    def __init__(self, params: list[str], app_data: ApplicationData, searched_location = None):
         super().__init__(params, app_data)
-        self._surched_location = surched_location
-        validate_params_count(params, 1)
+        self._searched_location = searched_location
+        # validate_params_count(params, 3, 4)
 
     @property
-    def surched_location(self):
-        return self._surched_location
+    def searched_location(self):
+        return self._searched_location
 
     def execute(self):
+        if self._searched_location:
+            unsent_packages = [pack for pack in self.app_data._all_packages_list if pack._status == Status.STENDING and pack._start_location == self._searched_location]
+            if unsent_packages:
+                return self.format_packages(unsent_packages)
+            else:
+                return f"No unsent packages found for the location '{self._searched_location}'."
+        else:
+            unsent_packages = [pack for pack in self.app_data._all_packages_list if pack._status == Status.STENDING]
+            if unsent_packages:
+                sorted_packages = sorted(unsent_packages, key=lambda x: x._start_location)
+                groups = groupby(sorted_packages, key=lambda x: x._start_location)
+                result = ""
+                for key, group in groups:
+                    result += self.format_packages(list(group), key)
+                return result
+            else:
+                return "No unsent packages found."
 
-        if self._surched_location != None:
-            sorted_packages = sorted([pack for pack in self.app_data._all_packages_list if pack._status == PackageStatus.STENDING], key=lambda x: x._start_location)
-            groups = groupby(sorted_packages, key=lambda x: x._start_location)
-
-            for key, group in groups:
-                group_list = list(group)
-                total_waight = sum([w[3] for w in group_list])
-                amount = len(group_list)
-                end_locations = [l[1] for l in group_list]
-                if key == self._surched_location:
-                    result = f'''Start location: {key}
-                    - Amount of packages: {amount}
-                    - Total waight: {total_waight}
-                    - End locations: {list(end_locations)}'''
-                    return result
-                else:
-                    result = f'''Start location: {key}
-                    - Amount of packages: {amount}
-                    - Total waight: {total_waight}
-                    - End locations: {list(end_locations)}'''
-                    return result
+    def format_packages(self, packages, location=None):
+        total_weight = sum(pack._package_weight for pack in packages)
+        amount = len(packages)
+        end_locations = [pack._end_location for pack in packages]
+        if location:
+            return f"Start location: {location}\n - Amount of packages: {amount}\n - Total weight: {total_weight}\n - End locations: {end_locations}\n"
+        else:
+            return f"Total amount of packages: {amount}\nTotal weight: {total_weight}\n"
