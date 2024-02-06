@@ -5,6 +5,7 @@ from commands.register_employee import RegisterEmployee
 from commands.logout_command import LogoutCommand
 from commands.login_command import LoginCommand
 from commands.add_package import AddPackageCommand
+from commands.show_trucks_in import ShowTrucksIn
 
 class CommandFactory:
     def __init__(self, data: ApplicationData):
@@ -22,5 +23,7 @@ class CommandFactory:
             return LoginCommand(params, self._app_data)
         if cmd.lower() == "addpackage":
             return AddPackageCommand(params, self._app_data, self._models_factory)
+        if cmd.lower() == 'showtrucksin':
+            return ShowTrucksIn(params, self._app_data)
         
         raise ApplicationError(f'Invalid command name: {cmd}!')
