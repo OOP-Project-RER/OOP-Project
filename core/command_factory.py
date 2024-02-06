@@ -26,7 +26,6 @@ class CommandFactory:
             return AddPackageCommand(params, self._app_data, self._models_factory)
         if cmd.lower() == 'showtrucksin':
             return ShowTrucksIn(params, self._app_data)
-        
         if cmd.lower() == "viewunsentpackages":
             return ViewUnsentPackagesCommand(params, self._app_data)
 
