@@ -1,4 +1,5 @@
 from models.package import Package
+
 class Trucks:
     def __init__(self, name: str, truck_id: int=0, capacity: float=0, max_range: int=0, num_of_trucks: int=0):
         self.truck_id = truck_id
@@ -25,6 +26,9 @@ class Trucks:
         return tuple(self._packages)
     
     def add_package(self, package: Package):
+        if package.package_weight > self._capacity:
+            raise ValueError("Package weight is bigger than truck capacity")
+        self._capacity -= package.package_weight 
         self._packages.append(package)
 
     def view(self):
