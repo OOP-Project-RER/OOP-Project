@@ -1,5 +1,5 @@
 from errors.application_error import ApplicationError
-from models.constants.status import PackageStatus
+from models.constants.status import Status
 from models.constants.locations import Locations
 from models.customer import Customer
 
@@ -15,7 +15,7 @@ class Package:
         self._end_location = end_location
         self._package_weight = package_weight
         self._contact_customer = contact_customer
-        self._status = PackageStatus.STENDING
+        self._status = Status.STENDING
         # list with packages
         
 
