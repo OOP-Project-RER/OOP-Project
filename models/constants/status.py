@@ -1,4 +1,4 @@
-class PackageStatus:
+class Status:
     STENDING = 'Stending' 
     IN_PROGRESS = 'In_porgress'
     FINISHED = 'Finished'
