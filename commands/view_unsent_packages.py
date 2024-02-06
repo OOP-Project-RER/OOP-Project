@@ -9,7 +9,7 @@ class ViewUnsentPackagesCommand(BaseCommand):
     def __init__(self, params: list[str], app_data: ApplicationData, searched_location = None):
         super().__init__(params, app_data)
         self._searched_location = searched_location
-        # validate_params_count(params, 3, 4)
+        validate_params_count(params, 1)
 
     @property
     def searched_location(self):
@@ -25,8 +25,8 @@ class ViewUnsentPackagesCommand(BaseCommand):
         else:
             unsent_packages = [pack for pack in self.app_data._all_packages_list if pack._status == Status.STENDING]
             if unsent_packages:
-                sorted_packages = sorted(unsent_packages, key=lambda x: x._start_location)
-                groups = groupby(sorted_packages, key=lambda x: x._start_location)
+                sorted_packages = sorted(unsent_packages, key=lambda x: x._start_location.city)
+                groups = groupby(sorted_packages, key=lambda x: x._start_location.city)
                 result = ""
                 for key, group in groups:
                     result += self.format_packages(list(group), key)
@@ -37,7 +37,7 @@ class ViewUnsentPackagesCommand(BaseCommand):
     def format_packages(self, packages, location=None):
         total_weight = sum(pack._package_weight for pack in packages)
         amount = len(packages)
-        end_locations = [pack._end_location for pack in packages]
+        end_locations = [pack._end_location.city for pack in packages]
         if location:
             return f"Start location: {location}\n - Amount of packages: {amount}\n - Total weight: {total_weight}\n - End locations: {end_locations}\n"
         else:
