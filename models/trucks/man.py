@@ -10,6 +10,6 @@ class Man(Trucks):
         super().__init__(truck_id, name, capacity, max_range, num_of_trucks)
         
         self.name = Name.MAN
-        self.capacity = Man.CAPACITY
-        self.max_range = Man.MAX_RANGE
-        self.num_of_trucks = Man.NUMBER_OF_TRUCKS
+        self._capacity = Man.CAPACITY
+        self._max_range = Man.MAX_RANGE
+        self._num_of_trucks = Man.NUMBER_OF_TRUCKS

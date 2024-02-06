@@ -10,6 +10,6 @@ class Scania(Trucks):
         super().__init__(truck_id, name, capacity, max_range, num_of_trucks)
         
         self.name = Name.SCANIA
-        self.capacity = Scania.CAPACITY
-        self.max_range = Scania.MAX_RANGE
-        self.num_of_trucks = Scania.NUMBER_OF_TRUCKS
+        self._capacity = Scania.CAPACITY
+        self._max_range = Scania.MAX_RANGE
+        self._num_of_trucks = Scania.NUMBER_OF_TRUCKS
