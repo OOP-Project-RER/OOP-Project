@@ -2,7 +2,7 @@ from errors.application_error import ApplicationError
 from models.constants.locations import Locations
 from models.trucks.trucks import Trucks
 from models.constants.status import Status
-from datetime import datetime
+from datetime import datetime, timedelta
 
 
 class Route:
@@ -62,4 +62,16 @@ class Route:
     
 
     def __str__(self) -> str:
-        pass
+        departure_str = self._date_time_departure.strftime(Route._format)
+        route_str = f"{self._start_location} ({departure_str})"
+        current_time = self._date_time_departure
+        
+        for location in self._other_locations:
+            distance = getattr(Locations, location.lower())[self._start_location]
+            time_delta_hours = distance / 87 
+            arrival_time = current_time + timedelta(hours=time_delta_hours)
+            arrival_str = arrival_time.strftime(Route._format)
+            route_str += f" → {location} ({arrival_str})"
+            current_time = arrival_time
+        
+        return route_str
