@@ -12,9 +12,16 @@ class Route:
         self._date_time_departure = date_time_departure
         self._start_location = start_location
         self._other_locations = other_locations
-        self._status = Status.STANDING
         self._locations: list[Locations] = []
         self._truck_list: list[Trucks] = []
+        if datetime.now() < self._date_time_departure:
+            self._status = Status.STANDING
+        elif datetime.now() >= self._date_time_departure:
+            self._status = Status.IN_PROGRESS
+        elif datetime.now() >= self._other_locations[-1]:
+            self._status = Status.FINISHED
+
+
         
 
     @property
@@ -71,7 +78,7 @@ class Route:
             time_delta_hours = distance / 87 
             arrival_time = current_time + timedelta(hours=time_delta_hours)
             arrival_str = arrival_time.strftime(Route._format)
-            route_str += f" → {location} ({arrival_str})"
+            route_str += f" → {location} ({arrival_str})h"
             current_time = arrival_time
         
         return route_str
