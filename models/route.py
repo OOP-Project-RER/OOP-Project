@@ -3,8 +3,10 @@ from models.constants.locations import Locations
 from models.trucks.trucks import Trucks
 
 class Route:
-    def __init__(self, route_id: int) -> None:
+    def __init__(self, route_id: int, start_location: Locations, *other_locations: Locations) -> None:
         self._route_id = route_id
+        self._start_location = start_location
+        self._other_locations = other_locations
         self._locations: list[Locations] = []
         self._truck_list: list[Trucks] = []
         
@@ -14,14 +16,21 @@ class Route:
         return self._route_id
     
     @property
+    def start_location(self):
+        return self._start_location
+    
+    @property
+    def other_locations(self):
+        return self._other_locations
+    
+    @property
     def locations(self):
         return self._locations
     
-    def create_route(self, start_location: Locations, *other_locations: Locations):
-        self._locations.clear() #Тук си мисля, че всеки път при създаване на route ще трябва да изчистом листа.
-        
-        self._locations.append(start_location)
-        self._locations.extend(other_locations)        
+    def add_location(self):
+        self._locations.clear() 
+        self._locations.append(self._start_location)
+        self._locations.extend(self._other_locations)        
 
     def calculate_distance_and_time(self):
         total_distance = 0

@@ -41,8 +41,8 @@ class ModelsFactory:
             return Trucks(truck_id, name, capacity, max_range, num_of_trucks)
 
 
-    def create_route(self, locations: list):
+    def create_route(self, start_location: Locations, *other_locations: Locations):
         route_id = self._route_id
         self._route_id +=1
 
-        return Route(route_id, locations)
+        return Route(route_id, start_location, *other_locations)

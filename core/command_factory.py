@@ -7,6 +7,7 @@ from commands.login_command import LoginCommand
 from commands.add_package import AddPackageCommand
 from commands.show_trucks_in import ShowTrucksIn
 from commands.view_unsent_packages import ViewUnsentPackagesCommand
+from commands.add_route import AddRouteCommand
 
 class CommandFactory:
     def __init__(self, data: ApplicationData):
@@ -26,7 +27,9 @@ class CommandFactory:
             return AddPackageCommand(params, self._app_data, self._models_factory)
         if cmd.lower() == 'showtrucksin':
             return ShowTrucksIn(params, self._app_data)
-        if cmd.lower() == "viewunsentpackages":
+        if cmd.lower() == "viewunsentpackages": 
             return ViewUnsentPackagesCommand(params, self._app_data)
-
+        if cmd.lower() == "addroute":
+            return AddRouteCommand(params, self._app_data, self._models_factory)
+        
         raise ApplicationError(f'Invalid command name: {cmd}!')

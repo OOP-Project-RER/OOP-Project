@@ -1,4 +1,5 @@
 from models.employee import Employee
+from models.route import Route
 from models.trucks.trucks import Trucks
 from models.package import Package
 
@@ -8,6 +9,7 @@ class ApplicationData:
         self._employees = []
         self._logged_employee = None
         self._all_packages_list: list[Package] = []
+        self._all_routes_list: list[Route] = []
 
 
     @property
@@ -51,3 +53,7 @@ class ApplicationData:
     def add_package(self, package: Package):
         if not any(p._package_id == package._package_id for p in self._all_packages_list):
             self._all_packages_list.append(package)
+
+    def add_route(self, route: Route):
+        if not any(r._route_id == route._route_id for r in self._all_routes_list):
+            self._all_routes_list.append(route)
