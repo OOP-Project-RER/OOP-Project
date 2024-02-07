@@ -15,7 +15,7 @@ class Package:
         self._end_location = end_location
         self._package_weight = package_weight
         self._contact_customer = contact_customer
-        self._status = Status.STENDING
+        self._status = Status.STANDING
         # list with packages
         
 
@@ -44,7 +44,7 @@ class Package:
     
     def __str__(self) -> str:
         return f'''Package №: {self.package_id}
-From: {self._start_location}
-To: {self._end_location}
+From: {self._start_location.city}
+To: {self._end_location.city}
 Weight: {self._package_weight}
 Status: {self._status}'''

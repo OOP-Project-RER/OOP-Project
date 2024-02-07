@@ -1,8 +1,8 @@
 class Status:
-    STENDING = 'Stending' 
+    STANDING = 'Standing' 
     IN_PROGRESS = 'In_porgress'
     FINISHED = 'Finished'
-    keys = ['Stending', 'In_porgress', 'Finished']
+    keys = ['Standing', 'In_porgress', 'Finished']
     
     @classmethod
     def next(cls, current: str):

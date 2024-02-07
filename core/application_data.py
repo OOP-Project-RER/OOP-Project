@@ -15,6 +15,14 @@ class ApplicationData:
     @property
     def employees(self):
         return tuple(self._employees)
+    
+    @property
+    def all_packages_list(self):
+        return tuple(self._all_packages_list)
+    
+    @property
+    def all_routes_list(self):
+        return tuple(self._all_routes_list)
 
     def create_employee(self, username, firstname, lastname, password, user_role) -> Employee:
         if len([u for u in self._employees if u.username == username]) > 0:
@@ -57,3 +65,10 @@ class ApplicationData:
     def add_route(self, route: Route):
         if not any(r._route_id == route._route_id for r in self._all_routes_list):
             self._all_routes_list.append(route)
+
+    def find_package_by_id(self, id:int) -> Package:
+        package = [pac for pac in self.all_packages_list if id == pac.package_id]
+        if package == []:
+            return ValueError(f'Package with ID: {id} can\'t be find!')
+        
+        return package[0]
