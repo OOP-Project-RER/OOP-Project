@@ -65,7 +65,7 @@ class Route:
         total_time = total_distance / 87
         total_time = "{:.2f}".format(total_time)
         
-        return total_distance, total_time
+        return f'\nTotal distance: {total_distance}'
     
 
     def __str__(self) -> str:
@@ -81,4 +81,4 @@ class Route:
             route_str += f" → {location} ({arrival_str})"
             current_time = arrival_time
         
-        return route_str
+        return f'{self.calculate_distance_and_time()}\n{route_str}\n'
