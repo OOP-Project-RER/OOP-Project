@@ -11,5 +11,5 @@ class FindPackage(BaseCommand):
 
         package = self.app_data.find_package_by_id(p_id)
 
-        return (f'{package}\n\nEmail with information was send to {package.contact_customer.email}')
+        return (f'{package}\n\nEmail with this information was send to {package.contact_customer.email}')
                 

@@ -45,13 +45,13 @@ class Package:
     def time_of_creating(self):
         return self._time_of_creating
     
-    def current_location(self, current_location):
+    def current_location(self):
         if self._status == Status.STANDING:
-            current_location = self._start_location
+            current_location = self._start_location.city
         elif self._status == Status.FINISHED:
-            current_location = self._end_location
+            current_location = self._end_location.city
         else:
-            current_location = f'Between {self._start_location} and {self._end_location}'
+            current_location = f'Between {self._start_location.city} and {self._end_location.city}'
 
         return current_location
     
@@ -63,4 +63,4 @@ From: {self._start_location.city}
 To: {self._end_location.city}
 Weight: {self._package_weight}
 Status: {self._status}
-Curren location: {self.current_location()}'''
+Curren location: {str(self.current_location())}'''
