@@ -69,6 +69,6 @@ class ApplicationData:
     def find_package_by_id(self, id:int) -> Package:
         package = [pac for pac in self.all_packages_list if id == pac.package_id]
         if package == []:
-            return ValueError(f'Package with ID: {id} can\'t be find!')
+            raise ValueError(f'Package with ID: {id} can\'t be find!')
         
         return package[0]
