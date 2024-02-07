@@ -26,13 +26,13 @@ class Locations:
     darwin_trucks = {'Scania': 2, 'Man': 2, 'Actros': 2}
     perth_trucks = {'Scania': 2, 'Man': 2, 'Actros': 2}
 
-    city_trucks = {'Sydney': sydney_trucks,
-                   'Melbourne': melbourne_trucks,
-                   'Adelaide' : adelaide_trucks,
-                   'Alice Springs' : alice_spring_trucks,
-                   'Brisbane' : brisbane_trucks,
-                   'Darwin' : darwin_trucks,
-                   'Perth' : perth_trucks
+    city_trucks = {SYD: sydney_trucks,
+                   MEL: melbourne_trucks,
+                   ADL : adelaide_trucks,
+                   ASP : alice_spring_trucks,
+                   BRI : brisbane_trucks,
+                   DAR : darwin_trucks,
+                   PER : perth_trucks
                    }
     
 
