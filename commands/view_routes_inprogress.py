@@ -17,8 +17,8 @@ class ViewUnsentPackagesCommand(BaseCommand):
     def execute(self):
         # super().execute(params)
 
-        # if not self._app_data.logged_in_employee.employee_role.SUPERVISOR:
-        #     raise ApplicationError("You are not a supervisor!")
+        # if not self._app_data.logged_in_employee.employee_role.MANAGER:
+        #     raise ApplicationError("You are not a manager!")
 
         if len(self.params) == 1:
             searched_location = self.params[0]

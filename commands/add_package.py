@@ -15,11 +15,8 @@ class AddPackageCommand(BaseCommand):
     def models_factory(self):
         return self._models_factory
 
-    def execute(self, params):
-        super().execute(params)
-
-        if not self._app_data.logged_in_employee.employee_role.SUPERVISOR:
-            raise ApplicationError("You are not an admin!")
+    def execute(self):
+        # super().execute(params)
 
         start_location_str, end_location_str, package_weight_str, *contact_customer_str = self.params
         package_weight = self._try_parse_float(package_weight_str)
@@ -31,8 +28,8 @@ class AddPackageCommand(BaseCommand):
 
         return f'Package #{package.package_id} with weight {package_weight} was added to the waiting list.'
     
-    def _requires_login(self) -> bool:
-        return True
+    # def _requires_login(self) -> bool:
+    #     return True
 
     def _expected_params_count(self) -> int:
         return 6
