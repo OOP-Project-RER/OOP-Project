@@ -24,6 +24,21 @@ class BaseCommand():
 
         return ''
     
+    
+    def _try_parse_float(self, s, msg='Invalid value. Expected a float.'):
+        try:
+            return float(s)
+        except:
+            raise ValueError(msg)
+        
+
+    def _try_parse_int(self, s, msg='Invalid value. Expected an int.'):
+        try:
+            return int(s)
+        except:
+            raise ValueError(msg)
+
+    
     def _requires_login(self) -> bool:
         raise NotImplementedError('Override in derived class')
 
