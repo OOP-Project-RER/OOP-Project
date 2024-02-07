@@ -11,7 +11,7 @@ class ModelsFactory:
     def __init__(self):
         self._package_id = 1
         self._truck_id = 1 
-        self._route_id = 1
+        self._route_id = 101
 
     def create_package(self, start_location: Locations, end_location: Locations, package_weight: float, contact_customer: Customer):
         package_id = self._package_id
@@ -42,9 +42,8 @@ class ModelsFactory:
             return Trucks(truck_id, name, capacity, max_range, num_of_trucks)
 
 
-    def create_route(self, date_time_departure: datetime, start_location: Locations, *other_locations: Locations):
-        self._route_id = 101
+    def create_route(self, date_time_departure: datetime, *locations: Locations):
         route_id = self._route_id
         self._route_id +=1
 
-        return Route(route_id, date_time_departure, start_location, *other_locations)
+        return Route(route_id, date_time_departure, *locations)

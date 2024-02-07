@@ -15,8 +15,8 @@ class AddRouteCommand(BaseCommand):
         return self._models_factory
     
     def execute(self):
-        date_time_departure, start_location, *other_locations = self.params
-        route: Route = self._models_factory.create_route(date_time_departure, start_location, *other_locations)
+        date_time_departure, *locations = self.params
+        route: Route = self._models_factory.create_route(date_time_departure, *locations)
         self.app_data.add_route(route)
 
-        return f"Route #{route.route_id} from {start_location} created."
+        return f"Route #{route.route_id} from {locations[0]} created."

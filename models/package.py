@@ -6,7 +6,7 @@ from datetime import datetime
 
 
 class Package:
-    _format = '%b %dst %H:%Mh'
+    _format = '%b %d %H:%Mh'
     def __init__(self, package_id: int, start_location: Locations, end_location: Locations, package_weight: float, contact_customer: Customer) -> None:
         
         if package_weight <= 0:
