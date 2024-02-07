@@ -42,6 +42,7 @@ class ModelsFactory:
 
 
     def create_route(self, start_location: Locations, *other_locations: Locations):
+        self._route_id = 101
         route_id = self._route_id
         self._route_id +=1
 
