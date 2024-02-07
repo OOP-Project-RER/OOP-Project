@@ -12,6 +12,7 @@ class Route:
         self._date_time_departure = self.format_datetime(date_time_departure)
         self._start_location = start_location
         self._other_locations = other_locations
+        self._status = Status.IN_PROGRESS
         self._locations: list[Locations] = []
         self._truck_list: list[Trucks] = []
         if datetime.now() < self._date_time_departure:
@@ -20,6 +21,9 @@ class Route:
             self._status = Status.IN_PROGRESS
         elif datetime.now() >= self._other_locations[-1]:
             self._status = Status.FINISHED
+        
+        self._locations.append(self._start_location)
+        self._locations.extend(self._other_locations) 
 
 
         
@@ -52,7 +56,7 @@ class Route:
         parsed_datetime = datetime.strptime(input_datetime, "%Y%m%dT%H%M")
         formatted_datetime = parsed_datetime.strftime("%b %dst %H:%Mh")
 
-        return formatted_datetime
+        return parsed_datetime
 
     
     def add_location(self):
@@ -76,16 +80,26 @@ class Route:
     
 
     def __str__(self) -> str:
-        departure_str = self._date_time_departure.strftime(Route._format)
+        departure_str = self._date_time_departure
         route_str = f"{self._start_location} ({departure_str})"
         current_time = self._date_time_departure
-        
-        for location in self._other_locations:
-            distance = getattr(Locations, location.lower())[self._start_location]
+        total_distance = 0
+
+        #for location in self._other_locations:
+        for i in range(len(self._locations)-1):
+            current_location = self._locations[i]
+            next_location = self._locations[i+1]
+            distance = getattr(Locations, current_location.lower())[next_location]
+
             time_delta_hours = distance / 87 
             arrival_time = current_time + timedelta(hours=time_delta_hours)
-            arrival_str = arrival_time.strftime(Route._format)
-            route_str += f" → {location} ({arrival_str})"
+            arrival_str = arrival_time
+            route_str += f" → {self._locations[i+1]} ({arrival_str})"
             current_time = arrival_time
+            
+            total_distance += distance
+            
+            
         
-        return f'{self.calculate_distance_and_time()}\n{route_str}\n'
+        return f'{total_distance}\n{route_str}\n'
+            #'Current locations: {}'
