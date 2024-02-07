@@ -19,8 +19,6 @@ class Package:
         self._contact_customer = contact_customer
         self._status = Status.STANDING
         self._time_of_creating = datetime.now()
-        # list with packages
-        
 
 
     @property
@@ -50,7 +48,7 @@ class Package:
     
     
     def __str__(self) -> str:
-        return f'''Package №: {self.package_id}
+        return f'''Package: #{self.package_id}
 Created on: {self.time_of_creating.strftime(Package._format)}
 From: {self._start_location.city}
 To: {self._end_location.city}
