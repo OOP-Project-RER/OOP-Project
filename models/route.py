@@ -9,7 +9,7 @@ class Route:
     _format = '%b %dst %H:%Mh'
     def __init__(self, route_id: int, date_time_departure: datetime, start_location: Locations, *other_locations: Locations) -> None:
         self._route_id = route_id
-        self._date_time_departure = date_time_departure
+        self._date_time_departure = self.format_datetime(date_time_departure)
         self._start_location = start_location
         self._other_locations = other_locations
         self._locations: list[Locations] = []
@@ -47,6 +47,13 @@ class Route:
     @property
     def date_time_departure(self):
         return self._date_time_departure
+    
+    def format_datetime(input_datetime: str) -> str:
+        parsed_datetime = datetime.strptime(input_datetime, "%Y%m%dT%H%M")
+        formatted_datetime = parsed_datetime.strftime("%b %dst %H:%Mh")
+
+        return formatted_datetime
+
     
     def add_location(self):
         self._locations.clear() 
