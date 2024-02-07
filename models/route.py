@@ -48,7 +48,7 @@ class Route:
     def date_time_departure(self):
         return self._date_time_departure
     
-    def format_datetime(input_datetime: str) -> str:
+    def format_datetime(self, input_datetime: str) -> str:
         parsed_datetime = datetime.strptime(input_datetime, "%Y%m%dT%H%M")
         formatted_datetime = parsed_datetime.strftime("%b %dst %H:%Mh")
 
