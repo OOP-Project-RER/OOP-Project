@@ -1,12 +1,14 @@
 from errors.application_error import ApplicationError
 from models.constants.locations import Locations
 from models.trucks.trucks import Trucks
+from models.constants.status import Status
 
 class Route:
     def __init__(self, route_id: int, start_location: Locations, *other_locations: Locations) -> None:
         self._route_id = route_id
         self._start_location = start_location
         self._other_locations = other_locations
+        self._status = Status.STANDING
         self._locations: list[Locations] = []
         self._truck_list: list[Trucks] = []
         
@@ -26,6 +28,10 @@ class Route:
     @property
     def locations(self):
         return self._locations
+    
+    @property
+    def status(self):
+        return self._status
     
     def add_location(self):
         self._locations.clear() 
