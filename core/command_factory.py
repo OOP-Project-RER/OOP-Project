@@ -33,6 +33,6 @@ class CommandFactory:
         if cmd.lower() == "addroute":
             return AddRouteCommand(params, self._app_data, self._models_factory)
         if cmd.lower() == 'findpackage':
-            return FindPackage(params,self._app_data)
+            return FindPackage(params, self._app_data)
         
         raise ApplicationError(f'Invalid command name: {cmd}!')
