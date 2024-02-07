@@ -59,7 +59,7 @@ class Route:
     
     def calc_distance_time(self):
         
-        date_time_departure_str = self._date_time_departure.strftime("%b %dst %H:%Mh")
+        date_time_departure_str = self._date_time_departure.strftime("%b %d %H:%Mh")
         route_str = f"{self._locations[0]} ({date_time_departure_str})"
         current_time = self._date_time_departure
         total_distance = 0
@@ -72,7 +72,7 @@ class Route:
 
             time_delta_hours = distance / 87 
             arrival_time = current_time + timedelta(hours=time_delta_hours)
-            arrival_str = arrival_time.strftime("%b %dst %H:%Mh")
+            arrival_str = arrival_time.strftime("%b %d %H:%Mh")
             route_str += f" → {self.locations[i+1]} ({arrival_str})"
             current_time = arrival_time
 
