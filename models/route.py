@@ -6,7 +6,7 @@ from datetime import datetime, timedelta
 
 
 class Route:
-    _format = '%d/%m/%Y, %H:%M:%S'
+    _format = '%b %dst %H:%Mh'
     def __init__(self, route_id: int, date_time_departure: datetime, start_location: Locations, *other_locations: Locations) -> None:
         self._route_id = route_id
         self._date_time_departure = date_time_departure
@@ -78,7 +78,7 @@ class Route:
             time_delta_hours = distance / 87 
             arrival_time = current_time + timedelta(hours=time_delta_hours)
             arrival_str = arrival_time.strftime(Route._format)
-            route_str += f" → {location} ({arrival_str})h"
+            route_str += f" → {location} ({arrival_str})"
             current_time = arrival_time
         
         return route_str
