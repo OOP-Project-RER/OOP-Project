@@ -20,7 +20,6 @@ class Package:
         self._status = Status.STANDING
         self._time_of_creating = datetime.now()
 
-
     @property
     def package_id(self):
         return self._package_id
@@ -46,6 +45,16 @@ class Package:
     def time_of_creating(self):
         return self._time_of_creating
     
+    def current_location(self, current_location):
+        if self._status == Status.STANDING:
+            current_location = self._start_location
+        elif self._status == Status.FINISHED:
+            current_location = self._end_location
+        else:
+            current_location = f'Between {self._start_location} and {self._end_location}'
+
+        return current_location
+    
     
     def __str__(self) -> str:
         return f'''Package: #{self.package_id}
@@ -53,4 +62,5 @@ Created on: {self.time_of_creating.strftime(Package._format)}
 From: {self._start_location.city}
 To: {self._end_location.city}
 Weight: {self._package_weight}
-Status: {self._status}'''
+Status: {self._status}
+Curren location: {self.current_location()}'''

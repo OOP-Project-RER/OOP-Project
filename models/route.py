@@ -2,10 +2,14 @@ from errors.application_error import ApplicationError
 from models.constants.locations import Locations
 from models.trucks.trucks import Trucks
 from models.constants.status import Status
+from datetime import datetime
+
 
 class Route:
-    def __init__(self, route_id: int, start_location: Locations, *other_locations: Locations) -> None:
+    _format = '%d/%m/%Y, %H:%M:%S'
+    def __init__(self, route_id: int, date_time_departure: datetime, start_location: Locations, *other_locations: Locations) -> None:
         self._route_id = route_id
+        self._date_time_departure = date_time_departure
         self._start_location = start_location
         self._other_locations = other_locations
         self._status = Status.STANDING
@@ -33,6 +37,10 @@ class Route:
     def status(self):
         return self._status
     
+    @property
+    def date_time_departure(self):
+        return self._date_time_departure
+    
     def add_location(self):
         self._locations.clear() 
         self._locations.append(self._start_location)
@@ -51,3 +59,7 @@ class Route:
         total_time = "{:.2f}".format(total_time)
         
         return total_distance, total_time
+    
+
+    def __str__(self) -> str:
+        pass

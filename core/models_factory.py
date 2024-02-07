@@ -5,6 +5,7 @@ from models.constants.locations import Locations
 from models.customer import Customer
 from models.constants.name import Name
 from models.trucks.trucks import Trucks
+from datetime import datetime
 
 class ModelsFactory:
     def __init__(self):
@@ -41,9 +42,9 @@ class ModelsFactory:
             return Trucks(truck_id, name, capacity, max_range, num_of_trucks)
 
 
-    def create_route(self, start_location: Locations, *other_locations: Locations):
+    def create_route(self, date_time_departure: datetime, start_location: Locations, *other_locations: Locations):
         self._route_id = 101
         route_id = self._route_id
         self._route_id +=1
 
-        return Route(route_id, start_location, *other_locations)
+        return Route(route_id, date_time_departure, start_location, *other_locations)

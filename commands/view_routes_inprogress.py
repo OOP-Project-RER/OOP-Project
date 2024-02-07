@@ -21,7 +21,9 @@ class ViewRoutesCommand(BaseCommand):
         # if not self._app_data.logged_in_employee.employee_role.MANAGER:
         #     raise ApplicationError("You are not a manager!")
 
-        pass
+        routes_in_progres_list = [route.__str__() for route in self._app_data._all_routes_list if route._status == Status.IN_PROGRESS]
+        return '\n'.join(routes_in_progres_list)
+
 
     # def _requires_login(self) -> bool:
     #     return True
