@@ -1,9 +1,9 @@
 from commands.base.base_command import BaseCommand
 from core.application_data import ApplicationData
 from models.constants.status import Status
-from itertools import groupby
 from errors.application_error import ApplicationError
 from core.models_factory import ModelsFactory
+from datetime import datetime
 
 
 class ViewRoutesCommand(BaseCommand):
@@ -21,12 +21,7 @@ class ViewRoutesCommand(BaseCommand):
         # if not self._app_data.logged_in_employee.employee_role.MANAGER:
         #     raise ApplicationError("You are not a manager!")
 
-        routes_in_prigress = [route for route in self._app_data._all_routes_list if route._status == Status.IN_PROGRESS]
-        
-        if len(routes_in_prigress) == 0:
-            return "No routes in progress."
-        
-
+        pass
 
     # def _requires_login(self) -> bool:
     #     return True
