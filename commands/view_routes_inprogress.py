@@ -22,7 +22,10 @@ class ViewRoutesCommand(BaseCommand):
         #     raise ApplicationError("You are not a manager!")
 
         routes_in_progres_list = [route.__str__() for route in self._app_data._all_routes_list if route._status == Status.IN_PROGRESS]
-        return '\n'.join(routes_in_progres_list)
+        if len(routes_in_progres_list) > 0:
+            return '\n'.join(routes_in_progres_list)
+        
+        return 'There is no routes in progress.'
 
 
     # def _requires_login(self) -> bool:
