@@ -42,11 +42,21 @@ class ViewUnsentPackagesCommand(BaseCommand):
         else:
              return "Invalid number of parameters. Please provide exactly zero or one location."
 
-    def format_packages(self, packages, location=None):
+    def format_packages(self, packages, searched_location):
         total_weight = sum(pack._package_weight for pack in packages)
         amount = len(packages)
-        end_locations = [pack._end_location.city for pack in packages]
-        if location:
-            return f"Start location: {location}\n - Amount of packages: {amount}\n - Total weight: {total_weight}\n - End locations: {end_locations}\n"
+        package_info = {}
+        for pack in packages:
+            if pack._end_location.city in package_info:
+                package_info[pack._end_location.city].append(str(pack._package_id))
+            else:
+                package_info[pack._end_location.city] = [str(pack._package_id)]
+
+        formatted_info = []
+        for location, id in package_info.items():
+            formatted_info.append(f'{location} ({", ".join(id)})\n')
+
+        if searched_location:
+            return f"Start location: {searched_location}\n - Amount of packages: {amount}\n - Total weight: {total_weight}\nEnd locations:\n - {' - '.join(formatted_info)+'\n'}"
         else:
             return f"Total amount of packages: {amount}\nTotal weight: {total_weight}\n"
