@@ -1,4 +1,6 @@
 from models.package import Package
+from models.constants.status import Status
+
 
 class Trucks:
     def __init__(self, name: str, truck_id: int=0, capacity: float=0, max_range: int=0, num_of_trucks: int=0):
@@ -8,6 +10,7 @@ class Trucks:
         self._max_range = max_range
         self._num_of_trucks = num_of_trucks
         self._packages: list[Package] = []
+        self._status = Status.STANDING
         
     @property
     def capacity(self):
@@ -25,6 +28,10 @@ class Trucks:
     def packages(self):
         return tuple(self._packages)
     
+    @property
+    def status(self):
+        return self._status
+
     def add_package(self, package: Package):
         if package.package_weight > self._capacity:
             raise ValueError("Package weight is bigger than truck capacity")

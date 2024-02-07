@@ -34,5 +34,7 @@ class CommandFactory:
             return AddRouteCommand(params, self._app_data, self._models_factory)
         if cmd.lower() == 'findpackage':
             return FindPackage(params, self._app_data)
+        if cmd.lower() == 'viewroutes':
+            return FindPackage(params, self._app_data, self._models_factory)
         
         raise ApplicationError(f'Invalid command name: {cmd}!')
