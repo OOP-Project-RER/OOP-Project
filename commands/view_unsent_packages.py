@@ -16,7 +16,7 @@ class ViewUnsentPackagesCommand(BaseCommand):
     def execute(self):
         if len(self.params) == 1:
             searched_location = self.params[0]
-            unsent_packages = [pack for pack in self.app_data._all_packages_list if pack._status == Status.STENDING and pack._start_location.city == searched_location]
+            unsent_packages = [pack for pack in self.app_data._all_packages_list if pack._status == Status.STANDING and pack._start_location.city == searched_location]
             if unsent_packages:
                 sorted_packages = sorted(unsent_packages, key=lambda x: x._start_location.city)
                 groups = groupby(sorted_packages, key=lambda x: x._start_location.city)
@@ -28,7 +28,7 @@ class ViewUnsentPackagesCommand(BaseCommand):
                 return "No unsent packages found."      
             
         elif len(self.params) == 0:
-            unsent_packages = [pack for pack in self.app_data._all_packages_list if pack._status == Status.STENDING]
+            unsent_packages = [pack for pack in self.app_data._all_packages_list if pack._status == Status.STANDING]
             if unsent_packages:
                 sorted_packages = sorted(unsent_packages, key=lambda x: x._start_location.city)
                 groups = groupby(sorted_packages, key=lambda x: x._start_location.city)
