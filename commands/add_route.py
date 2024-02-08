@@ -3,6 +3,7 @@ from core.application_data import ApplicationData
 from core.models_factory import ModelsFactory
 from models.route import Route
 from datetime import datetime
+from models.constants.locations import Locations
 
 class AddRouteCommand(BaseCommand):
     def __init__(self, params: list[str], app_data: ApplicationData, models_factory: ModelsFactory):

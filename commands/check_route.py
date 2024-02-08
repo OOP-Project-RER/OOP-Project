@@ -12,4 +12,4 @@ class CheckRouteCommand(BaseCommand):
         
         start_location, end_lockation = self.params
         route = self.app_data.check_for_route(start_location, end_lockation)
-        return ",  ".join(route)
+        return "\n".join(route)
