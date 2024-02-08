@@ -3,7 +3,6 @@ from models.constants.status import Status
 from models.constants.locations import Locations
 from models.customer import Customer
 from datetime import datetime
-from core.application_data import ApplicationData
 from models.constants.status import Status
 
 
@@ -53,14 +52,14 @@ class Package:
         elif self._status == Status.FINISHED:
             current_location = self._end_location.city
         else:
-            for route in ApplicationData.all_routes_list:
-                if route._status == Status.IN_PROGRESS:
-                    for truck in route:
-                        for pack in truck._packages:
-                            if self._package_id == pack._package_id:
-                                current_location = route.calc_current_location()
+            # for route in .all_routes_list:
+            #     if route._status == Status.IN_PROGRESS:
+            #         for truck in route:
+            #             for pack in truck._packages:
+            #                 if self._package_id == pack._package_id:
+            #                     current_location = route.calc_current_location()
 
-        return current_location
+        # return current_location
     
     
     def __str__(self) -> str:
