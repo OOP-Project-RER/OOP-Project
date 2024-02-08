@@ -11,6 +11,7 @@ from commands.add_route import AddRouteCommand
 from commands.find_package import FindPackageCommand
 from commands.view_routes_inprogress import ViewRoutesCommand
 from commands.check_route import CheckRouteCommand
+from commands.assigh_truck import AssignTruck
 
 class CommandFactory:
     def __init__(self, data: ApplicationData):
@@ -40,5 +41,7 @@ class CommandFactory:
             return ViewRoutesCommand(params, self._app_data, self._models_factory)
         if cmd.lower() == 'checkroute':
             return CheckRouteCommand(params, self._app_data)
+        if cmd.lower() == 'assigntruck':
+            return AssignTruck(params, self._app_data, self._models_factory)
         
         raise ApplicationError(f'Invalid command name: {cmd}!')

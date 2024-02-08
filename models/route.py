@@ -13,6 +13,7 @@ class Route:
         self._date_time_departure = self.format_datetime(date_time_departure)
         self._locations = locations
         self._trucks_list: list[Trucks] = []
+        self._truck = None
         
         if datetime.now() < self.date_time_departure:
             self._status = Status.STANDING
@@ -51,6 +52,10 @@ class Route:
         parsed_datetime = datetime.strptime(input_datetime, "%Y%m%dT%H%M") 
 
         return parsed_datetime
+    
+    def add_truck(self, truck):
+        self._truck = truck
+        return self._truck
     
     def calc_distance_time(self):
         

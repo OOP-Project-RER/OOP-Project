@@ -75,6 +75,13 @@ class ApplicationData:
         
         return package[0]
     
+    def find_route_by_id(self, id):
+        route = [rt for rt in self.all_routes_list if id ==rt.route_id]
+        if route == []:
+            raise ValueError(f'Route with ID: {id} can\'t be find!') 
+        
+        return route[0]
+    
     def check_for_route(self, start_location: str, end_location: str) -> Locations:
         found_routes = []
         for route in self.all_routes_list:
