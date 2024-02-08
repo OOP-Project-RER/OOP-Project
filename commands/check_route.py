@@ -8,10 +8,8 @@ class CheckRouteCommand(BaseCommand):
         super().__init__(params, app_data)
         
 
-    
     def execute(self):
         
         start_location, end_lockation = self.params
         route = self.app_data.check_for_route(start_location, end_lockation)
-        route_str, total_distance = route.calc_distance_time()
-        return f"{route_str} was found"
+        return ",  ".join(route)
