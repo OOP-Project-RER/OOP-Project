@@ -78,20 +78,20 @@ class Route:
 
         return route_str, total_distance
 
-    def calc_current_location(self):
-        time_traveled = self._date_time_departure + datetime.now()
-        km_traveled = 87 * time_traveled
-
-        for i in range(len(self._locations)-1):
-            current_location = self.locations[i]
-            next_location = self.locations[i+1]
-            distance = getattr(Locations, current_location.lower())[next_location]
-            if km_traveled < distance:
-                return f'{distance - km_traveled} till {next_location}'
+#   def calc_current_location(self):
+#       time_traveled = self._date_time_departure + datetime.now()
+#       km_traveled = 87 * time_traveled
+#
+#       for i in range(len(self._locations)-1):
+#           current_location = self.locations[i]
+#           next_location = self.locations[i+1]
+#           distance = getattr(Locations, current_location.lower())[next_location]
+#           if km_traveled < distance:
+#               return f'{distance - km_traveled} till {next_location}'
 
 
     def __str__(self) -> str: 
         route_str, total_distance = self.calc_distance_time() 
-        current_location = self.calc_current_location()
+        #current_location = self.calc_current_location()
 
-        return f'{route_str}\nTotal distance: {total_distance}\nCurrent locations: {current_location}'           
+        return f'{route_str}\nTotal distance: {total_distance}\nCurrent locations: {self.locations[0]}'           
