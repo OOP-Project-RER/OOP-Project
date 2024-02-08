@@ -3,15 +3,19 @@ from models.constants.status import Status
 
 
 class Trucks:
-    def __init__(self, name: str, truck_id: int=0, capacity: float=0, max_range: int=0, num_of_trucks: int=0):
-        self.truck_id = truck_id
+    def __init__(self, truck_id: int, name: str,  capacity: float=0, max_range: int=0, num_of_trucks: int=0):
+        self._truck_id = truck_id
         self.name = name
         self._capacity = capacity
         self._max_range = max_range
         self._num_of_trucks = num_of_trucks
         self._packages: list[Package] = []
         self._status = Status.STANDING
-        
+
+    @property
+    def truck_id(self):
+        return self._truck_id
+
     @property
     def capacity(self):
         return self._capacity
