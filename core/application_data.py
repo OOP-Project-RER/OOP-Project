@@ -76,11 +76,20 @@ class ApplicationData:
         return package[0]
     
     def check_for_route(self, start_location: str, end_location: str) -> Locations:
+        found_routes = []
         for route in self.all_routes_list:
             if start_location in route.locations and end_location in route.locations:
                 start_index = route.locations.index(start_location)
                 end_index = route.locations.index(end_location)
             if start_index < end_index:
-                return route
+                found_routes.append(route)
+        if len(found_routes) > 0:
+            routes = []
+            for i in found_routes:
+                route_str, total_distance = route.calc_distance_time()
+                routes.append(route_str)
+            return routes
+
         return f"There is not a route from {start_location} to {end_location}"
+        
         
