@@ -85,16 +85,17 @@ class ApplicationData:
     def check_for_route(self, start_location: str, end_location: str) -> Locations:
         found_routes = []
         for route in self.all_routes_list:
-            if route.status == Status.STANDING or route.status == Status.IN_PROGRESS:
+            if route.status != Status.FINISHED:
                 if start_location in route.locations and end_location in route.locations:
                     start_index = route.locations.index(start_location)
                     end_index = route.locations.index(end_location)
-                if start_index < end_index:
-                    found_routes.append(route)
+                    if start_index < end_index:
+                        found_routes.append(route)
+        
         if len(found_routes) > 0:
             routes = []
             for i in found_routes:
-                route_str, total_distance = route.calc_distance_time()
+                route_str, total_distance = i.calc_distance_time()
                 routes.append(route_str)
             return routes
 
