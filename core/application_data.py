@@ -1,3 +1,5 @@
+from models.constants.locations import Locations
+from models.constants.status import Status
 from models.employee import Employee
 from models.route import Route
 from models.trucks.trucks import Trucks
@@ -72,3 +74,13 @@ class ApplicationData:
             raise ValueError(f'Package with ID: {id} can\'t be find!')
         
         return package[0]
+    
+    def check_for_route(self, start_location: str, end_location: str) -> Locations:
+        for route in self.all_routes_list:
+            if start_location in route.locations and end_location in route.locations:
+                start_index = route.locations.index(start_location)
+                end_index = route.locations.index(end_location)
+            if start_index < end_index:
+                return route
+        return f"There is not a route from {start_location} to {end_location}"
+        
