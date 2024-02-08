@@ -25,37 +25,23 @@ class Route:
     def status(self):
         return self._status
     
-    @property
-    def date_time_departure(self):
-        return self._date_time_departure
-    
-    @date_time_departure.setter
-    def date_time_departure(self):
+    @status.setter
+    def status(self):
         if datetime.now() < self.date_time_departure:
             self._status = Status.STANDING
         elif datetime.now() >= self.date_time_departure:
             self._status = Status.IN_PROGRESS
         elif datetime.now() >= self.locations[-1]:
             self._status = Status.FINISHED
-    
+
+    @property
+    def date_time_departure(self):
+        return self._date_time_departure
+  
     def format_datetime(self, input_datetime: str) -> datetime:
         parsed_datetime = datetime.strptime(input_datetime, "%Y%m%dT%H%M") 
 
         return parsed_datetime
-
-    def location_distance_time(self):
-        total_distance = 0
-    
-        for i in range(len(self.locations) - 1):
-            current_location = self.locations[i]
-            next_location = self.locations[i + 1]
-            distance = getattr(Locations, current_location.lower())[next_location]
-            total_distance += distance
-        
-        total_time = total_distance / 87
-        total_time = "{:.2f}".format(total_time)
-        
-        return f'\nTotal distance: {total_distance}'
     
     def calc_distance_time(self):
         
@@ -89,7 +75,7 @@ class Route:
             total_distance += distance
 
             if km_traveled < total_distance:
-                return f'{distance - km_traveled} till {next_location}'
+                return f'{round(distance - km_traveled)} till {next_location}'
 
     def __str__(self) -> str: 
         route_str, total_distance = self.calc_distance_time() 
