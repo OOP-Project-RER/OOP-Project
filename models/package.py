@@ -51,7 +51,7 @@ class Package:
             current_location = self._start_location.city
         elif self._status == Status.FINISHED:
             current_location = self._end_location.city
-        else:
+        # else:
             # for route in .all_routes_list:
             #     if route._status == Status.IN_PROGRESS:
             #         for truck in route:
@@ -59,8 +59,7 @@ class Package:
             #                 if self._package_id == pack._package_id:
             #                     current_location = route.calc_current_location()
 
-        # return current_location
-            pass
+        return current_location
     
     
     def __str__(self) -> str:
