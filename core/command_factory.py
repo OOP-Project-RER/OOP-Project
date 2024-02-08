@@ -10,6 +10,7 @@ from commands.view_unsent_packages import ViewUnsentPackagesCommand
 from commands.add_route import AddRouteCommand
 from commands.find_package import FindPackageCommand
 from commands.view_routes_inprogress import ViewRoutesCommand
+from commands.check_route import CheckRouteCommand
 
 class CommandFactory:
     def __init__(self, data: ApplicationData):
@@ -37,5 +38,7 @@ class CommandFactory:
             return FindPackageCommand(params, self._app_data)
         if cmd.lower() == 'viewroutes':
             return ViewRoutesCommand(params, self._app_data, self._models_factory)
+        if cmd.lower() == 'checkroute':
+            return CheckRouteCommand(params, self._app_data)
         
         raise ApplicationError(f'Invalid command name: {cmd}!')
