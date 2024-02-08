@@ -8,12 +8,20 @@ from datetime import datetime, timedelta
 class Route:
     _format = '%b %d %H:%Mh'
     def __init__(self, route_id: int, date_time_departure: datetime, *locations: Locations) -> None:
+      
         self._route_id = route_id
         self._date_time_departure = self.format_datetime(date_time_departure)
         self._locations = locations
-        self._status = Status.IN_PROGRESS
         self._trucks_list: list[Trucks] = []
+        
+        if datetime.now() < self.date_time_departure:
+            self._status = Status.STANDING
+        elif datetime.now() >= self.date_time_departure:
+            self._status = Status.IN_PROGRESS
+        elif len(self._trucks_list) == 0:
+            self._status = Status.FINISHED
 
+       
     @property
     def route_id(self):
         return self._route_id  
