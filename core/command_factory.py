@@ -11,7 +11,7 @@ from commands.add_route import AddRouteCommand
 from commands.find_package import FindPackageCommand
 from commands.view_routes_inprogress import ViewRoutesCommand
 from commands.check_route import CheckRouteCommand
-from commands.assigh_truck import AssignTruck
+from commands.assign_truck import AssignTruck
 
 class CommandFactory:
     def __init__(self, data: ApplicationData):
