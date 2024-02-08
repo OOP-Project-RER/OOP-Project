@@ -12,6 +12,7 @@ class Route:
         self._date_time_departure = self.format_datetime(date_time_departure)
         self._locations = locations
         self._status = Status.IN_PROGRESS
+        self._trucks_list: list[Trucks] = []
 
     @property
     def route_id(self):
@@ -31,7 +32,7 @@ class Route:
             self._status = Status.STANDING
         elif datetime.now() >= self.date_time_departure:
             self._status = Status.IN_PROGRESS
-        elif datetime.now() >= self.locations[-1]:
+        elif len(self._trucks_list) == 0:
             self._status = Status.FINISHED
 
     @property
