@@ -1,3 +1,4 @@
+from commands.add_pack_to_truck import AddPackToTruck
 from errors.application_error import ApplicationError
 from core.application_data import ApplicationData
 from core.models_factory import ModelsFactory
@@ -43,5 +44,9 @@ class CommandFactory:
             return CheckRouteCommand(params, self._app_data)
         if cmd.lower() == 'assigntruck':
             return AssignTruck(params, self._app_data, self._models_factory)
+        if cmd.lower() == 'addpacktotruck':
+            return AddPackToTruck(params, self._app_data)
+        
+        
         
         raise ApplicationError(f'Invalid command name: {cmd}!')

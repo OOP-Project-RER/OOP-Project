@@ -20,7 +20,7 @@ class AssignTruck(BaseCommand):
         truck = self.models_factory.create_truck(vehicle)
         route.add_truck(truck)
 
-        return f'{vehicle} with ID:{truck._truck_id} truck was assigh to route #{self.params[1]}'
+        return f'{vehicle} with ID:{truck._truck_id} truck was assigned to route #{self.params[1]}'
 
 
 
