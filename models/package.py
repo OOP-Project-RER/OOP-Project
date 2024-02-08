@@ -60,6 +60,7 @@ class Package:
             #                     current_location = route.calc_current_location()
 
         # return current_location
+            pass
     
     
     def __str__(self) -> str:
