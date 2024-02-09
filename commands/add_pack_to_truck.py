@@ -9,11 +9,15 @@ class AddPackToTruck(BaseCommand):
 
 
     def execute(self):
-        package_id_str, = self.params
+        package_id_str, route_id_str = self.params
         package_id = self._try_parse_int(package_id_str)
+        route_id = self._try_parse_int(route_id_str)
         package = self.app_data.find_package_by_id(package_id)
-        Trucks.add_package(package)   #тук гърми :(
-        return f"Package №: {package_id} was added to truck №: {Trucks.truck_id}"
+        route = self.app_data.find_route_by_id(route_id)
+        for truck in route._trucks_list:
+            truck.add_package(package)
+        
+        return f"Package №: {package_id} was added successfuly"
         
 
 

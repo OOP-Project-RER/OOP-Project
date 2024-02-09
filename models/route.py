@@ -73,6 +73,7 @@ class Route:
     
     def add_truck(self, truck):
         self.truck = truck
+        self._trucks_list.append(truck) #
         return self.truck
     
     def calc_distance_time(self):
