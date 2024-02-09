@@ -27,8 +27,8 @@ class AssignTruck(BaseCommand):
             raise ApplicationError(f'Truck {vehicle} is not available in {city} hub')
         else:
             t = [truck for truck in self.app_data._all_trucks[vehicle]  if truck.status == Status.STANDING]
-            t[0]._status = Status.IN_PROGRESS
             route.add_truck(t[0])
+            t[0]._status = Status.IN_PROGRESS
             city_trucks[vehicle] -= 1
             
             return f'{vehicle} with ID:{t[0].truck_id} truck was assigned to route #{self.params[1]}'
