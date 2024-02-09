@@ -3,6 +3,7 @@ from core.application_data import ApplicationData
 from core.models_factory import ModelsFactory
 from errors.application_error import ApplicationError
 from models.constants.locations import Locations
+from models.constants.status import Status
 
 class AssignTruck(BaseCommand):
     def __init__(self, params: list[str], app_data: ApplicationData, models_factory : ModelsFactory):
@@ -25,10 +26,12 @@ class AssignTruck(BaseCommand):
         if city_trucks.get(vehicle) == 0:
             raise ApplicationError(f'Truck {vehicle} is not available in {city} hub')
         else:
-            truck = self.models_factory.create_truck(vehicle)
-            route.add_truck(truck)
             city_trucks[vehicle] -= 1
-            return f'{vehicle} with ID:{truck._truck_id} truck was assigned to route #{self.params[1]}'
+            t = [truck for truck in self.app_data._all_trucks[vehicle]  if truck.status == Status.STANDING]
+            t[0]._status = Status.IN_PROGRESS
+            route.add_truck(t[0])
+            
+            return f'{vehicle} with ID:{t[0].truck_id} truck was assigned to route #{self.params[1]}'
 
 
         

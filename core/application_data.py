@@ -5,6 +5,9 @@ from models.employee import Employee
 from models.route import Route
 from models.trucks.trucks import Trucks
 from models.package import Package
+from models.trucks.scania import Scania
+from models.trucks.man import Man
+from models.trucks.actros import Actros
 
 
 class ApplicationData:
@@ -13,6 +16,9 @@ class ApplicationData:
         self._logged_employee = None
         self._all_packages_list: list[Package] = []
         self._all_routes_list: list[Route] = []
+        self._all_trucks ={'Scania':[(Scania('Scania')) for i in range(10)], 
+                        'Man': [(Man('Man')) for l in range(15)],
+                        'Actros': [(Actros('Actros')) for l in range(15)]}
 
 
     @property
@@ -25,9 +31,13 @@ class ApplicationData:
     
     @property
     def all_routes_list(self):
-        return tuple(self._all_routes_list)
+        return self._all_routes_list
+    
+    @property
+    def all_trucks(self):
+        return tuple(self._all_trucks)
 
-    def create_employee(self, username, firstname, lastname, password, user_role) -> Employee:
+    def create_employee(self, username:str, firstname:str, lastname:str, password:int, user_role) -> Employee:
         if len([u for u in self._employees if u.username == username]) > 0:
             raise ApplicationError(
                 f'User {username} already exist. Choose a different username!')
@@ -76,7 +86,7 @@ class ApplicationData:
         
         return package[0]
     
-    def find_route_by_id(self, id):
+    def find_route_by_id(self, id:int) -> Route:
         route = [rt for rt in self.all_routes_list if id ==rt.route_id]
         if route == []:
             raise ApplicationError(f'Route with ID: {id} can\'t be find!') 

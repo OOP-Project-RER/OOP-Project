@@ -12,18 +12,18 @@ from datetime import datetime
 class ModelsFactory:
     def __init__(self):
         self._package_id = 1
-        self._truck_id = 1 
         self._route_id = 101
-        self._scania_id = 1001
-        self._man_id = 1011
-        self._actros_id = 1026
+        #self._truck_id = 1 
+        #self._scania_id = 1001
+        #self._man_id = 1011
+        #self._actros_id = 1026
 
     def create_package(self, start_location: Locations, end_location: Locations, package_weight: float, contact_customer: Customer):
         package_id = self._package_id
         self._package_id += 1
 
         return Package(package_id, start_location, end_location, package_weight, contact_customer)
-    
+    '''    
     def create_truck(self, name: Name):
         if name == Name.SCANIA:
             if self._scania_id > 1010:
@@ -54,7 +54,7 @@ class ModelsFactory:
         
         else:
             raise ValueError(f'There is no truck with name {name}!')
-
+    '''
 
     def create_route(self, start_location: Locations, *other_locations: Locations):
         route_id = self._route_id

@@ -1,18 +1,27 @@
 from models.constants.name import Name
 from models.trucks.trucks import Trucks
-class Actros(Trucks):
+from errors.application_error import ApplicationError
 
+class Actros(Trucks):
         
     CAPACITY = 26000
     MAX_RANGE = 13000
     NUMBER_OF_TRUCKS = 15
+    _actros_id = 1026
 
-    def __init__(self, truck_id: int, name: str, capacity: float = CAPACITY, max_range: int = MAX_RANGE, num_of_trucks: int = NUMBER_OF_TRUCKS):
+    def __init__(self, name: Name, truck_id: int = 0, capacity: float = CAPACITY, max_range: int = MAX_RANGE, num_of_trucks: int = NUMBER_OF_TRUCKS):
         super().__init__(truck_id, name, capacity, max_range, num_of_trucks)
 
-    #self.name = Name.ACTROS
-    #self._capacity = Actros.CAPACITY
-    #self._max_range = Actros.MAX_RANGE
-    #self._num_of_trucks = Actros.NUMBER_OF_TRUCKS
+        self.name = Name.from_string(name)
+        self.truck_id = Actros._actros_id
+        Actros._actros_id += 1
 
-   
+    @property
+    def truck_id(self):
+        return self._truck_id
+    
+    @truck_id.setter
+    def truck_id(self, value):
+        if value > 1040:
+                raise ApplicationError('You don\'t have any more Actros trucks')
+        self._truck_id = value
