@@ -68,6 +68,9 @@ class Route:
         return parsed_datetime
     
     def add_truck(self, truck):
+        route, distance = self.calc_distance_time()
+        if truck.max_range < distance:
+            raise ApplicationError(f'The distance is too high for truck {truck.name}!')
         self.truck = truck
         return self.truck
     
