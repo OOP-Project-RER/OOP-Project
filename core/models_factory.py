@@ -27,7 +27,7 @@ class ModelsFactory:
     def create_truck(self, name: Name):
         if name == Name.SCANIA:
             if self._scania_id > 1010:
-                raise ValueError('You don\'t have any more  Scania trucks')
+                raise ApplicationError('You don\'t have any more  Scania trucks')
             
             truck_id = self._scania_id
             self._scania_id += 1
@@ -36,7 +36,7 @@ class ModelsFactory:
 
         elif name == Name.MAN:
             if self._man_id > 1025:
-                raise ValueError('You don\'t have any more  Man trucks')
+                raise ApplicationError('You don\'t have any more  Man trucks')
             
             truck_id = self._man_id
             self._man_id += 1
@@ -45,7 +45,7 @@ class ModelsFactory:
 
         elif name == Name.ACTROS:
             if self._actros_id > 1040:
-                raise ValueError('You don\'t have any more  Scania trucks')
+                raise ApplicationError('You don\'t have any more  Scania trucks')
             
             truck_id = self._actros_id
             self._actros_id += 1

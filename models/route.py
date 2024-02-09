@@ -60,7 +60,7 @@ class Route:
             if self.truck == None:
                 self._truck = value
             else:
-                raise ValueError('Truck is already assign to this route!')    
+                raise ApplicationError('Truck is already assign to this route!')    
   
     def format_datetime(self, input_datetime: str) -> datetime:
         parsed_datetime = datetime.strptime(input_datetime, "%Y%m%dT%H%M") 

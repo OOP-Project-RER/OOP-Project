@@ -1,6 +1,7 @@
 from commands.base.base_command import BaseCommand
 from core.application_data import ApplicationData
 from core.models_factory import ModelsFactory
+from errors.application_error import ApplicationError
 from models.constants.locations import Locations
 
 class AssignTruck(BaseCommand):
@@ -21,7 +22,7 @@ class AssignTruck(BaseCommand):
         city = route.locations[0]
         city_trucks = Locations.city_trucks.get(city)
         if city_trucks.get(vehicle) == 0:
-            raise ValueError(f'Truck {vehicle} is not available in {city} hub')
+            raise ApplicationError(f'Truck {vehicle} is not available in {city} hub')
         else:
             city_trucks[vehicle] -= 1
         
