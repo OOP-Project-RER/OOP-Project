@@ -1,4 +1,5 @@
 from core.application_data import ApplicationData
+from errors.application_error import ApplicationError
 
 
 class BaseCommand():
@@ -16,10 +17,10 @@ class BaseCommand():
 
     def execute(self):
         if self._requires_login() and not self._app_data.has_logged_in_employee:
-            raise ValueError('You are not logged in! Please login first!')
+            raise ApplicationError('You are not logged in! Please login first!')
 
         if len(self.params) < self._expected_params_count():
-            raise ValueError(
+            raise ApplicationError(
                 f'Invalid number of arguments. Expected at least {self._expected_params_count()}; received: {len(self.params)}.")')
 
         return ''
@@ -29,14 +30,14 @@ class BaseCommand():
         try:
             return float(s)
         except:
-            raise ValueError(msg)
+            raise ApplicationError(msg)
         
 
     def _try_parse_int(self, s, msg='Invalid value. Expected an int.'):
         try:
             return int(s)
         except:
-            raise ValueError(msg)
+            raise ApplicationError(msg)
 
     
     def _requires_login(self) -> bool:
@@ -48,5 +49,5 @@ class BaseCommand():
     def _throw_if_employee_logged_in(self):
         if self._app_data.has_logged_in_employee:
             logged_employee = self._app_data.logged_in_employee
-            raise ValueError(
+            raise ApplicationError(
                 f'Employee {logged_employee.username} is logged in! Please log out first!')
