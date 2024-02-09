@@ -12,14 +12,9 @@ class ShowTrucksIn(BaseCommand):
         else:  
             city = self.params[0]
 
-        try:
-            loc = Locations(city)
-        except TypeError as e:
-            print('You didn\'t enter valid city!')
-            
+        loc = Locations(city)           
 
         return f'{loc.show_truck()}'
-
 
     def _expected_params_count(self) -> int:
         return 1
