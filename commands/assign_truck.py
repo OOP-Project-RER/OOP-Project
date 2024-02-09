@@ -1,6 +1,7 @@
 from commands.base.base_command import BaseCommand
 from core.application_data import ApplicationData
 from core.models_factory import ModelsFactory
+from errors.application_error import ApplicationError
 from models.constants.locations import Locations
 
 class AssignTruck(BaseCommand):

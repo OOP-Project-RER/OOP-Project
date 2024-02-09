@@ -1,3 +1,4 @@
+from errors.application_error import ApplicationError
 from models.package import Package
 from models.constants.status import Status
 
@@ -38,7 +39,7 @@ class Trucks:
 
     def add_package(self, package: Package):
         if package.package_weight > self._capacity:
-            raise ValueError("Package weight is bigger than truck capacity")
+            raise ApplicationError("Package weight is bigger than truck capacity")
         self._capacity -= package.package_weight 
         self._packages.append(package)
 

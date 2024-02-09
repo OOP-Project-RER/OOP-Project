@@ -1,5 +1,6 @@
 from commands.base.base_command import BaseCommand
 from core.application_data import ApplicationData
+from errors.application_error import ApplicationError
 
 
 class LoginCommand(BaseCommand):
@@ -13,7 +14,7 @@ class LoginCommand(BaseCommand):
         username, password = self.params
         employee = self._app_data.find_employee_by_username(username)
         if employee.password != password:
-            raise ValueError('Wrong username or password!')
+            raise ApplicationError('Wrong username or password!')
         else:
             self._app_data.login(employee)
 

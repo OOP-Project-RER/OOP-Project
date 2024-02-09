@@ -1,3 +1,4 @@
+from errors.application_error import ApplicationError
 from models.constants.locations import Locations
 from models.constants.status import Status
 from models.employee import Employee
@@ -28,7 +29,7 @@ class ApplicationData:
 
     def create_employee(self, username, firstname, lastname, password, user_role) -> Employee:
         if len([u for u in self._employees if u.username == username]) > 0:
-            raise ValueError(
+            raise ApplicationError(
                 f'User {username} already exist. Choose a different username!')
 
         employee = Employee(username, firstname, lastname, password, user_role)
@@ -39,7 +40,7 @@ class ApplicationData:
     def find_employee_by_username(self, username: str) -> Employee:
         filtered = [employee for employee in self._employees if employee.username == username]
         if filtered == []:
-            raise ValueError(f'There is no employee with username {username}!')
+            raise ApplicationError(f'There is no employee with username {username}!')
 
         return filtered[0]
     
@@ -48,7 +49,7 @@ class ApplicationData:
         if self.has_logged_in_employee:
             return self._logged_employee
         else:
-            raise ValueError('There is no logged in employee.')
+            raise ApplicationError('There is no logged in employee.')
 
     @property
     def has_logged_in_employee(self):
@@ -71,14 +72,14 @@ class ApplicationData:
     def find_package_by_id(self, id:int) -> Package:
         package = [pac for pac in self.all_packages_list if id == pac.package_id]
         if package == []:
-            raise ValueError(f'Package with ID: {id} can\'t be find!')
+            raise ApplicationError(f'Package with ID: {id} can\'t be find!')
         
         return package[0]
     
     def find_route_by_id(self, id):
         route = [rt for rt in self.all_routes_list if id ==rt.route_id]
         if route == []:
-            raise ValueError(f'Route with ID: {id} can\'t be find!') 
+            raise ApplicationError(f'Route with ID: {id} can\'t be find!') 
         
         return route[0]
     
