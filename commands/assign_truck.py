@@ -1,6 +1,7 @@
 from commands.base.base_command import BaseCommand
 from core.application_data import ApplicationData
 from core.models_factory import ModelsFactory
+from models.constants.locations import Locations
 
 class AssignTruck(BaseCommand):
     def __init__(self, params: list[str], app_data: ApplicationData, models_factory : ModelsFactory):
@@ -15,8 +16,15 @@ class AssignTruck(BaseCommand):
         #return super().execute()
         vehicle = self.params[0]
         id = self._try_parse_int(self.params[1])
-        route = self._app_data.find_route_by_id(id)
 
+        route = self._app_data.find_route_by_id(id)
+        city = route.locations[0]
+        city_trucks = Locations.city_trucks.get(city)
+        if city_trucks.get(vehicle) == 0:
+            raise ValueError(f'Truck {vehicle} is not available in {city} hub')
+        else:
+            city_trucks[vehicle] -= 1
+        
         truck = self.models_factory.create_truck(vehicle)
         route.add_truck(truck)
 
