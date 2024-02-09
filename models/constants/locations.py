@@ -9,6 +9,8 @@ class Locations:
     BRI = 'Brisbane'
     DAR = 'Darwin'
     PER = 'Perth'
+    
+    locations = ['Sydney', 'Melbourne', 'Adelaide', 'Alice_Springs', 'Brisbane', 'Darwin', 'Perth']
 
     sydney = {MEL: 877, ADL: 1376, ASP:	2762, BRI: 909, DAR: 3935, PER:	4016}
     melbourne = {SYD: 877, ADL:	725, ASP: 2255, BRI: 1765, DAR:	3752, PER: 3509}
