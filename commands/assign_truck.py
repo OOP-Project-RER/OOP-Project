@@ -21,22 +21,14 @@ class AssignTruck(BaseCommand):
         route = self._app_data.find_route_by_id(id)
         city = route.locations[0]
         city_trucks = Locations.city_trucks.get(city)
-        try:
-            if city_trucks.get(vehicle) == 0:
-                raise ValueError(f'Truck {vehicle} is not available in {city} hub')
-            else:
-                truck = self.models_factory.create_truck(vehicle)
-                route.add_truck(truck)
-                city_trucks[vehicle] -= 1
-                return f'{vehicle} with ID:{truck._truck_id} truck was assigned to route #{self.params[1]}'
-        
-        except Exception as e:
-            print(e)
 
-            print(truck.truck_id)
-            
-
-
+        if city_trucks.get(vehicle) == 0:
+            raise ApplicationError(f'Truck {vehicle} is not available in {city} hub')
+        else:
+            truck = self.models_factory.create_truck(vehicle)
+            route.add_truck(truck)
+            city_trucks[vehicle] -= 1
+            return f'{vehicle} with ID:{truck._truck_id} truck was assigned to route #{self.params[1]}'
 
 
         
