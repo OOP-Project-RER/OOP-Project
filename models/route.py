@@ -12,15 +12,14 @@ class Route:
         self._route_id = route_id
         self._date_time_departure = self.format_datetime(date_time_departure)
         self._locations = locations
-        self._trucks_list: list[Trucks] = []
         self.truck = None
         
         if datetime.now() < self.date_time_departure:
             self._status = Status.STANDING
         elif datetime.now() >= self.date_time_departure:
             self._status = Status.IN_PROGRESS
-        elif len(self._trucks_list) == 0:
-            self._status = Status.FINISHED
+        #elif datetime.now() >= self.date_time_departure:
+          #  self._status = Status.FINISHED
 
        
     @property
@@ -41,7 +40,7 @@ class Route:
             self._status = Status.STANDING
         elif datetime.now() >= self.date_time_departure:
             self._status = Status.IN_PROGRESS
-        elif len(self._trucks_list) == 0:
+        elif len(self.truck) == 0:
             self._status = Status.FINISHED
 
     @property
@@ -61,10 +60,7 @@ class Route:
             if self.truck == None:
                 self._truck = value
             else:
-                raise ValueError('Truck is already assign to this route!')
-
-        
-        
+                raise ValueError('Truck is already assign to this route!')    
   
     def format_datetime(self, input_datetime: str) -> datetime:
         parsed_datetime = datetime.strptime(input_datetime, "%Y%m%dT%H%M") 
@@ -73,7 +69,6 @@ class Route:
     
     def add_truck(self, truck):
         self.truck = truck
-        self._trucks_list.append(truck) #
         return self.truck
     
     def calc_distance_time(self):
