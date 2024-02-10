@@ -4,6 +4,7 @@ from core.models_factory import ModelsFactory
 from errors.application_error import ApplicationError
 from models.constants.locations import Locations
 from models.constants.status import Status
+import random
 
 class AssignTruck(BaseCommand):
     def __init__(self, params: list[str], app_data: ApplicationData, models_factory : ModelsFactory):
@@ -26,12 +27,12 @@ class AssignTruck(BaseCommand):
         if city_trucks.get(vehicle) == 0:
             raise ApplicationError(f'Truck {vehicle} is not available in {city} hub')
         else:
-            t = [truck for truck in self.app_data._all_trucks[vehicle]  if truck.status == Status.STANDING]
-            route.add_truck(t[0])
-            t[0]._status = Status.IN_PROGRESS
+            truck = random.choice([truck for truck in self.app_data._all_trucks[vehicle]  if truck.status == Status.STANDING])
+            route.add_truck(truck)
+            truck._status = Status.IN_PROGRESS
             city_trucks[vehicle] -= 1
             
-            return f'{vehicle} with ID:{t[0].truck_id} truck was assigned to route #{self.params[1]}'
+            return f'{vehicle} with ID:{truck.truck_id} truck was assigned to route #{self.params[1]}'
 
 
         
