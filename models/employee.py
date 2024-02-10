@@ -2,12 +2,12 @@ from models.constants.employee_role import EmployeeRole
 from errors.application_error import ApplicationError
 
 class Employee():
-    def __init__(self, username:str, first_name:str, last_name:str, password:str, employee_role : EmployeeRole = 'employee') -> None:
+    def __init__(self, username:str, first_name:str, last_name:str, password:str, employee_role : EmployeeRole = 'Employee') -> None:
         self.username = username
         self.first_name = first_name
         self.last_name = last_name
         self.password = password
-        self._employee_role = employee_role
+        self._employee_role = EmployeeRole.from_string(employee_role)
 
     @property
     def username(self):

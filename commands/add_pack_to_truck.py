@@ -9,6 +9,8 @@ class AddPackToTruck(BaseCommand):
 
 
     def execute(self):
+        #super().execute()
+    
         package_id_str, route_id_str = self.params
         package_id = self._try_parse_int(package_id_str)
         route_id = self._try_parse_int(route_id_str)
@@ -18,5 +20,10 @@ class AddPackToTruck(BaseCommand):
         
         return f"Package №: {package_id} was added successfuly"
         
+    def _requires_login(self) -> bool:
+        return True
+
+    def _expected_params_count(self) -> list[int]:
+        return [2]
 
 

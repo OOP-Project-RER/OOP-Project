@@ -8,7 +8,7 @@ class LoginCommand(BaseCommand):
         super().__init__(params, app_data)
 
     def execute(self):
-        super().execute()
+        #super().execute()
         self._throw_if_employee_logged_in()
 
         username, password = self.params
@@ -23,5 +23,5 @@ class LoginCommand(BaseCommand):
     def _requires_login(self) -> bool:
         return False
 
-    def _expected_params_count(self) -> int:
-        return 2
+    def _expected_params_count(self) -> list[int]:
+        return [2]

@@ -9,7 +9,14 @@ class CheckRouteCommand(BaseCommand):
         
 
     def execute(self):
+        #super().execute()
         
         start_location, end_lockation = self.params
         route = self.app_data.check_for_route(start_location, end_lockation)
         return "\n".join(route)
+    
+    def _requires_login(self) -> bool:
+         return True
+
+    def _expected_params_count(self) -> list[int]:
+        return [2]

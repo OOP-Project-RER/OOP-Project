@@ -2,9 +2,9 @@ from errors.application_error import ApplicationError
 
 
 class EmployeeRole:
-    EMPLOYEE = 'employee'
-    SUPERVISOR = 'supervisor'
-    MANAGER = 'manager'
+    EMPLOYEE = 'Employee'
+    SUPERVISOR = 'Supervisor'
+    MANAGER = 'Manager'
 
     @classmethod
     def from_string(cls, value) -> str:

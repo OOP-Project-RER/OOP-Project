@@ -17,8 +17,8 @@ class ViewUnsentPackagesCommand(BaseCommand):
     def execute(self):
         # super().execute(params)
 
-        # if not self._app_data.logged_in_employee.employee_role.SUPERVISOR:
-        #     raise ApplicationError("You are not a supervisor!")
+        #if self._app_data.logged_in_employee.employee_role != 'Supervisor':
+        #    raise ApplicationError("You are not a supervisor!")
 
         if len(self.params) == 1:
             searched_location = self.params[0]
@@ -49,6 +49,8 @@ class ViewUnsentPackagesCommand(BaseCommand):
              return "Invalid number of parameters. Please provide exactly zero or one location."
 
     def format_packages(self, packages, searched_location):
+        #super().execute()
+        
         total_weight = sum(pack._package_weight for pack in packages)
         amount = len(packages)
         package_info = {}
@@ -67,8 +69,8 @@ class ViewUnsentPackagesCommand(BaseCommand):
         else:
             return f"Total amount of packages: {amount}\nTotal weight: {total_weight}\n"
 
-    # def _requires_login(self) -> bool:
-    #     return True
+    def _requires_login(self) -> bool:
+         return True
 
-    def _expected_params_count(self) -> int:
-        return 1
+    def _expected_params_count(self) -> list[int]:
+        return [1]

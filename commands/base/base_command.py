@@ -18,11 +18,15 @@ class BaseCommand():
     def execute(self):
         if self._requires_login() and not self._app_data.has_logged_in_employee:
             raise ApplicationError('You are not logged in! Please login first!')
-
-        if len(self.params) < self._expected_params_count():
-            raise ApplicationError(
-                f'Invalid number of arguments. Expected at least {self._expected_params_count()}; received: {len(self.params)}.")')
-
+        
+        if len(self._expected_params_count()) == 2:
+            if len(self.params) < self._expected_params_count()[0] or len(self.params) > self._expected_params_count()[1]:
+                raise ApplicationError(
+                    f'Invalid number of arguments. Expected between {self._expected_params_count()[0]} and {self._expected_params_count()[1]} arguments, Received: {len(self.params)}')
+        else:
+            if len(self.params) != self._expected_params_count()[0]:
+                raise ApplicationError(
+                    f'Invalid number of arguments. Expected {self._expected_params_count()[0]}')
         return ''
     
     
@@ -43,7 +47,7 @@ class BaseCommand():
     def _requires_login(self) -> bool:
         raise NotImplementedError('Override in derived class')
 
-    def _expected_params_count(self) -> int:
+    def _expected_params_count(self) -> list[int]:
         raise NotImplementedError('Override in derived class')
     
     def _throw_if_employee_logged_in(self):

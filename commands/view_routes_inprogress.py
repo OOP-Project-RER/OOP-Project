@@ -16,10 +16,10 @@ class ViewRoutesCommand(BaseCommand):
         return self._models_factory
 
     def execute(self):
-        # super().execute(params)
-
-        # if not self._app_data.logged_in_employee.employee_role.MANAGER:
-        #     raise ApplicationError("You are not a manager!")
+        #super().execute()
+        
+        #if self._app_data.logged_in_employee.employee_role != 'Manager':
+        #    raise ApplicationError("You are not a manager!")
 
         routes_in_progres_list = [route.__str__() for route in self._app_data._all_routes_list if route._status == Status.IN_PROGRESS]
         if len(routes_in_progres_list) > 0:
@@ -28,8 +28,8 @@ class ViewRoutesCommand(BaseCommand):
         return 'There is no routes in progress.'
 
 
-    # def _requires_login(self) -> bool:
-    #     return True
+    def _requires_login(self) -> bool:
+        return True
 
-    def _expected_params_count(self) -> int:
-        return 0
+    def _expected_params_count(self) -> list[int]:
+        return [0]

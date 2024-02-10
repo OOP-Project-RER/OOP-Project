@@ -17,7 +17,8 @@ class AddRouteCommand(BaseCommand):
         return self._models_factory
     
     def execute(self):
-        
+        #super().execute()
+
         date_time_departure, *locations = self.params
         for loc in locations:
             if loc not in Locations.locations:
@@ -27,3 +28,9 @@ class AddRouteCommand(BaseCommand):
         self.app_data.add_route(route)
 
         return f"Route #{route.route_id} from {locations[0]} created."
+    
+    def _requires_login(self) -> bool:
+         return True
+
+    def _expected_params_count(self) -> list[int]:
+        return [3, 10]

@@ -16,7 +16,8 @@ class AssignTruck(BaseCommand):
         return self._models_factory
 
     def execute(self):
-        #return super().execute()
+        #super().execute()
+
         vehicle = self.params[0]
         id = self._try_parse_int(self.params[1])
 
@@ -34,5 +35,9 @@ class AssignTruck(BaseCommand):
             
             return f'{vehicle} with ID:{truck.truck_id} truck was assigned to route #{self.params[1]}'
 
+    def _requires_login(self) -> bool:
+         return True
 
+    def _expected_params_count(self) -> list[int]:
+        return [2]
         

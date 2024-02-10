@@ -21,6 +21,7 @@ class Engine:
                 print()
             except ApplicationError as e:
                 print(e)
+                print()
             except Exception as err:
                 #output.append(err.args[0])
                 print(err.args[0])

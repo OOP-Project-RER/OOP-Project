@@ -7,7 +7,7 @@ class RegisterEmployee(BaseCommand):
         super().__init__(params, app_data)
 
     def execute(self):
-        super().execute()
+        #super().execute()
         self._throw_if_employee_logged_in()
 
         username, firstname, lastname, password, *rest = self.params
@@ -26,5 +26,5 @@ class RegisterEmployee(BaseCommand):
     def _requires_login(self) -> bool:
         return False
 
-    def _expected_params_count(self) -> int:
-        return 4
+    def _expected_params_count(self) -> list[int]:
+        return [4, 5]
