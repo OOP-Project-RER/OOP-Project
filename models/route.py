@@ -13,11 +13,13 @@ class Route:
         self._date_time_departure = self.format_datetime(date_time_departure)
         self._locations = locations
         self.truck = None
+        self._status = Status.IN_PROGRESS
+        self._locations_info = self.stops_info()
         
-        if datetime.now() < self.date_time_departure:
-            self._status = Status.STANDING
-        elif datetime.now() >= self.date_time_departure:
-            self._status = Status.IN_PROGRESS
+        #if datetime.now() < self.date_time_departure:
+        #    self._status = Status.STANDING
+        #elif datetime.now() >= self.date_time_departure:
+        #    self._status = Status.IN_PROGRESS
         #elif datetime.now() >= self.date_time_departure:
           #  self._status = Status.FINISHED
 
@@ -34,14 +36,14 @@ class Route:
     def status(self):
         return self._status
     
-    @status.setter
-    def status(self):
-        if datetime.now() < self.date_time_departure:
-            self._status = Status.STANDING
-        elif datetime.now() >= self.date_time_departure:
-            self._status = Status.IN_PROGRESS
-        elif len(self.truck) == 0:
-            self._status = Status.FINISHED
+    #@status.setter
+    #def status(self):
+    #    if datetime.now() < self.date_time_departure:
+    #        self._status = Status.STANDING
+    #    elif datetime.now() >= self.date_time_departure:
+    #        self._status = Status.IN_PROGRESS
+    #    elif len(self.truck) == 0:
+    #        self._status = Status.FINISHED
 
     @property
     def date_time_departure(self):
@@ -73,6 +75,64 @@ class Route:
             raise ApplicationError(f'The distance is too high for truck {truck.name}!')
         self.truck = truck
         return self.truck
+    
+
+    def calculate_travel_time(self, stop, next_stop):
+        average_speed = 87
+        distance = getattr(Locations, stop.lower())[next_stop]
+        travel_time_hours = distance / average_speed
+
+        return travel_time_hours
+    
+    
+    def stops_info(self):
+        #start_time, *locations = input_data.split()
+        #start_time_parsed = datetime.strptime(start_time, "%Y%m%dT%H%M") 
+    
+        info = {self.locations[0]: self._date_time_departure}
+        datetime_departute = self.date_time_departure
+    
+        for i in range(len(self.locations) - 1):
+            stop = self.locations[i]
+            next_stop = self.locations[i + 1]
+            travel_time_hours = self.calculate_travel_time(stop, next_stop)
+            datetime_departute += timedelta(hours=travel_time_hours)
+            info[next_stop] = datetime_departute
+    
+        return info
+
+    def generate_route_string(self):
+        route_string = ''
+        #stops = self.stops_info()
+        for i, j in self._locations_info.items():
+            string = f'{i} ({j.strftime("%b %dth %H:%Mh")}) → '
+            route_string += string
+
+        route_string = route_string[:-3]
+        
+        return route_string
+
+
+    def calc_current_locations(self):
+        #stops = self.stops_info()
+        now = datetime.now()
+
+        if now < list(self._locations_info.values())[0]:
+            return f'Still in local hub: {list(self._locations_info.keys())[0]}'
+
+        elif now > list(self._locations_info.values())[-1]:
+            return f'Reached end location: {list(self._locations_info.keys())[-1]}'
+
+        else:
+            for k, v in self._locations_info.items():
+                if now < v:  
+                    time_to_next_stop = (v - now)
+                    distance_to_next_stop = round(time_to_next_stop.total_seconds() / 3600 * 87)
+                    return f'{distance_to_next_stop} km till {k}'
+
+
+
+
     
     def calc_distance_time(self):
         
@@ -111,5 +171,7 @@ class Route:
     def __str__(self) -> str: 
         route_str, total_distance = self.calc_distance_time() 
         current_location = self.calc_current_location()
+        route_string = self.generate_route_string()
+        calc_current_location = self.calc_current_locations()
 
-        return f'Route #{self._route_id}\n{route_str}\nTotal distance: {total_distance}\nCurrent locations: {current_location}'           
+        return f'Route #{self._route_id}\n{route_string}\nTotal distance: {total_distance}\nCurrent locations: {calc_current_location}'           
