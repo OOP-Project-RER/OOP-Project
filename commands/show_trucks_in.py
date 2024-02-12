@@ -9,14 +9,14 @@ class ShowTrucksIn(BaseCommand):
     def execute(self):
         #super().execute()
 
-        if len(self.params) == 2:
-            city = f'{self.params[0]}'+ ' ' + f'{self.params[1]}'
-        else:  
-            city = self.params[0]
+        #if len(self.params) == 2:
+        #    city = f'{self.params[0]}'+ ' ' + f'{self.params[1]}'
+        #else:  
+        #    city = self.params[0]
 
-        loc = Locations(city)           
+        loc = Locations.from_string(self.params[0])          
 
-        return f'{loc.show_truck()}'
+        return f'{Locations.show_truck(loc)}'
     def _requires_login(self) -> bool:
          return True
     

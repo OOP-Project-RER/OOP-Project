@@ -36,17 +36,6 @@ class Locations:
                    DAR : darwin_trucks,
                    PER : perth_trucks
                    }
-    
-
-
-
-    def __init__(self, city) -> None:
-        self.from_string(city)
-        self._city = city
-
-    @property
-    def city(self):
-        return self._city
 
     @classmethod
     def from_string(cls, location_string):
@@ -56,13 +45,13 @@ class Locations:
 
         return location_string
     
-    
-    def show_truck(self):
-        trucks = self.city_trucks.get(self.city)
+    @classmethod
+    def show_truck(cls, city):
+        trucks = cls.city_trucks.get(city)
         total_trucks = sum([v for v in trucks.values()])
 
         return '\n'.join([
-            f'{self.city} hup have total of standing trucks: {total_trucks}',
+            f'{city} hup have total of standing trucks: {total_trucks}',
             '------------------------',
             f'Scania: {trucks.get('Scania')}',
             f'Man: {trucks.get('Man')}',

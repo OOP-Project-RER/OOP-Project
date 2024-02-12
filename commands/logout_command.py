@@ -8,7 +8,7 @@ class LogoutCommand(BaseCommand):
         super().__init__(params, app_data)
 
     def execute(self):
-        #super().execute()
+        super().execute()
         
         self._app_data.logout()
 

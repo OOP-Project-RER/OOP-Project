@@ -3,6 +3,7 @@ from models.constants.locations import Locations
 from models.trucks.trucks import Trucks
 from models.constants.status import Status
 from datetime import datetime, timedelta
+from models.package import Package
 
 
 class Route:
@@ -14,7 +15,8 @@ class Route:
         self._locations = locations
         self.truck = None
         self._status = Status.IN_PROGRESS
-        self._locations_info = self.stops_info()
+        self._locations_info, self.weight_in_locations = self.stops_info()
+    
         
         #if datetime.now() < self.date_time_departure:
         #    self._status = Status.STANDING
@@ -90,6 +92,7 @@ class Route:
         #start_time_parsed = datetime.strptime(start_time, "%Y%m%dT%H%M") 
     
         info = {self.locations[0]: self._date_time_departure}
+        weight_in_stops = {self.locations[0]: 0}
         datetime_departute = self.date_time_departure
     
         for i in range(len(self.locations) - 1):
@@ -98,8 +101,9 @@ class Route:
             travel_time_hours = self.calculate_travel_time(stop, next_stop)
             datetime_departute += timedelta(hours=travel_time_hours)
             info[next_stop] = datetime_departute
+            weight_in_stops[next_stop] = 0
     
-        return info
+        return info, weight_in_stops
 
     def generate_route_string(self):
         route_string = ''
@@ -130,9 +134,12 @@ class Route:
                     distance_to_next_stop = round(time_to_next_stop.total_seconds() / 3600 * 87)
                     return f'{distance_to_next_stop} km till {k}'
 
+    def update_weight_in_stops(self, package : Package):
+        
+        self.weight_in_locations[package.start_location] += package.package_weight
+        self.weight_in_locations[package.end_location] -= package.package_weight
 
-
-
+        
     
     def calc_distance_time(self):
         

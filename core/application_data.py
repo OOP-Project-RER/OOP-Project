@@ -93,6 +93,22 @@ class ApplicationData:
         
         return route[0]
     
+    def check_if_package_locations_are_in_route_locations(self, package:Package, route:Route):
+        if package.start_location not in route.locations or package.end_location not in route.locations:
+            raise ApplicationError('One of locations of the package doesn\'t match the route locatons!')
+        
+    
+    def check_if_package_can_be_adde_to_route(self, package:Package, route:Route):
+        end_index = route.locations.index(package.end_location)
+        capacity_at_stop = 0
+
+        for i in range(end_index):
+            capacity_at_stop += route.weight_in_locations[route.locations[i]]
+        
+        if (capacity_at_stop+package.package_weight) > route.truck.capacity:
+            raise ApplicationError(f'Can\'t assign package #{package._package_id} to route #{route.route_id}. The weight is too much!')
+
+    
     def check_for_route(self, start_location: str, end_location: str) -> Locations:
         found_routes = []
         for route in self.all_routes_list:

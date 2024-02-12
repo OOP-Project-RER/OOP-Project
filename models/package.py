@@ -4,21 +4,20 @@ from models.constants.locations import Locations
 from models.customer import Customer
 from datetime import datetime
 from models.constants.status import Status
+from models.constants.package_status import PackageStatus
 
 
 class Package:
     _format = '%b %d %H:%Mh'
     def __init__(self, package_id: int, start_location: Locations, end_location: Locations, package_weight: float, contact_customer: Customer) -> None:
-        
-        if package_weight <= 0:
-            raise ApplicationError('Invalid value for package_weight!')
 
         self._package_id = package_id
         self._start_location = start_location
         self._end_location = end_location
-        self._package_weight = package_weight
+        self.package_weight = package_weight
         self._contact_customer = contact_customer
         self._status = Status.STANDING
+        self._package_status = PackageStatus.UNASSIGN
         self._time_of_creating = datetime.now()
 
     @property
@@ -37,6 +36,12 @@ class Package:
     def package_weight(self): 
         return self._package_weight
     
+    @package_weight.setter
+    def package_weight(self, value):
+        if value <= 0 :
+            raise ApplicationError('The weight must be higher than 0!')
+        
+        self._package_weight = value
     
     @property
     def contact_customer(self):
@@ -45,6 +50,10 @@ class Package:
     @property
     def time_of_creating(self):
         return self._time_of_creating
+    
+    @property
+    def package_status(self):
+        return self._package_status
     
     def current_location(self):
         if self._status == Status.STANDING:
@@ -68,5 +77,5 @@ Created on: {self.time_of_creating.strftime(Package._format)}
 From: {self._start_location.city}
 To: {self._end_location.city}
 Weight: {self._package_weight}
-Status: {self._status}
+Status: {self._status}{self._status}
 Curren location: {str(self.current_location())}'''

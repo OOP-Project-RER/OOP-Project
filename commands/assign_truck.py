@@ -33,7 +33,7 @@ class AssignTruck(BaseCommand):
             truck._status = Status.IN_PROGRESS
             city_trucks[vehicle] -= 1
             
-            return f'{vehicle} with ID:{truck.truck_id} truck was assigned to route #{self.params[1]}'
+            return f'Truck {vehicle} with ID:{truck.truck_id} was assigned to route #{self.params[1]}'
 
     def _requires_login(self) -> bool:
          return True

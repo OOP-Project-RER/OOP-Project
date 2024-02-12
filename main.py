@@ -9,10 +9,24 @@ engine = Engine(cmd_factory)
 engine.start() 
 
 # registeremployee dave David Bechkam 12345
-# addroute 20240210T1630 Sydney Melbourne Adelaide
+# addroute 20240212T0830 Sydney Melbourne Adelaide
 # assigntruck Man 101
 # addpackage Sydney Melbourne 2350 gosho gosho gosho@abv.bg
-# viewunsentpackages
 # addpacktotruck 1 101
+# viewunsentpackages
 # showtrucksin Adelaide
 # viewroutes
+# checkroute Melbourne Adelaide
+# findpackage 
+
+
+# addroute 20240212T0830 Sydney Melbourne Adelaide Brisbane
+# assigntruck Man 101
+# addpackage Sydney Brisbane 20000 gosho gosho gosho@abv.bg
+# addpackage Adelaide Brisbane 4000 gosho gosho gosho@abv.bg
+# addpackage Melbourne Brisbane 3350 gosho gosho gosho@abv.bg
+# addpackage Melbourne Brisbane 10050 gosho gosho gosho@abv.bg
+# addpacktotruck 1 101
+# addpacktotruck 2 101
+
+# addpacktotruck 3 101
