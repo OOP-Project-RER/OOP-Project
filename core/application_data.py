@@ -95,7 +95,7 @@ class ApplicationData:
     
     def check_if_package_locations_are_in_route_locations(self, package:Package, route:Route):
         if package.start_location not in route.locations or package.end_location not in route.locations:
-            raise ApplicationError('One of locations of the package doesn\'t match the route locatons!')
+            raise ApplicationError('One of the locations in package doesn\'t match the route locations!')
         
     
     def check_if_package_can_be_adde_to_route(self, package:Package, route:Route):
