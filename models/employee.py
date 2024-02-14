@@ -12,7 +12,6 @@ class Employee():
     @property
     def username(self):
         return self._username
-    
     @username.setter
     def username(self, value):
         special_symbols = ['!','£','$','%','&','(',')','<','>','/']
@@ -26,31 +25,30 @@ class Employee():
     @property
     def first_name(self):
         return self._first_name
-    
     @first_name.setter 
     def first_name(self, value):
-        if len(value) < 2 or len(value) > 15:
+        if type(value) != str:
+            raise ApplicationError('Name should be letters')
+        elif len(value) < 2 or len(value) > 15:
             raise ApplicationError('Name should be between 3 and 10 symbols.')
-        elif type(value) != str:
-            raise ApplicationError('Name should be  letters')
         else:
             self._first_name = value
+
     @property
     def last_name(self):
         return self._last_name
-    
     @last_name.setter 
     def last_name(self, value):
-        if len(value) < 2 or len(value) > 15:
-            raise ApplicationError('Name should be between 3 and 10 symbols.')
-        elif type(value) != str:
+        if type(value) != str:
             raise ApplicationError('Name should be letters')
+        elif len(value) < 2 or len(value) > 15:
+            raise ApplicationError('Name should be between 3 and 10 symbols.')
         else:
             self._last_name = value
+
     @property
     def password(self):
         return self._password
-    
     @password.setter
     def password(self, value):
         special_symbols = ['!','£','$','%','&','(',')','<','>','/']
