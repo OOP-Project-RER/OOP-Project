@@ -6,7 +6,6 @@ class Customer:
         self._last_name = last_name
         self._email = email
 
-
     @property
     def first_name(self):
         return self._first_name
@@ -34,5 +33,5 @@ class Customer:
     def check_email(self, value):
         if '@' not in value:
             raise ApplicationError('You enter a invalid email!(Should contain "@")')
-        else:
-            return value
+        
+        return value
