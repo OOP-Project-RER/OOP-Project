@@ -95,7 +95,8 @@ class ApplicationData:
     
     def check_if_route_can_be_assign_to_truck(self, route:Route, truck:Trucks):
         truck_schedules = [rt for rt in truck._routes_list 
-                           if rt.status != Status.FINISHED and route.date_time_departure < rt._locations_info[rt.locations[-1]]]
+                           if rt.status != Status.FINISHED and 
+                           route.date_time_departure < rt._locations_info[rt.locations[-1]]]
         #for testing what is in the list
         for i in truck_schedules:
             print(i)
