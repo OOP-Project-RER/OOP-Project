@@ -14,7 +14,7 @@ class Route:
         self._date_time_departure = self.parsed(date_time_departure) #self.date_time_departure = date_time_departure
         self._locations = locations
         self.truck = None
-        self._status = Status.IN_PROGRESS  #self._status = datetime.now()
+        self._status = datetime.now()  
         self._locations_info, self.weight_in_locations = self.stops_info()
         self._total_distance = self.total_distance()
     
@@ -81,7 +81,7 @@ class Route:
         if truck.max_range < self._total_distance:
             raise ApplicationError(f'The distance is too high for truck {truck.name}!')
         self.truck = truck
-        
+
         return self.truck 
 
     def calculate_travel_time(self, stop, next_stop):
