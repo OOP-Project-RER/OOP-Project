@@ -28,5 +28,13 @@ engine.start()
 # addpackage Melbourne Brisbane 10050 gosho gosho gosho@abv.bg
 # addpacktotruck 1 101
 # addpacktotruck 2 101
-
 # addpacktotruck 3 101
+
+# addroute 20240212T0830 Sydney Melbourne Adelaide
+# addroute 20240214T1800 Sydney Melbourne Adelaide
+# addroute 20240215T0830 Sydney Melbourne Adelaide
+# addroute 20240215T1000 Sydney Melbourne Adelaide
+# addroute 20240215T1000 Sydney Melbourne Adelaide
+# assigntruck Man 101
+# assigntruck Man 102
+

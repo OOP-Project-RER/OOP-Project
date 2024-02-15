@@ -23,17 +23,20 @@ class AssignTruck(BaseCommand):
 
         route = self._app_data.find_route_by_id(id)
         city = route.locations[0]
-        city_trucks = Locations.city_trucks.get(city)
+        #city_trucks = Locations.city_trucks.get(city)
 
-        if city_trucks.get(vehicle) == 0:
-            raise ApplicationError(f'Truck {vehicle} is not available in {city} hub')
-        else:
-            truck = random.choice([truck for truck in self.app_data._all_trucks[vehicle]  if truck.status == Status.STANDING])
-            route.add_truck(truck)
-            truck._status = Status.IN_PROGRESS
-            city_trucks[vehicle] -= 1
+        #if city_trucks.get(vehicle) == 0:
+            #aise ApplicationError(f'Truck {vehicle} is not available in {city} hub')
+        #else:
+        truck = [truck for truck in self.app_data._all_trucks[vehicle]]  #if truck.status == Status.STANDING
+        self._app_data.check_if_route_can_be_assign_to_truck(route, truck[0])
+        
+        route.add_truck(truck[0])
+        truck[0].add_route(route)
+ 
+        #city_trucks[vehicle] -= 1
             
-            return f'Truck {vehicle} with ID:{truck.truck_id} was assigned to route #{self.params[1]}'
+        return f'Truk {vehicle} with ID:{truck[0].truck_id} was assigned to route #{self.params[1]}'
 
     def _requires_login(self) -> bool:
          return True

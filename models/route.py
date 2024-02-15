@@ -11,21 +11,13 @@ class Route:
     def __init__(self, route_id: int, date_time_departure: datetime, *locations: Locations) -> None:
       
         self._route_id = route_id
-        self._date_time_departure = self.format_datetime(date_time_departure)
+        self._date_time_departure = self.parsed(date_time_departure) #self.date_time_departure = date_time_departure
         self._locations = locations
         self.truck = None
-        self._status = Status.IN_PROGRESS
+        self._status = datetime.now()  
         self._locations_info, self.weight_in_locations = self.stops_info()
+        self._total_distance = self.total_distance()
     
-        
-        #if datetime.now() < self.date_time_departure:
-        #    self._status = Status.STANDING
-        #elif datetime.now() >= self.date_time_departure:
-        #    self._status = Status.IN_PROGRESS
-        #elif datetime.now() >= self.date_time_departure:
-          #  self._status = Status.FINISHED
-
-       
     @property
     def route_id(self):
         return self._route_id  
@@ -38,19 +30,38 @@ class Route:
     def status(self):
         return self._status
     
-    #@status.setter
-    #def status(self):
-    #    if datetime.now() < self.date_time_departure:
-    #        self._status = Status.STANDING
-    #    elif datetime.now() >= self.date_time_departure:
-    #        self._status = Status.IN_PROGRESS
-    #    elif len(self.truck) == 0:
-    #        self._status = Status.FINISHED
+    @status.setter
+    def status(self, date_time : datetime):
+        if date_time < self.date_time_departure:
+            self._status = Status.STANDING
+            
+        elif date_time >= self.date_time_departure and date_time < self._locations_info[self.locations[-1]]:
+                self._status = Status.IN_PROGRESS
+
+        else:
+            self._status = Status.FINISHED
 
     @property
     def date_time_departure(self):
         return self._date_time_departure
     
+        #@date_time_departure.setter
+    #def date_time_departure(self, input_datetime: str) -> datetime:
+    #    parsed_datetime = datetime.strptime(input_datetime, "%Y%m%dT%H%M")
+    #    
+    #    if datetime.now() > parsed_datetime:
+    #        raise ApplicationError(f'You can\'t create route in the past time')
+    #    
+    #    elif datetime.now() + timedelta(hours = 1) > parsed_datetime:
+    #        raise ApplicationError(F'It takes at least 1 hour to prepare to truck for departure') 
+    #    
+    #    self._date_time_departure = parsed_datetime
+
+    def parsed(self, input_datetime: str) -> datetime:
+        parsed_datetime = datetime.strptime(input_datetime, "%Y%m%dT%H%M")
+
+        return parsed_datetime
+        
     @property
     def truck(self):
         return self._truck
@@ -65,19 +76,13 @@ class Route:
                 self._truck = value
             else:
                 raise ApplicationError('Truck is already assign to this route!')    
-  
-    def format_datetime(self, input_datetime: str) -> datetime:
-        parsed_datetime = datetime.strptime(input_datetime, "%Y%m%dT%H%M") 
-
-        return parsed_datetime
-    
+     
     def add_truck(self, truck):
-        route, distance = self.calc_distance_time()
-        if truck.max_range < distance:
+        if truck.max_range < self._total_distance:
             raise ApplicationError(f'The distance is too high for truck {truck.name}!')
         self.truck = truck
-        return self.truck
-    
+
+        return self.truck 
 
     def calculate_travel_time(self, stop, next_stop):
         average_speed = 87
@@ -116,7 +121,6 @@ class Route:
         
         return route_string
 
-
     def calc_current_locations(self):
         #stops = self.stops_info()
         now = datetime.now()
@@ -139,32 +143,7 @@ class Route:
         self.weight_in_locations[package.start_location] += package.package_weight
         self.weight_in_locations[package.end_location] -= package.package_weight
 
-        
-    
-    def calc_distance_time(self):
-        
-        date_time_departure_str = self._date_time_departure.strftime("%b %d %H:%Mh")
-        route_str = f"{self._locations[0]} ({date_time_departure_str})"
-        current_time = self._date_time_departure
-        total_distance = 0
-
-        for i in range(len(self._locations)-1):
-            current_location = self.locations[i]
-            next_location = self.locations[i+1]
-            distance = getattr(Locations, current_location.lower())[next_location]
-            total_distance += distance
-
-            time_delta_hours = distance / 87 
-            arrival_time = current_time + timedelta(hours=time_delta_hours)
-            arrival_str = arrival_time.strftime("%b %d %H:%Mh")
-            route_str += f" → {self.locations[i+1]} ({arrival_str})"
-            current_time = arrival_time
-
-        return route_str, total_distance
-
-    def calc_current_location(self):
-        time_elapsed = datetime.now() - self._date_time_departure
-        km_traveled = 87 * time_elapsed.total_seconds() / 3600
+    def total_distance(self):
         total_distance = 0
         for i in range(len(self._locations)-1):
             current_location = self.locations[i]
@@ -172,13 +151,10 @@ class Route:
             distance = getattr(Locations, current_location.lower())[next_location]
             total_distance += distance
 
-            if km_traveled < total_distance:
-                return f'{round(distance - km_traveled)} till {next_location}'
+        return total_distance
 
     def __str__(self) -> str: 
-        route_str, total_distance = self.calc_distance_time() 
-        current_location = self.calc_current_location()
         route_string = self.generate_route_string()
         calc_current_location = self.calc_current_locations()
 
-        return f'Route #{self._route_id}\n{route_string}\nTotal distance: {total_distance}\nCurrent locations: {calc_current_location}'           
+        return f'Route #{self._route_id}\n{route_string}\nTotal distance: {self._total_distance}\nCurrent locations: {calc_current_location}'           
