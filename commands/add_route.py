@@ -20,6 +20,7 @@ class AddRouteCommand(BaseCommand):
         #super().execute()
 
         date_time_departure, *locations = self.params
+        
         for loc in locations:
             if loc not in Locations.locations:
                 raise ApplicationError(f"The city {loc} does not exist")

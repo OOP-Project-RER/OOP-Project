@@ -93,9 +93,23 @@ class ApplicationData:
         
         return route[0]
     
+    def check_if_route_can_be_assign_to_truck(self, route:Route, truck:Trucks):
+        truck_schedules = [rt for rt in truck._routes_list 
+                           if rt.status != Status.FINISHED and route.date_time_departure < rt._locations_info[rt.locations[-1]]]
+        #for testing what is in the list
+        for i in truck_schedules:
+            print(i)
+
+        end = [rt for rt in truck_schedules if route._locations_info[route.locations[-1]] > rt.date_time_departure]
+        #for testing what is in the list
+        print()
+        for i in end:
+            print(i)
+            raise ApplicationError('The route can\'t be assign to this truck. Different route is scheduled for this truck!')
+
     def check_if_package_locations_are_in_route_locations(self, package:Package, route:Route):
         if package.start_location not in route.locations or package.end_location not in route.locations:
-            raise ApplicationError('One of the locations in package doesn\'t match the route locations!')
+            raise ApplicationError('One or both of the locations in package doesn\'t match the route locations!')
         
     
     def check_if_package_can_be_adde_to_route(self, package:Package, route:Route):

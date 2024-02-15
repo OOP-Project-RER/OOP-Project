@@ -1,5 +1,6 @@
 from errors.application_error import ApplicationError
 from models.package import Package
+#from models.route import Route
 from models.constants.status import Status
 from models.constants.package_status import PackageStatus
 
@@ -11,6 +12,7 @@ class Trucks:
         self._capacity = capacity
         self._max_range = max_range
         self._num_of_trucks = num_of_trucks
+        self._routes_list: list  = []
         self._packages: list[Package] = []
         self._status = Status.STANDING
 
@@ -44,6 +46,9 @@ class Trucks:
         #self._capacity -= package.package_weight 
         self._packages.append(package)
         package._package_status = PackageStatus.ASSIGN
+
+    def add_route(self, route):
+        self._routes_list.append(route)
 
     def view(self):
         return '\n'.join([f'{self}'] + [f'  {package}' for package in self.packages])
