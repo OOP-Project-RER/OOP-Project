@@ -31,10 +31,6 @@ class Package_Should(unittest.TestCase):
         self.assertIsInstance(truck.packages, tuple)
 
 class AddPackage_Should(unittest.TestCase):
-    def test_add_package_raises_error_when_weight_is_bigger_than_capacity(self):
-        truck = Trucks(VALID_ID, VALID_NAME, VALID_CAPACITY, VALID_MAX_RANGE, VALID_NUM_OF_TRUCKS)
-        with self.assertRaises(ApplicationError):
-            truck.add_package(Package(1, "Sydney", "Melbourne", 50000.0, "David Bechkam dave@abv.bg"))
 
     def test_add_package_adds_packages_properly(self):
         #Arrange
@@ -48,16 +44,7 @@ class AddPackage_Should(unittest.TestCase):
         #Assert
         self.assertIn(package1, truck._packages)
         self.assertIn(package2, truck._packages)
-    
-    def test_add_package_changes_status_to_assigne(self):
-        #Arrange
-        truck = Trucks(VALID_ID, VALID_NAME, VALID_CAPACITY, VALID_MAX_RANGE, VALID_NUM_OF_TRUCKS)
-        package1 = Package(1, "Sydney", "Melbourne", 2000.0, "David Bechkam dave@abv.bg")
-        #Act
-        truck.add_package(package1)
-        #Assert
-        self.assertEqual(PackageStatus.ASSIGN, package1._package_status)
-    
+
 class AddRoute_Should(unittest.TestCase):
     def test_add_route_adds_route_properly(self):
         #Arrange

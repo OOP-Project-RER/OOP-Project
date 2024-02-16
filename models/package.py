@@ -16,8 +16,9 @@ class Package:
         self._end_location = end_location
         self.package_weight = package_weight
         self._contact_customer = contact_customer
-        self._status = Status.STANDING
-        self._package_status = PackageStatus.UNASSIGN
+        self._departure_time = None
+        self._arriving_time = None
+        self.status = datetime.now()
         self._time_of_creating = datetime.now()
 
     @property
@@ -48,34 +49,53 @@ class Package:
         return self._contact_customer
     
     @property
+    def status(self):
+        return self._status
+    
+    @status.setter
+    def status(self, date_time : datetime):
+        if self._departure_time == None:
+            self._status = Status.UNASSIGN
+        else:   
+            if date_time < self._departure_time:
+                self._status = Status.STANDING
+            
+            elif date_time >= self._departure_time and date_time < self._arriving_time:
+                self._status = Status.IN_PROGRESS
+
+            else:
+                self._status = Status.FINISHED
+    
+    @property
     def time_of_creating(self):
         return self._time_of_creating
     
-    @property
-    def package_status(self):
-        return self._package_status
-    
     def current_location(self):
-        if self._status == Status.STANDING:
-            current_location = self._start_location
-        elif self._status == Status.FINISHED:
-            current_location = self._end_location
-        # else:
-            # for route in .all_routes_list:
-            #     if route._status == Status.IN_PROGRESS:
-            #         for truck in route:
-            #             for pack in truck._packages:
-            #                 if self._package_id == pack._package_id:
-            #                     current_location = route.calc_current_location()
+        now = datetime.now()
 
-        return current_location
-    
+        if now < self._departure_time:
+            return f'Still in {self.start_location} hub. Waiting for the truck!'
+
+        elif now > self._arriving_time:
+            return f'Reached end location: {self.end_location}'
+
+        else:  
+            time_to_next_stop = (self._arriving_time - now)
+            distance_to_next_stop = round(time_to_next_stop.total_seconds() / 3600 * 87)
+            return f'{distance_to_next_stop} km till {self.end_location}'
     
     def __str__(self) -> str:
-        return f'''Package: #{self.package_id}
-Created on: {self.time_of_creating.strftime(Package._format)}
-From: {self._start_location}
-To: {self._end_location}
-Weight: {self._package_weight}
-Status: {self._status}{self._status}
-Curren location: {str(self.current_location())}'''
+        str_list = [f'Package: #{self.package_id}',
+                    f'Created on: {self.time_of_creating.strftime(Package._format)}',
+                    f'From: {self._start_location}',
+                    f'To: {self._end_location}',
+                    f'Weight: {self._package_weight}',
+                    f'Status: {self._status}',
+                    ]
+
+        if self._status == Status.UNASSIGN:
+            return '\n'.join(str_list) + f'\nStill in the hub. Its not assign to route, yet!'
+
+        else: 
+            return '\n'.join(str_list) + f'\nDeparture/Arriving: {self._departure_time.strftime(Package._format)} /' + f'{self._arriving_time.strftime(Package._format)}' + f'\nCurrent locations: {self.current_location()}'
+                    

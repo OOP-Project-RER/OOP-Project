@@ -41,11 +41,7 @@ class Trucks:
         return self._status
 
     def add_package(self, package: Package):
-        if package.package_weight > self._capacity:
-            raise ApplicationError("Package weight is bigger than truck capacity")
-        #self._capacity -= package.package_weight 
         self._packages.append(package)
-        package._package_status = PackageStatus.ASSIGN
 
     def add_route(self, route):
         self._routes_list.append(route)

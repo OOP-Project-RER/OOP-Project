@@ -15,15 +15,16 @@ class Engine:
                     break
 
                 command = self._command_factory.create(input_line)
-                #output.append(command.execute())
+
                 print('-----------------------')
                 print(command.execute())
                 print()
+            
             except ApplicationError as e:
                 print(e)
                 print()
+            
             except Exception as err:
-                #output.append(err.args[0])
                 print(err.args[0])
                 print()
 

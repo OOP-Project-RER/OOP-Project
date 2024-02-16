@@ -1,6 +1,6 @@
 from commands.base.base_command import BaseCommand
 from core.application_data import ApplicationData
-from models.constants.package_status import PackageStatus
+from models.constants.status import Status
 from itertools import groupby
 from errors.application_error import ApplicationError
 
@@ -22,7 +22,7 @@ class ViewUnsentPackagesCommand(BaseCommand):
 
         if len(self.params) == 1:
             searched_location = self.params[0]
-            unsent_packages = [pack for pack in self.app_data._all_packages_list if pack._package_status == PackageStatus.UNASSIGN and pack._start_location.city == searched_location]
+            unsent_packages = [pack for pack in self.app_data._all_packages_list if pack._status == Status.UNASSIGN and pack._start_location == searched_location]
             if unsent_packages:
                 sorted_packages = sorted(unsent_packages, key=lambda x: x._start_location)
                 groups = groupby(sorted_packages, key=lambda x: x._start_location)
@@ -34,7 +34,7 @@ class ViewUnsentPackagesCommand(BaseCommand):
                 return "No unsent packages found."      
             
         elif len(self.params) == 0:
-            unsent_packages = [pack for pack in self.app_data._all_packages_list if pack._package_status == PackageStatus.UNASSIGN]
+            unsent_packages = [pack for pack in self.app_data._all_packages_list if pack._status == Status.UNASSIGN]
             if unsent_packages:
                 sorted_packages = sorted(unsent_packages, key=lambda x: x._start_location)
                 groups = groupby(sorted_packages, key=lambda x: x._start_location)

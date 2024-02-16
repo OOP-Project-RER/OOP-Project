@@ -93,9 +93,7 @@ class Route:
     
     
     def stops_info(self):
-        #start_time, *locations = input_data.split()
-        #start_time_parsed = datetime.strptime(start_time, "%Y%m%dT%H%M") 
-    
+
         info = {self.locations[0]: self._date_time_departure}
         weight_in_stops = {self.locations[0]: 0}
         datetime_departute = self.date_time_departure
@@ -122,7 +120,6 @@ class Route:
         return route_string
 
     def calc_current_locations(self):
-        #stops = self.stops_info()
         now = datetime.now()
 
         if now < list(self._locations_info.values())[0]:

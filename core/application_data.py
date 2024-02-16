@@ -97,30 +97,27 @@ class ApplicationData:
         truck_schedules = [rt for rt in truck._routes_list 
                            if rt.status != Status.FINISHED and 
                            route.date_time_departure < rt._locations_info[rt.locations[-1]]]
-        #for testing what is in the list
-        for i in truck_schedules:
-            print(i)
 
-        end = [rt for rt in truck_schedules if route._locations_info[route.locations[-1]] > rt.date_time_departure]
-        #for testing what is in the list
-        print()
-        for i in end:
-            print(i)
+        if True in [True for rt in truck_schedules if route._locations_info[route.locations[-1]] > rt.date_time_departure]:
             raise ApplicationError('The route can\'t be assign to this truck. Different route is scheduled for this truck!')
 
     def check_if_package_locations_are_in_route_locations(self, package:Package, route:Route):
         if package.start_location not in route.locations or package.end_location not in route.locations:
             raise ApplicationError('One or both of the locations in package doesn\'t match the route locations!')
         
+    def check_if_package_is_already_added(self, package:Package, route:Route):
+        if True in [True for pack in route.truck.packages if pack.package_id == package.package_id]:
+            raise ApplicationError(f'Package #{package.package_id} is already added to this route!')
+        
     
-    def check_if_package_can_be_adde_to_route(self, package:Package, route:Route):
+    def check_if_package_weight_can_be_adde_to_route(self, package:Package, route:Route):
         end_index = route.locations.index(package.end_location)
         capacity_at_stop = 0
 
         for i in range(end_index):
             capacity_at_stop += route.weight_in_locations[route.locations[i]]
         
-        if (capacity_at_stop+package.package_weight) > route.truck.capacity:
+        if (capacity_at_stop + package.package_weight) > route.truck.capacity:
             raise ApplicationError(f'Can\'t assign package #{package._package_id} to route #{route.route_id}. The weight is too much!')
 
     
