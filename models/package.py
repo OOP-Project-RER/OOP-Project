@@ -57,9 +57,9 @@ class Package:
     
     def current_location(self):
         if self._status == Status.STANDING:
-            current_location = self._start_location.city
+            current_location = self._start_location
         elif self._status == Status.FINISHED:
-            current_location = self._end_location.city
+            current_location = self._end_location
         # else:
             # for route in .all_routes_list:
             #     if route._status == Status.IN_PROGRESS:
@@ -74,8 +74,8 @@ class Package:
     def __str__(self) -> str:
         return f'''Package: #{self.package_id}
 Created on: {self.time_of_creating.strftime(Package._format)}
-From: {self._start_location.city}
-To: {self._end_location.city}
+From: {self._start_location}
+To: {self._end_location}
 Weight: {self._package_weight}
 Status: {self._status}{self._status}
 Curren location: {str(self.current_location())}'''
