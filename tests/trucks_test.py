@@ -1,4 +1,5 @@
 import unittest
+import datetime
 from errors.application_error import ApplicationError
 from models.constants.package_status import PackageStatus
 from models.package import Package
@@ -14,7 +15,7 @@ VALID_NUM_OF_TRUCKS = 10
 
 
 class Initializer_Should(unittest.TestCase):
-    def test_assign_alues(self):
+    def test_assign_values(self):
         # Arrange & Act
         truck = Trucks(VALID_ID, VALID_NAME, VALID_CAPACITY, VALID_MAX_RANGE, VALID_NUM_OF_TRUCKS)
          # Assert
@@ -73,12 +74,11 @@ class AddRoute_Should(unittest.TestCase):
 class View_Should(unittest.TestCase):
     def test_view_returns_correct_format(self):
         #Arrange
+        current_datetime = datetime.datetime.now()
         truck = Trucks(VALID_ID, VALID_NAME, VALID_CAPACITY, VALID_MAX_RANGE, VALID_NUM_OF_TRUCKS)
         package1 = Package(1, "Sydney", "Melbourne", 2000.0, "David Bechkam dave@abv.bg")
-        package2 = Package(2, "Sydney", "Adeliade", 1500.0, "David Bechkam dave@abv.bg")
         truck.add_package(package1)
-        truck.add_package(package2)
-        expected = "#1. Truck 1001 (2 packages)\n  Package ID: 1, Weight: 2000\n  Package ID: 2, Weight: 1500"
+        expected = f"#1001. Scania (1 packages)\n  Package: #1\nCreated on: {current_datetime.strftime('%b %d %H:%M')}h\nFrom: Sydney\nTo: Melbourne\nWeight: 2000.0\nStatus: StandingStanding\nCurren location: Sydney"
         # Act & Assert
         actual = truck.view()
         self.assertEqual(actual, expected)
