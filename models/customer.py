@@ -2,6 +2,10 @@ from errors.application_error import ApplicationError
 
 class Customer:
     def __init__(self,first_name:str, last_name:str, email:str) -> None:
+        self.check_first_name(first_name)
+        self.check_last_name(last_name)
+        self.check_email(email)
+
         self._first_name = first_name
         self._last_name = last_name
         self._email = email
