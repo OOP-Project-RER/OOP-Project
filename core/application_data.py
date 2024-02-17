@@ -9,6 +9,9 @@ from models.trucks.scania import Scania
 from models.trucks.man import Man
 from models.trucks.actros import Actros
 from datetime import datetime
+from models.constants.encoder import Encoder
+import json
+
 
 
 class ApplicationData:
@@ -20,6 +23,7 @@ class ApplicationData:
         self._all_trucks ={'Scania':[(Scania('Scania')) for i in range(10)], 
                         'Man': [(Man('Man')) for l in range(15)],
                         'Actros': [(Actros('Actros')) for l in range(15)]}
+        self._file_path = "save_application_data.json"
 
 
     @property
@@ -37,6 +41,20 @@ class ApplicationData:
     @property
     def all_trucks(self):
         return tuple(self._all_trucks)
+    
+    def save_to_json(self):
+        data = {
+                "employees": [emp.__dict__ for emp in self._employees],
+                "logged_employee": self._logged_employee.__dict__ if self._logged_employee else None,
+                "all_packages_list": [package.__dict__ for package in self._all_packages_list],
+                "all_routes_list": [route.__dict__ for route in self._all_routes_list]
+            }
+        try:
+            with open('save_application_data.json', 'w') as file:
+                json.dump(data, file, indent=4, cls=Encoder)
+        except Exception as e:
+            print(f"Error saving data to file: {e}")
+
 
     def create_employee(self, username:str, firstname:str, lastname:str, password:int, user_role) -> Employee:
         if len([u for u in self._employees if u.username == username]) > 0:
@@ -75,11 +93,13 @@ class ApplicationData:
     def add_package(self, package: Package):
         if not any(p._package_id == package._package_id for p in self._all_packages_list):
             self._all_packages_list.append(package)
+            self.save_to_json()
 
     def add_route(self, route: Route):
         if not any(r._route_id == route._route_id for r in self._all_routes_list):
             self._all_routes_list.append(route)
-
+            self.save_to_json()
+            
     def find_package_by_id(self, id:int) -> Package:
         package = [pac for pac in self.all_packages_list if id == pac.package_id]
         if package == []:

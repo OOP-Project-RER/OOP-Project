@@ -1,0 +1,45 @@
+{
+    "employees": [],
+    "logged_employee": null,
+    "all_packages_list": [
+        {
+            "_package_id": 2,
+            "_start_location": "Sydney",
+            "_end_location": "Melbourne",
+            "_package_weight": 2350.0,
+            "_contact_customer": {
+                "_first_name": "gosho",
+                "_last_name": "gosho",
+                "_email": "gosho@abv.bg"
+            },
+            "_departure_time": null,
+            "_arriving_time": null,
+            "_status": "Unassign",
+            "_time_of_creating": "2024-02-17 18:48:17"
+        }
+    ],
+    "all_routes_list": [
+        {
+            "_route_id": 102,
+            "_date_time_departure": "2024-02-12 08:30:00",
+            "_locations": [
+                "Sydney",
+                "Melbourne",
+                "Adelaide"
+            ],
+            "_truck": null,
+            "_status": "2024-02-17 18:48:08",
+            "_locations_info": {
+                "Sydney": "2024-02-12 08:30:00",
+                "Melbourne": "2024-02-12 18:34:49",
+                "Adelaide": "2024-02-13 02:54:49"
+            },
+            "weight_in_locations": {
+                "Sydney": 0,
+                "Melbourne": 0,
+                "Adelaide": 0
+            },
+            "_total_distance": 1602
+        }
+    ]
+}
