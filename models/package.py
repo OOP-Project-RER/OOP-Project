@@ -4,7 +4,7 @@ from models.constants.locations import Locations
 from models.customer import Customer
 from datetime import datetime
 from models.constants.status import Status
-from models.constants.package_status import PackageStatus
+
 
 
 class Package:
@@ -97,5 +97,6 @@ class Package:
             return '\n'.join(str_list) + f'\nStill in the hub. Its not assign to route, yet!'
 
         else: 
-            return '\n'.join(str_list) + f'\nDeparture/Arriving: {self._departure_time.strftime(Package._format)} /' + f'{self._arriving_time.strftime(Package._format)}' + f'\nCurrent locations: {self.current_location()}'
+            return '\n'.join(str_list) + f'\nDeparture/Arriving: {self._departure_time.strftime(Package._format)} /' \
+            + f'{self._arriving_time.strftime(Package._format)}' + f'\nCurrent locations: {self.current_location()}'
                     

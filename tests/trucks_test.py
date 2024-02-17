@@ -1,7 +1,6 @@
 import unittest
 import datetime
 from errors.application_error import ApplicationError
-from models.constants.package_status import PackageStatus
 from models.package import Package
 from models.route import Route
 

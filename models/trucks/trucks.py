@@ -2,7 +2,7 @@ from errors.application_error import ApplicationError
 from models.package import Package
 #from models.route import Route
 from models.constants.status import Status
-from models.constants.package_status import PackageStatus
+
 
 
 class Trucks:
