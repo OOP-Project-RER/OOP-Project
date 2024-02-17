@@ -110,7 +110,7 @@ class Route:
 
     def generate_route_string(self):
         route_string = ''
-        #stops = self.stops_info()
+        
         for i, j in self._locations_info.items():
             string = f'{i} ({j.strftime("%b %dth %H:%Mh")}) → '
             route_string += string

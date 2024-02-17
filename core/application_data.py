@@ -8,6 +8,7 @@ from models.package import Package
 from models.trucks.scania import Scania
 from models.trucks.man import Man
 from models.trucks.actros import Actros
+from datetime import datetime
 
 
 class ApplicationData:
@@ -105,10 +106,12 @@ class ApplicationData:
         if package.start_location not in route.locations or package.end_location not in route.locations:
             raise ApplicationError('One or both of the locations in package doesn\'t match the route locations!')
         
+        if datetime.now() > route._locations_info[package.start_location]:
+            raise ApplicationError(f'The truck already passed {package.start_location}')
+        
     def check_if_package_is_already_added(self, package:Package, route:Route):
         if True in [True for pack in route.truck.packages if pack.package_id == package.package_id]:
             raise ApplicationError(f'Package #{package.package_id} is already added to this route!')
-        
     
     def check_if_package_weight_can_be_adde_to_route(self, package:Package, route:Route):
         end_index = route.locations.index(package.end_location)
@@ -134,7 +137,7 @@ class ApplicationData:
         if len(found_routes) > 0:
             routes = []
             for i in found_routes:
-                route_str, total_distance = i.calc_distance_time()
+                route_str = i.generate_route_string()
                 routes.append(route_str)
             return routes
 

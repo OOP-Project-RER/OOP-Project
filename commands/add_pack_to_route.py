@@ -5,7 +5,7 @@ from models.trucks.trucks import Trucks
 from models.constants.status import Status
 
 
-class AddPackToTruck(BaseCommand):
+class AddPackToRoute(BaseCommand):
     def __init__(self, params: list[str], app_data: ApplicationData):
         super().__init__(params, app_data)
 

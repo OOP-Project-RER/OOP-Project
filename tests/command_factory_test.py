@@ -1,5 +1,5 @@
 import unittest
-from commands.add_pack_to_truck import AddPackToTruck
+from commands.add_pack_to_route import AddPackToRoute
 from commands.add_package import AddPackageCommand
 from commands.assign_truck import AssignTruck
 from commands.check_route import CheckRouteCommand
@@ -157,15 +157,15 @@ class Create_Should(unittest.TestCase):
         self.assertEqual(app_data, command.app_data)
         self.assertEqual(("Man", "101"), command.params)
 
-    def test_create_add_pack_to_truck_command(self):
+    def test_create_add_pack_to_route_command(self):
         # Arrange
-        input_line = "addpacktotruck 1 101"
+        input_line = "addpacktoroute 1 101"
         app_data = ApplicationData()
         cmd_factory = CommandFactory(app_data)
         # Act
         command = cmd_factory.create(input_line)
         # Assert
-        self.assertIsInstance(command, AddPackToTruck)
+        self.assertIsInstance(command, AddPackToRoute)
         self.assertEqual(app_data, command.app_data)
         self.assertEqual(("1", "101"), command.params)
 
