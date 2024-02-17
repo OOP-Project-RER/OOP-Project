@@ -8,19 +8,38 @@ from models.trucks.man import Man
 from models.trucks.scania import Scania
 from models.trucks.actros import Actros
 from datetime import datetime
+import json
 
 class ModelsFactory:
     def __init__(self):
         self._package_id = 1
         self._route_id = 101
+        self._file_path = "models_factory.json"
         #self._truck_id = 1 
         #self._scania_id = 1001
         #self._man_id = 1011
         #self._actros_id = 1026
 
+    def _save_last_package_and_route_id_to_json(self):
+        data = {
+            "package_id": self._package_id,
+            "route_id": self._route_id
+        }
+        with open(self._file_path, "w") as file:
+            json.dump(data, file)
+
+
     def create_package(self, start_location: Locations, end_location: Locations, package_weight: float, contact_customer: Customer):
+        
+        with open(self._file_path, "r") as file:
+            data = json.load(file)
+            self._package_id = data["package_id"]
+
+        self._route_id = data["route_id"]
         package_id = self._package_id
         self._package_id += 1
+
+        self._save_last_package_and_route_id_to_json()
 
         return Package(package_id, start_location, end_location, package_weight, contact_customer)
     '''    
@@ -57,7 +76,13 @@ class ModelsFactory:
     '''
 
     def create_route(self, start_location: Locations, *other_locations: Locations):
+        with open(self._file_path, "r") as file:
+            data = json.load(file)
+            self._route_id = data["route_id"]
+
+        self._package_id = data["package_id"]
         route_id = self._route_id
         self._route_id +=1
+        self._save_last_package_and_route_id_to_json()
 
         return Route(route_id, start_location, *other_locations)
