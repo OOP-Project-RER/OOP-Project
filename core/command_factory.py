@@ -13,7 +13,7 @@ from commands.view_routes_inprogress import ViewRoutesCommand
 from commands.check_route import CheckRouteCommand
 from commands.assign_truck import AssignTruck
 from commands.add_pack_to_route import AddPackToRoute
-
+from commands.remove_package import RemovePackage
 class CommandFactory:
     def __init__(self, data: ApplicationData):
         self._app_data = data
@@ -28,13 +28,13 @@ class CommandFactory:
             return LogoutCommand(params, self._app_data)
         if cmd.lower() == 'login':
             return LoginCommand(params, self._app_data)
-        if cmd.lower() == "addpackage":
+        if cmd.lower() == 'addpackage':
             return AddPackageCommand(params, self._app_data, self._models_factory)
         if cmd.lower() == 'showtrucksin':
             return ShowTrucksIn(params, self._app_data)
-        if cmd.lower() == "viewunsentpackages": 
+        if cmd.lower() == 'viewunsentpackages': 
             return ViewUnsentPackagesCommand(params, self._app_data)
-        if cmd.lower() == "addroute":
+        if cmd.lower() == 'addroute':
             return AddRouteCommand(params, self._app_data, self._models_factory)
         if cmd.lower() == 'findpackage':
             return FindPackageCommand(params, self._app_data)
@@ -46,6 +46,8 @@ class CommandFactory:
             return AssignTruck(params, self._app_data, self._models_factory)
         if cmd.lower() == 'addpacktoroute':
             return AddPackToRoute(params, self._app_data)
+        if cmd.lower() == 'removepackfromroute':
+            return RemovePackage(params, self._app_data)
         
         
         

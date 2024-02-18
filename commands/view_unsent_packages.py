@@ -3,6 +3,7 @@ from core.application_data import ApplicationData
 from models.constants.status import Status
 from itertools import groupby
 from errors.application_error import ApplicationError
+from datetime import datetime
 
 
 class ViewUnsentPackagesCommand(BaseCommand):
@@ -19,6 +20,8 @@ class ViewUnsentPackagesCommand(BaseCommand):
 
         #if self._app_data.logged_in_employee.employee_role != 'Supervisor':
         #    raise ApplicationError("You are not a supervisor!")
+        for pack in self._app_data._all_packages_list:
+            pack.status = datetime.now()
 
         if len(self.params) == 1:
             searched_location = self.params[0]
@@ -72,4 +75,4 @@ class ViewUnsentPackagesCommand(BaseCommand):
          return True
 
     def _expected_params_count(self) -> list[int]:
-        return [0]
+        return [0,1]

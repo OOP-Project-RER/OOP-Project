@@ -18,9 +18,10 @@ engine.start()
 # viewroutes
 # checkroute Melbourne Adelaide
 # findpackage 
+# removepackfromroute 1 101
 
 
-# addroute 20240212T0830 Sydney Melbourne Adelaide Brisbane
+# addroute 20240219T0830 Sydney Melbourne Adelaide Brisbane
 # assigntruck Man 101
 # addpackage Sydney Brisbane 20000 gosho gosho gosho@abv.bg
 # addpackage Adelaide Brisbane 4000 gosho gosho gosho@abv.bg

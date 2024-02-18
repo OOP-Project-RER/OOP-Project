@@ -3,10 +3,10 @@
     "logged_employee": null,
     "all_packages_list": [
         {
-            "_package_id": 2,
+            "_package_id": 1,
             "_start_location": "Sydney",
-            "_end_location": "Melbourne",
-            "_package_weight": 2350.0,
+            "_end_location": "Brisbane",
+            "_package_weight": 20000.0,
             "_contact_customer": {
                 "_first_name": "gosho",
                 "_last_name": "gosho",
@@ -15,31 +15,69 @@
             "_departure_time": null,
             "_arriving_time": null,
             "_status": "Unassign",
-            "_time_of_creating": "2024-02-17 18:48:17"
+            "_time_of_creating": "2024-02-18 16:53:29"
+        },
+        {
+            "_package_id": 2,
+            "_start_location": "Adelaide",
+            "_end_location": "Brisbane",
+            "_package_weight": 4000.0,
+            "_contact_customer": {
+                "_first_name": "gosho",
+                "_last_name": "gosho",
+                "_email": "gosho@abv.bg"
+            },
+            "_departure_time": null,
+            "_arriving_time": null,
+            "_status": "Unassign",
+            "_time_of_creating": "2024-02-18 16:53:29"
+        },
+        {
+            "_package_id": 3,
+            "_start_location": "Melbourne",
+            "_end_location": "Adelaide",
+            "_package_weight": 3350.0,
+            "_contact_customer": {
+                "_first_name": "gosho",
+                "_last_name": "gosho",
+                "_email": "gosho@abv.bg"
+            },
+            "_departure_time": null,
+            "_arriving_time": null,
+            "_status": "Unassign",
+            "_time_of_creating": "2024-02-18 16:53:29"
+        },
+        {
+            "_package_id": 4,
+            "_start_location": "Melbourne",
+            "_end_location": "Brisbane",
+            "_package_weight": 10050.0,
+            "_contact_customer": {
+                "_first_name": "gosho",
+                "_last_name": "gosho",
+                "_email": "gosho@abv.bg"
+            },
+            "_departure_time": null,
+            "_arriving_time": null,
+            "_status": "Unassign",
+            "_time_of_creating": "2024-02-18 16:53:29"
         }
     ],
     "all_routes_list": [
         {
-            "_route_id": 102,
-            "_date_time_departure": "2024-02-12 08:30:00",
+            "_route_id": 101,
+            "_date_time_departure": "2024-02-19 08:30:00",
             "_locations": [
                 "Sydney",
                 "Melbourne",
-                "Adelaide"
+                "Adelaide",
+                "Brisbane"
             ],
-            "_truck": null,
-            "_status": "2024-02-17 18:48:08",
-            "_locations_info": {
-                "Sydney": "2024-02-12 08:30:00",
-                "Melbourne": "2024-02-12 18:34:49",
-                "Adelaide": "2024-02-13 02:54:49"
-            },
-            "weight_in_locations": {
-                "Sydney": 0,
-                "Melbourne": 0,
-                "Adelaide": 0
-            },
-            "_total_distance": 1602
-        }
-    ]
-}
+            "_truck": {
+                "_truck_id": 1011,
+                "name": "Man",
+                "_capacity": 37000,
+                "_max_range": 10000,
+                "_num_of_trucks": 15,
+                "_routes_list": [
+                    

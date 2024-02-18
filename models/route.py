@@ -137,6 +137,12 @@ class Route:
         self.weight_in_locations[package.start_location] += package.package_weight
         self.weight_in_locations[package.end_location] -= package.package_weight
 
+    def remove_package(self, package : Package):
+        package._departure_time = None
+        package._arriving_time = None
+        self.weight_in_locations[package.start_location] -= package.package_weight
+        self.weight_in_locations[package.end_location] += package.package_weight
+
     def total_distance(self):
         total_distance = 0
         for i in range(len(self._locations)-1):

@@ -20,6 +20,9 @@ class AddPackToRoute(BaseCommand):
         package = self.app_data.find_package_by_id(package_id)
         route = self.app_data.find_route_by_id(route_id)
 
+        if package.status != Status.UNASSIGN:
+            raise ApplicationError('This package was already assign to route!')
+
         self.app_data.check_if_package_is_already_added(package, route)
         self.app_data.check_if_package_locations_are_in_route_locations(package, route)
         self.app_data.check_if_package_weight_can_be_adde_to_route(package, route)
