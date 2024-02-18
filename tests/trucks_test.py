@@ -64,7 +64,7 @@ class View_Should(unittest.TestCase):
         truck = Trucks(VALID_ID, VALID_NAME, VALID_CAPACITY, VALID_MAX_RANGE, VALID_NUM_OF_TRUCKS)
         package1 = Package(1, "Sydney", "Melbourne", 2000.0, "David Bechkam dave@abv.bg")
         truck.add_package(package1)
-        expected = f"#1001. Scania (1 packages)\n  Package: #1\nCreated on: {current_datetime.strftime('%b %d %H:%M')}h\nFrom: Sydney\nTo: Melbourne\nWeight: 2000.0\nStatus: StandingStanding\nCurren location: Sydney"
+        expected = f"#1001. Scania (1 packages)\n  Package: #1\nCreated on: {current_datetime.strftime('%b %d %H:%M')}h\nFrom: Sydney\nTo: Melbourne\nWeight: 2000.0\nStatus: Unassign\nStill in the hub. Its not assign to route, yet!"
         # Act & Assert
         actual = truck.view()
         self.assertEqual(actual, expected)
