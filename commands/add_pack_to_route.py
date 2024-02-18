@@ -24,7 +24,10 @@ class AddPackToRoute(BaseCommand):
             raise ApplicationError('This package was already assign to route!')
 
         self.app_data.check_if_package_locations_are_in_route_locations(package, route)
-        self.app_data.check_if_package_weight_can_be_adde_to_route(package, route)
+        try:
+            self.app_data.check_if_package_weight_can_be_adde_to_route(package, route)
+        except:
+            raise ApplicationError('You need to assign truck to the route before adding packages!')
 
         route.truck.add_package(package)
         route.update_weight_in_stops(package)
