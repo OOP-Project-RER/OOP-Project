@@ -40,7 +40,7 @@ class ApplicationData:
     
     @property
     def all_trucks(self):
-        return tuple(self._all_trucks)
+        return self._all_trucks
     
     def save_to_json(self):
         data = {
