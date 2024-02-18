@@ -8,7 +8,7 @@ from models.package import Package
 from models.trucks.scania import Scania
 from models.trucks.man import Man
 from models.trucks.actros import Actros
-from datetime import datetime
+from datetime import datetime, timedelta
 from models.constants.encoder import Encoder
 import json
 
