@@ -63,21 +63,6 @@
             "_time_of_creating": "2024-02-18 16:53:29"
         }
     ],
-    "all_routes_list": [
-        {
-            "_route_id": 101,
-            "_date_time_departure": "2024-02-19 08:30:00",
-            "_locations": [
-                "Sydney",
-                "Melbourne",
-                "Adelaide",
-                "Brisbane"
-            ],
-            "_truck": {
-                "_truck_id": 1011,
-                "name": "Man",
-                "_capacity": 37000,
-                "_max_range": 10000,
-                "_num_of_trucks": 15,
-                "_routes_list": [
+    "all_routes_list": []
+}
                     
