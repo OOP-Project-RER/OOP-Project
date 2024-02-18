@@ -28,7 +28,7 @@ class AssignTruck(BaseCommand):
         #if city_trucks.get(vehicle) == 0:
             #aise ApplicationError(f'Truck {vehicle} is not available in {city} hub')
         #else:
-        truck = [truck for truck in self.app_data._all_trucks[vehicle]]  #if truck.status == Status.STANDING
+        truck = [truck for truck in self.app_data.all_trucks[vehicle]]  #if truck.status == Status.STANDING
         self._app_data.check_if_route_can_be_assign_to_truck(route, truck[0])
         
         route.add_truck(truck[0])

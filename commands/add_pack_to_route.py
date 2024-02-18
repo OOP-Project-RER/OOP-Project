@@ -27,8 +27,8 @@ class AddPackToRoute(BaseCommand):
         route.truck.add_package(package)
         route.update_weight_in_stops(package)
 
-        package._departure_time = route._locations_info[package.start_location]
-        package._arriving_time = route._locations_info[package.end_location]
+        package._departure_time = route._stops_date_time[package.start_location]
+        package._arriving_time = route._stops_date_time[package.end_location]
         
         return f"Package №: {package_id} was added successfuly"
         

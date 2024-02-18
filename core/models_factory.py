@@ -56,8 +56,8 @@ class ModelsFactory:
             raise ValueError(f'There is no truck with name {name}!')
     '''
 
-    def create_route(self, start_location: Locations, *other_locations: Locations):
+    def create_route(self, date_time_departure: datetime, *other_locations: Locations):
         route_id = self._route_id
         self._route_id +=1
 
-        return Route(route_id, start_location, *other_locations)
+        return Route(route_id, date_time_departure, *other_locations)

@@ -20,6 +20,8 @@ class AddRouteCommand(BaseCommand):
         #super().execute()
 
         date_time_departure, *locations = self.params
+
+        date_time_departure = self.app_data.parsed(date_time_departure)
         
         for loc in locations:
             if loc not in Locations.locations:

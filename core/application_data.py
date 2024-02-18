@@ -8,7 +8,7 @@ from models.package import Package
 from models.trucks.scania import Scania
 from models.trucks.man import Man
 from models.trucks.actros import Actros
-from datetime import datetime
+from datetime import datetime,timedelta
 
 
 class ApplicationData:
@@ -36,7 +36,7 @@ class ApplicationData:
     
     @property
     def all_trucks(self):
-        return tuple(self._all_trucks)
+        return self._all_trucks
 
     def create_employee(self, username:str, firstname:str, lastname:str, password:int, user_role) -> Employee:
         if len([u for u in self._employees if u.username == username]) > 0:
@@ -94,19 +94,58 @@ class ApplicationData:
         
         return route[0]
     
+    def parsed(self, input_datetime: str) -> datetime:
+        try:
+            parsed_datetime = datetime.strptime(input_datetime, "%Y%m%dT%H%M")
+        except:
+            raise ApplicationError('Invalid format for date/time! Should be yyyymmddThhmm (20240219T1000)')
+
+        return parsed_datetime
+    
     def check_if_route_can_be_assign_to_truck(self, route:Route, truck:Trucks):
+        
+        routes_end_time_before_departure_of_route = filter(lambda x: x._stops_date_time[x.locations[-1]] < route.date_time_departure,                                                   
+                                                           truck._routes_list)
+        
+        before_departure = sorted(routes_end_time_before_departure_of_route, 
+                               key=lambda x: x._stops_date_time[x.locations[-1]],reverse=True)
+        
+        if len(before_departure) > 0:
+            start_location, end_location = before_departure[0].locations[-1],route.locations[0]
+            
+            travel_time_hours = route.calculate_travel_time(start_location, end_location)
+            
+            if before_departure[0]._stops_date_time[start_location] + timedelta(hours = travel_time_hours) > route.date_time_departure:
+                raise ApplicationError(f'This truck can\'t get back on time for this route!')
+        
+        routes_departure_time_after_end_of_route = filter(lambda x: x.date_time_departure > route._stops_date_time[route.locations[-1]],
+                                                          truck._routes_list)
+        
+        after_arrival = sorted(routes_departure_time_after_end_of_route, 
+                               key=lambda x: x.date_time_departure)
+        
+        if len(after_arrival) > 0:
+            start_location, end_location = route.locations[-1], after_arrival[0].locations[0]
+        
+            travel_time_hours = route.calculate_travel_time(start_location, end_location)
+
+            if route._stops_date_time[start_location] + timedelta(hours = travel_time_hours) > after_arrival[0].date_time_departure:
+                raise ApplicationError(f'This truck won\'t be able get back on time for next route that is already scheduled!')
+
+
+        
         truck_schedules = [rt for rt in truck._routes_list 
                            if rt.status != Status.FINISHED and 
-                           route.date_time_departure < rt._locations_info[rt.locations[-1]]]
+                           route.date_time_departure < rt._stops_date_time[rt.locations[-1]]]
 
-        if True in [True for rt in truck_schedules if route._locations_info[route.locations[-1]] > rt.date_time_departure]:
+        if True in [True for rt in truck_schedules if route._stops_date_time[route.locations[-1]] > rt.date_time_departure]:
             raise ApplicationError('The route can\'t be assign to this truck. Different route is scheduled for this truck!')
 
     def check_if_package_locations_are_in_route_locations(self, package:Package, route:Route):
         if package.start_location not in route.locations or package.end_location not in route.locations:
             raise ApplicationError('One or both of the locations in package doesn\'t match the route locations!')
         
-        if datetime.now() > route._locations_info[package.start_location]:
+        if datetime.now() > route._stops_date_time[package.start_location]:
             raise ApplicationError(f'The truck already passed {package.start_location}')
         
     def check_if_package_is_already_added(self, package:Package, route:Route):
