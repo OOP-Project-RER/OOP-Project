@@ -12,9 +12,9 @@
                 "_last_name": "gosho",
                 "_email": "gosho@abv.bg"
             },
-            "_departure_time": null,
-            "_arriving_time": null,
-            "_status": "Unassign",
+            "_departure_time": "2024-02-19 08:30:00",
+            "_arriving_time": "2024-02-21 01:03:47",
+            "_status": "Standing",
             "_time_of_creating": "2024-02-18 16:53:29"
         },
         {
@@ -27,9 +27,9 @@
                 "_last_name": "gosho",
                 "_email": "gosho@abv.bg"
             },
-            "_departure_time": null,
-            "_arriving_time": null,
-            "_status": "Unassign",
+            "_departure_time": "2024-02-20 02:54:49",
+            "_arriving_time": "2024-02-21 01:03:47",
+            "_status": "Standing",
             "_time_of_creating": "2024-02-18 16:53:29"
         },
         {
@@ -42,9 +42,9 @@
                 "_last_name": "gosho",
                 "_email": "gosho@abv.bg"
             },
-            "_departure_time": null,
-            "_arriving_time": null,
-            "_status": "Unassign",
+            "_departure_time": "2024-02-19 18:34:49",
+            "_arriving_time": "2024-02-20 02:54:49",
+            "_status": "Standing",
             "_time_of_creating": "2024-02-18 16:53:29"
         },
         {

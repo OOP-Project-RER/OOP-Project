@@ -168,10 +168,6 @@ class ApplicationData:
         if datetime.now() > route._stops_date_time[package.start_location]:
             raise ApplicationError(f'The truck already passed {package.start_location}')
         
-    def check_if_package_is_already_added(self, package:Package, route:Route):
-        if True in [True for pack in route.truck.packages if pack.package_id == package.package_id]:
-            raise ApplicationError(f'Package #{package.package_id} is already added to this route!')
-    
     def check_if_package_weight_can_be_adde_to_route(self, package:Package, route:Route):
         end_index = route.locations.index(package.end_location)
         capacity_at_stop = 0
