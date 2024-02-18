@@ -114,6 +114,14 @@ class ApplicationData:
         
         return route[0]
     
+    def find_truck_by_id(self, id:int) -> Trucks:
+        truck = [truck for trucks in self.all_trucks.values() for truck in trucks if id == truck.truck_id] 
+
+        if truck == []:
+            raise ApplicationError(f'Truck with ID: {id} can\'t be find!')
+        
+        return truck[0]
+    
     def parsed(self, input_datetime: str) -> datetime:
         try:
             parsed_datetime = datetime.strptime(input_datetime, "%Y%m%dT%H%M")

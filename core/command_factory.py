@@ -14,6 +14,8 @@ from commands.check_route import CheckRouteCommand
 from commands.assign_truck import AssignTruck
 from commands.add_pack_to_route import AddPackToRoute
 from commands.remove_package import RemovePackage
+from commands.show_truck import ShowTruck
+
 class CommandFactory:
     def __init__(self, data: ApplicationData):
         self._app_data = data
@@ -48,6 +50,8 @@ class CommandFactory:
             return AddPackToRoute(params, self._app_data)
         if cmd.lower() == 'removepackfromroute':
             return RemovePackage(params, self._app_data)
+        if cmd.lower() == 'showtruck':
+            return ShowTruck(params, self._app_data)
         
         
         

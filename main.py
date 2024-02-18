@@ -22,7 +22,7 @@ engine.start()
 
 
 # addroute 20240219T0830 Sydney Melbourne Adelaide Brisbane
-# assigntruck Man 101
+# assigntruck Scania 101
 # addpackage Sydney Brisbane 20000 gosho gosho gosho@abv.bg
 # addpackage Adelaide Brisbane 4000 gosho gosho gosho@abv.bg
 # addpackage Melbourne Adelaide 3350 gosho gosho gosho@abv.bg
