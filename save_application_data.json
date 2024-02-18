@@ -12,55 +12,10 @@
                 "_last_name": "gosho",
                 "_email": "gosho@abv.bg"
             },
-            "_departure_time": "2024-02-19 08:30:00",
-            "_arriving_time": "2024-02-21 01:03:47",
-            "_status": "Standing",
-            "_time_of_creating": "2024-02-18 16:53:29"
-        },
-        {
-            "_package_id": 2,
-            "_start_location": "Adelaide",
-            "_end_location": "Brisbane",
-            "_package_weight": 4000.0,
-            "_contact_customer": {
-                "_first_name": "gosho",
-                "_last_name": "gosho",
-                "_email": "gosho@abv.bg"
-            },
-            "_departure_time": "2024-02-20 02:54:49",
-            "_arriving_time": "2024-02-21 01:03:47",
-            "_status": "Standing",
-            "_time_of_creating": "2024-02-18 16:53:29"
-        },
-        {
-            "_package_id": 3,
-            "_start_location": "Melbourne",
-            "_end_location": "Adelaide",
-            "_package_weight": 3350.0,
-            "_contact_customer": {
-                "_first_name": "gosho",
-                "_last_name": "gosho",
-                "_email": "gosho@abv.bg"
-            },
-            "_departure_time": "2024-02-19 18:34:49",
-            "_arriving_time": "2024-02-20 02:54:49",
-            "_status": "Standing",
-            "_time_of_creating": "2024-02-18 16:53:29"
-        },
-        {
-            "_package_id": 4,
-            "_start_location": "Melbourne",
-            "_end_location": "Brisbane",
-            "_package_weight": 10050.0,
-            "_contact_customer": {
-                "_first_name": "gosho",
-                "_last_name": "gosho",
-                "_email": "gosho@abv.bg"
-            },
             "_departure_time": null,
             "_arriving_time": null,
             "_status": "Unassign",
-            "_time_of_creating": "2024-02-18 16:53:29"
+            "_time_of_creating": "2024-02-18 17:17:27"
         }
     ],
     "all_routes_list": [
@@ -73,11 +28,21 @@
                 "Adelaide",
                 "Brisbane"
             ],
-            "_truck": {
-                "_truck_id": 1011,
-                "name": "Man",
-                "_capacity": 37000,
-                "_max_range": 10000,
-                "_num_of_trucks": 15,
-                "_routes_list": [
-                    
+            "_truck": null,
+            "_status": "2024-02-18 17:17:19",
+            "_stops_date_time": {
+                "Sydney": "2024-02-19 08:30:00",
+                "Melbourne": "2024-02-19 18:34:49",
+                "Adelaide": "2024-02-20 02:54:49",
+                "Brisbane": "2024-02-21 01:03:47"
+            },
+            "weight_in_locations": {
+                "Sydney": 0,
+                "Melbourne": 0,
+                "Adelaide": 0,
+                "Brisbane": 0
+            },
+            "_total_distance": 3529
+        }
+    ]
+}
