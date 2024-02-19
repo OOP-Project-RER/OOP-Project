@@ -24,5 +24,6 @@ class Actros(Trucks):
     def truck_id(self, value):
         '''Restrict the value donot go above 1040'''
         if value > 1040:
-                raise ApplicationError('You don\'t have any more Actros trucks')
+            raise ApplicationError('You don\'t have any more Actros trucks')
+        
         self._truck_id = value

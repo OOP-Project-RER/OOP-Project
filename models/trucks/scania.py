@@ -25,4 +25,5 @@ class Scania(Trucks):
         '''Restrict the value donot go above 1010'''
         if value > 1010:
             raise ApplicationError('You don\'t have any more Scania trucks')
+        
         self._truck_id = value

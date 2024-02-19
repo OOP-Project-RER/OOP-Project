@@ -19,6 +19,7 @@ engine.start()
 # checkroute Melbourne Adelaide
 # findpackage 
 # removepackfromroute 1 101
+# showtruck 1014
 
 
 # addroute 20240219T0830 Sydney Melbourne Adelaide Brisbane
