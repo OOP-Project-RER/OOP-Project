@@ -7,6 +7,7 @@ class Engine:
         self._command_factory = factory
 
     def start(self):
+        '''Gets input from the user in format(command, *params) and return message with information of the result'''
         output: list[str] = []
         while True:
             try:

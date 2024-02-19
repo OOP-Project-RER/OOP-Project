@@ -21,6 +21,7 @@ class ModelsFactory:
         #self._actros_id = 1026
 
     def _save_last_package_and_route_id_to_json(self):
+        '''Create dictinary and save data for routes and packages'''
         data = {
             "package_id": self._package_id,
             "route_id": self._route_id
@@ -30,6 +31,7 @@ class ModelsFactory:
 
 
     def create_package(self, start_location: Locations, end_location: Locations, package_weight: float, contact_customer: Customer):
+        '''Create object of class Package'''
         
         with open(self._file_path, "r") as file:
             data = json.load(file)
@@ -76,6 +78,7 @@ class ModelsFactory:
     '''
 
     def create_route(self, date_time_departure: datetime,*other_locations: Locations):
+        '''Create object of class Route'''
         route_id = self._route_id
         self._route_id +=1
         self._save_last_package_and_route_id_to_json()

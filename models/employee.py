@@ -14,6 +14,7 @@ class Employee():
         return self._username
     @username.setter
     def username(self, value):
+        '''Check if value is between 2-20 characters and doesn't contain special symbols'''
         special_symbols = ['!','£','$','%','&','(',')','<','>','/']
         if len(value) < 2 or len(value) > 20:
             raise  ApplicationError('Username must be between 2 and 20 characters long!')
@@ -27,10 +28,11 @@ class Employee():
         return self._first_name
     @first_name.setter 
     def first_name(self, value):
+        '''Check if value is string and is between 2-15 '''
         if type(value) != str:
             raise ApplicationError('Name should be letters')
         elif len(value) < 2 or len(value) > 15:
-            raise ApplicationError('Name should be between 3 and 10 symbols.')
+            raise ApplicationError('Name should be between 2 and 15 symbols.')
         else:
             self._first_name = value
 
@@ -39,10 +41,11 @@ class Employee():
         return self._last_name
     @last_name.setter 
     def last_name(self, value):
+        '''Check if value is string and is between 2-15 '''
         if type(value) != str:
             raise ApplicationError('Name should be letters')
         elif len(value) < 2 or len(value) > 15:
-            raise ApplicationError('Name should be between 3 and 10 symbols.')
+            raise ApplicationError('Name should be between 2 and 15 symbols.')
         else:
             self._last_name = value
 
@@ -51,6 +54,7 @@ class Employee():
         return self._password
     @password.setter
     def password(self, value):
+        '''Check if value is between 5-30 and not contain special symbols'''
         special_symbols = ['!','£','$','%','&','(',')','<','>','/']
         if len(value) < 5 or len(value) > 30:
             raise ApplicationError('Password must be between 5 and 30 characters long!')

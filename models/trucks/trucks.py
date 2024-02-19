@@ -41,13 +41,17 @@ class Trucks:
         return self._status
 
     def add_package(self, package: Package):
+        '''Add object of class Package to list'''
         self._packages.append(package)
 
     def add_route(self, route):
+        '''Add object of class Route to list'''
         self._routes_list.append(route)
 
     def view(self):
+        '''Return string with information for every package in list'''
         return '\n'.join([f'{self}'] + [f'  {package}' for package in self.packages])
 
     def __str__(self):
+        '''Return string with info for the truck and how many packages transport'''
         return f'#{self.truck_id}. {self.name} ({len(self.packages)} packages)'    

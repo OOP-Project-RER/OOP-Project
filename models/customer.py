@@ -23,18 +23,21 @@ class Customer:
         return self._email
     
     def check_first_name(self, value):
+        '''Check if value is between 2-15 characters'''
         if len(value) < 2 or len(value) > 15:
             raise ApplicationError('Firstname must be between 2 and 20 characters long!')
     
         return value
     
     def check_last_name(self, value):
+        '''Check if valiu is between 2-15 characters'''
         if len(value) < 2 or len(value) > 15:
             raise ApplicationError('Firstname must be between 2 and 20 characters long!')
     
         return value
     
     def check_email(self, value):
+        '''Check if value contain @'''
         if '@' not in value:
             raise ApplicationError('You enter a invalid email!(Should contain "@")')
         

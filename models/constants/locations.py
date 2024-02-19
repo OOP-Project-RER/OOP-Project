@@ -39,6 +39,7 @@ class Locations:
 
     @classmethod
     def from_string(cls, location_string):
+        '''Method which check if value match the class attributes'''
         if location_string not in [cls.SYD, cls.MEL, cls.ADL, cls.ASP, cls.BRI, cls.DAR, cls.PER]:
             raise ApplicationError(
                 f'None of the possible Locations matches the value {location_string}.')
@@ -47,6 +48,7 @@ class Locations:
     
     @classmethod
     def show_truck(cls, city):
+        '''Method that get the values from dictionary with a key(location) and return string with information'''
         trucks = cls.city_trucks.get(city)
         total_trucks = sum([v for v in trucks.values()])
 

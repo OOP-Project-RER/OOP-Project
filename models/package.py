@@ -39,6 +39,7 @@ class Package:
     
     @package_weight.setter
     def package_weight(self, value):
+        '''Check if value is higher than 0'''
         if value <= 0 :
             raise ApplicationError('The weight must be higher than 0!')
         
@@ -54,6 +55,7 @@ class Package:
     
     @status.setter
     def status(self, date_time : datetime):
+        '''Change the status based on date and time'''
         if self._departure_time == None:
             self._status = Status.UNASSIGN
         else:   
@@ -71,6 +73,7 @@ class Package:
         return self._time_of_creating
     
     def current_location(self):
+        '''Return information where is the package based on date and time'''
         now = datetime.now()
 
         if now < self._departure_time:
@@ -85,6 +88,7 @@ class Package:
             return f'{distance_to_next_stop} km till {self.end_location}'
     
     def __str__(self) -> str:
+        '''Return detailed information for the package'''
         str_list = [f'Package: #{self.package_id}',
                     f'Created on: {self.time_of_creating.strftime(Package._format)}',
                     f'From: {self._start_location}',
