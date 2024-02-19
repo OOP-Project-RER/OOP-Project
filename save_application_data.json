@@ -1,12 +1,41 @@
 {
-    "employees": [],
-    "logged_employee": null,
+    "employees": [
+        {
+            "_username": "dave",
+            "_first_name": "David",
+            "_last_name": "Bechkam",
+            "_password": "12345",
+            "_employee_role": "Employee"
+        }
+    ],
+    "logged_employee": {
+        "_username": "dave",
+        "_first_name": "David",
+        "_last_name": "Bechkam",
+        "_password": "12345",
+        "_employee_role": "Employee"
+    },
     "all_packages_list": [
         {
-            "_package_id": 1,
+            "_package_id": 3,
             "_start_location": "Sydney",
-            "_end_location": "Brisbane",
-            "_package_weight": 20000.0,
+            "_end_location": "Melbourne",
+            "_package_weight": 4000.0,
+            "_contact_customer": {
+                "_first_name": "David",
+                "_last_name": "Bechkam",
+                "_email": "dave@abv.bg"
+            },
+            "_departure_time": null,
+            "_arriving_time": null,
+            "_status": "Unassign",
+            "_time_of_creating": "2024-02-19 11:32:43"
+        },
+        {
+            "_package_id": 4,
+            "_start_location": "Melbourne",
+            "_end_location": "Adelaide",
+            "_package_weight": 3350.0,
             "_contact_customer": {
                 "_first_name": "gosho",
                 "_last_name": "gosho",
@@ -15,9 +44,23 @@
             "_departure_time": null,
             "_arriving_time": null,
             "_status": "Unassign",
-            "_time_of_creating": "2024-02-18 17:17:27"
+            "_time_of_creating": "2024-02-19 14:06:48"
         }
     ],
-    "all_routes_list": []
-}
+    "all_routes_list": [
+        {
+            "_route_id": 115,
+            "_date_time_departure": "2024-02-18 02:55:00",
+            "_locations": [
+                "Sydney",
+                "Melbourne",
+                "Adelaide"
+            ],
+            "_truck": {
+                "_truck_id": 1011,
+                "name": "Man",
+                "_capacity": 37000,
+                "_max_range": 10000,
+                "_num_of_trucks": 15,
+                "_routes_list": [
                     
