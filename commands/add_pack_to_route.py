@@ -11,6 +11,13 @@ class AddPackToRoute(BaseCommand):
 
 
     def execute(self):
+        ''' 
+        AddPackToRoute command assigning package to route.
+        
+        Takes 2 integers as parameters: 1) Package_id 2) Route_id 
+        
+        Return: String with information for the state of the package  
+        '''
         #super().execute()
     
         package_id_str, route_id_str = self.params

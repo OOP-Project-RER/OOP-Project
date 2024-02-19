@@ -16,6 +16,17 @@ class ViewUnsentPackagesCommand(BaseCommand):
         return self._searched_location
 
     def execute(self):
+        '''
+        ViewUnsentPackageCommand is showing every package that is unassign to route
+
+        Takes 0 or 1 parameter:
+        case(0) - None
+        case(1) - 1) Location
+
+        Return: 
+        case(0) String with information about every unassign packages 
+        case(1) String with information about unassign packages in searched location
+        '''
         #super().execute()
 
         #if self._app_data.logged_in_employee.employee_role != 'Supervisor':

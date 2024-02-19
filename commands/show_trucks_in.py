@@ -7,12 +7,14 @@ class ShowTrucksIn(BaseCommand):
         super().__init__(params, app_data)
 
     def execute(self):
-        #super().execute()
+        '''
+        ShowTrucksIn command is showing in every city how many trucks have at the moment
 
-        #if len(self.params) == 2:
-        #    city = f'{self.params[0]}'+ ' ' + f'{self.params[1]}'
-        #else:  
-        #    city = self.params[0]
+        Takes 1 parameter: 1) Location
+
+        Return: String with information for the number of trucks in location
+        '''
+        #super().execute()
 
         loc = Locations.from_string(self.params[0])          
 

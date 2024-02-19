@@ -4,6 +4,7 @@ from core.models_factory import ModelsFactory
 from errors.application_error import ApplicationError
 from models.constants.locations import Locations
 from models.constants.status import Status
+from models.constants.name import Name
 import random
 
 class AssignTruck(BaseCommand):
@@ -16,31 +17,68 @@ class AssignTruck(BaseCommand):
         return self._models_factory
 
     def execute(self):
+        '''
+        AssignTruck command is assigning object of class Truck(Man, Scania, Artos) to object of class Route
+
+        Takes 2 or 3 parameters: 
+        Case(2) - 1) Name of class Trucks 2) Route_id  
+        Case(3) - 1) Name of class Trucks 2) Truck_id 3) Route_id
+
+        Return: String with information about the state of the command
+        '''
         #super().execute()
+        if len(self.params) == 2:
+            vehicle_str, id = self.params
+            vehicle = Name.from_string(vehicle_str)
+            id = self._try_parse_int(self.params[1])
+            route = self._app_data.find_route_by_id(id)
 
-        vehicle = self.params[0]
-        id = self._try_parse_int(self.params[1])
+            #To Do 
+            #city = route.locations[0]
+            #city_trucks = Locations.city_trucks.get(city)
 
-        route = self._app_data.find_route_by_id(id)
-        city = route.locations[0]
-        #city_trucks = Locations.city_trucks.get(city)
-
-        #if city_trucks.get(vehicle) == 0:
+            #if city_trucks.get(vehicle) == 0:
             #aise ApplicationError(f'Truck {vehicle} is not available in {city} hub')
-        #else:
-        truck = [truck for truck in self.app_data.all_trucks[vehicle]]  #if truck.status == Status.STANDING
-        self._app_data.check_if_route_can_be_assign_to_truck(route, truck[0])
+            #else:
+            trucks = [truck for truck in self.app_data.all_trucks[vehicle]]  #if truck.status == Status.STANDING
         
-        route.add_truck(truck[0])
-        truck[0].add_route(route)
+            for i in range(len(trucks)):
+                try:
+                    self._app_data.check_if_route_can_be_assign_to_truck(route, trucks[i])
+                    truck = trucks[i]  
+                    break
+            
+                except:
+                    if i == len(trucks)-1:
+                        raise ApplicationError(f'There is no available {vehicle} truck at the moment!')
+                    pass
+        else:
+            vehicle_str, id_tr, id_rt = self.params
+            vehicle = Name.from_string(vehicle_str)
+            id_truck = self._try_parse_int(id_tr)
+            id_route = self._try_parse_int(id_rt)
+
+            route = self._app_data.find_route_by_id(id_route)
+
+            trucks = [truck for truck in self.app_data.all_trucks[vehicle] if id_truck == truck.truck_id]
+            if trucks == []:
+                raise ValueError(f'There is no {vehicle} with that ID')
+            
+            truck = trucks[0]
+            self._app_data.check_if_route_can_be_assign_to_truck(route, truck)
+
+
+        
+        route.add_truck(truck)
+        truck.add_route(route)
  
         #city_trucks[vehicle] -= 1
             
-        return f'Truk {vehicle} with ID:{truck[0].truck_id} was assigned to route #{self.params[1]}'
+        return f'Truk {vehicle} with ID:{truck.truck_id} was assigned to route #{route.route_id}'
 
     def _requires_login(self) -> bool:
          return True
 
     def _expected_params_count(self) -> list[int]:
-        return [2]
+        return [2,3]
         

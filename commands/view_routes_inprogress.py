@@ -16,6 +16,13 @@ class ViewRoutesCommand(BaseCommand):
         return self._models_factory
 
     def execute(self):
+        '''
+        ViewRoutesCommand is showing every route In_progress
+
+        Takes no parameter:
+
+        Return: String with detailed information about every route in progress
+        '''
         #super().execute()
         
         #if self._app_data.logged_in_employee.employee_role != 'Manager':

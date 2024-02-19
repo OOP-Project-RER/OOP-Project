@@ -8,6 +8,13 @@ class LoginCommand(BaseCommand):
         super().__init__(params, app_data)
 
     def execute(self):
+        '''
+        LoginCommand s logging in a user
+
+        Takes 2 parameters: 1) username 2) password
+
+        Return: String with information
+        '''
         #super().execute()
         self._throw_if_employee_logged_in()
 

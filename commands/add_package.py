@@ -16,7 +16,14 @@ class AddPackageCommand(BaseCommand):
         return self._models_factory
 
     def execute(self):
-        #super().execute()
+        '''
+        AddPackageCommand creates object of class Package and object of class Customer
+
+        Takes 6 parameters: 1) Start_Location 2) End_Location 3) Package weight 4) Customer name 5) Customer surname 6) Customer email
+
+        Return: String with information for the package
+        '''
+        #super().execute() 
 
         start_location_str, end_location_str, package_weight_str, *contact_customer_str = self.params
         package_weight = self._try_parse_float(package_weight_str)

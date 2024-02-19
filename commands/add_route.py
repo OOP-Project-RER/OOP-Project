@@ -17,6 +17,13 @@ class AddRouteCommand(BaseCommand):
         return self._models_factory
     
     def execute(self):
+        '''
+        AddRouteCommand creates object of class Route 
+
+        Takes from 3 to 10 parameters: 1) Date_Time 2) Location 3) Location 4) Location .......
+
+        Return: String with information for the route
+        '''
         #super().execute()
 
         date_time_departure, *locations = self.params
