@@ -23,7 +23,9 @@ class ShowTruck(BaseCommand):
 
         #routes_str = []
         #[routes_str.append(route.__str__()) for route in truck._routes_list]
-
+        if truck._routes_list == []:
+            return(f'Truck #{id} have no routes in his schedule!')
+        
         return '\n'.join([route.__str__() for route in truck._routes_list])
 
     def _requires_login(self) -> bool:

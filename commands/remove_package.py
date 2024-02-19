@@ -1,5 +1,6 @@
 from commands.base.base_command import BaseCommand
 from core.application_data import ApplicationData
+from core.application_data import ApplicationError
 
 class RemovePackage(BaseCommand):
     def __init__(self, params: list[str], app_data: ApplicationData):
@@ -20,9 +21,11 @@ class RemovePackage(BaseCommand):
 
         route = self.app_data.find_route_by_id(route_id)
         package = self.app_data.find_package_by_id(package_id)
-
-        route.truck._packages.remove(package)
-        route.remove_package(package)
+        try:
+            route.truck._packages.remove(package)
+            route.remove_package(package)
+        except:
+            raise ApplicationError(f'Package #{package_id} is not on this route!')
        
         return f'Package #{package_id} with weight {package.package_weight} was removed from route #{route_id}'
     

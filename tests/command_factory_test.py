@@ -30,7 +30,7 @@ class Create_Should(unittest.TestCase):
     def test_create_register_employee_command(self):
         # Arrange
         input_line = "registeremployee dave David Bechkam 12345"
-        app_data = ApplicationData()
+        app_data = ApplicationData
         cmd_factory = CommandFactory(app_data)
         # Act
         command = cmd_factory.create(input_line)
@@ -42,7 +42,7 @@ class Create_Should(unittest.TestCase):
     def test_create_logout_command(self):
         # Arrange
         input_line = "logout"
-        app_data = ApplicationData()
+        app_data = ApplicationData
         cmd_factory = CommandFactory(app_data)
         # Act
         command = cmd_factory.create(input_line)
@@ -53,7 +53,7 @@ class Create_Should(unittest.TestCase):
     def test_create_login_command(self):
         # Arrange
         input_line = "login dave 12345"
-        app_data = ApplicationData()
+        app_data = ApplicationData
         cmd_factory = CommandFactory(app_data)
         # Act
         command = cmd_factory.create(input_line)
@@ -65,7 +65,7 @@ class Create_Should(unittest.TestCase):
     def test_create_add_package_command(self):
         # Arrange
         input_line = "addpackage Sydney Melbourne 2350 David Bechkam dave@abv.bg"
-        app_data = ApplicationData()
+        app_data = ApplicationData
         cmd_factory = CommandFactory(app_data)
         # Act
         command = cmd_factory.create(input_line)
@@ -78,7 +78,7 @@ class Create_Should(unittest.TestCase):
     def test_create_show_trucks_in_command(self):
         # Arrange
         input_line = "showtrucksin"
-        app_data = ApplicationData()
+        app_data = ApplicationData
         cmd_factory = CommandFactory(app_data)
         # Act
         command = cmd_factory.create(input_line)
@@ -89,7 +89,7 @@ class Create_Should(unittest.TestCase):
     def test_create_view_unsent_packages_command(self):
         # Arrange
         input_line = "viewunsentpackages"
-        app_data = ApplicationData()
+        app_data = ApplicationData
         cmd_factory = CommandFactory(app_data)
         # Act
         command = cmd_factory.create(input_line)
@@ -100,7 +100,7 @@ class Create_Should(unittest.TestCase):
     def test_create_add_route_command(self):
         # Arrange
         input_line = "addroute 20240212T0830 Sydney Melbourne Adelaide"
-        app_data = ApplicationData()
+        app_data = ApplicationData
         cmd_factory = CommandFactory(app_data)
         # Act
         command = cmd_factory.create(input_line)
@@ -113,7 +113,7 @@ class Create_Should(unittest.TestCase):
     def test_create_find_package_command(self):
         # Arrange
         input_line = "findpackage"
-        app_data = ApplicationData()
+        app_data = ApplicationData
         cmd_factory = CommandFactory(app_data)
         # Act
         command = cmd_factory.create(input_line)
@@ -124,7 +124,7 @@ class Create_Should(unittest.TestCase):
     def test_create_view_routes_command(self):
         # Arrange
         input_line = "viewroutes"
-        app_data = ApplicationData()
+        app_data = ApplicationData
         cmd_factory = CommandFactory(app_data)
         # Act
         command = cmd_factory.create(input_line)
@@ -136,7 +136,7 @@ class Create_Should(unittest.TestCase):
     def test_create_check_route_command(self):
         # Arrange
         input_line = "checkroute"
-        app_data = ApplicationData()
+        app_data = ApplicationData
         cmd_factory = CommandFactory(app_data)
         # Act
         command = cmd_factory.create(input_line)
@@ -147,7 +147,7 @@ class Create_Should(unittest.TestCase):
     def test_create_assign_truck_command(self):
         # Arrange
         input_line = "assigntruck Man 101"
-        app_data = ApplicationData()
+        app_data = ApplicationData
         cmd_factory = CommandFactory(app_data)
         # Act
         command = cmd_factory.create(input_line)
@@ -160,7 +160,7 @@ class Create_Should(unittest.TestCase):
     def test_create_add_pack_to_route_command(self):
         # Arrange
         input_line = "addpacktoroute 1 101"
-        app_data = ApplicationData()
+        app_data = ApplicationData
         cmd_factory = CommandFactory(app_data)
         # Act
         command = cmd_factory.create(input_line)
