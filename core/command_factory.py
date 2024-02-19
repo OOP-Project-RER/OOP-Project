@@ -24,35 +24,34 @@ class CommandFactory:
     def create(self, input_line):
         cmd, *params = input_line.split()
 
-        if cmd.lower() == 'registeremployee':
-            return RegisterEmployee(params, self._app_data)
+        if cmd.lower() == 'addpacktoroute':
+            return AddPackToRoute(params, self._app_data)
+        if cmd.lower() == 'addpackage':
+            return AddPackageCommand(params, self._app_data, self._models_factory)
+        if cmd.lower() == 'addroute':
+            return AddRouteCommand(params, self._app_data, self._models_factory)
+        if cmd.lower() == 'assigntruck':
+            return AssignTruck(params, self._app_data, self._models_factory)
+        if cmd.lower() == 'checkroute':
+            return CheckRouteCommand(params, self._app_data)
+        if cmd.lower() == 'findpackage':
+            return FindPackageCommand(params, self._app_data)
         if cmd.lower() == 'logout':
             return LogoutCommand(params, self._app_data)
         if cmd.lower() == 'login':
             return LoginCommand(params, self._app_data)
-        if cmd.lower() == 'addpackage':
-            return AddPackageCommand(params, self._app_data, self._models_factory)
-        if cmd.lower() == 'showtrucksin':
-            return ShowTrucksIn(params, self._app_data)
-        if cmd.lower() == 'viewunsentpackages': 
-            return ViewUnsentPackagesCommand(params, self._app_data)
-        if cmd.lower() == 'addroute':
-            return AddRouteCommand(params, self._app_data, self._models_factory)
-        if cmd.lower() == 'findpackage':
-            return FindPackageCommand(params, self._app_data)
-        if cmd.lower() == 'viewroutes':
-            return ViewRoutesCommand(params, self._app_data, self._models_factory)
-        if cmd.lower() == 'checkroute':
-            return CheckRouteCommand(params, self._app_data)
-        if cmd.lower() == 'assigntruck':
-            return AssignTruck(params, self._app_data, self._models_factory)
-        if cmd.lower() == 'addpacktoroute':
-            return AddPackToRoute(params, self._app_data)
+        if cmd.lower() == 'registeremployee':
+            return RegisterEmployee(params, self._app_data)
         if cmd.lower() == 'removepackfromroute':
             return RemovePackage(params, self._app_data)
         if cmd.lower() == 'showtruck':
             return ShowTruck(params, self._app_data)
-        
+        if cmd.lower() == 'showtrucksin':
+            return ShowTrucksIn(params, self._app_data)
+        if cmd.lower() == 'viewroutes':
+            return ViewRoutesCommand(params, self._app_data, self._models_factory)
+        if cmd.lower() == 'viewunsentpackages': 
+            return ViewUnsentPackagesCommand(params, self._app_data)
         
         
         raise ApplicationError(f'Invalid command name: {cmd}!')
