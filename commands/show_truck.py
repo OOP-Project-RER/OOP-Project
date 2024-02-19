@@ -7,6 +7,13 @@ class ShowTruck(BaseCommand):
         super().__init__(params, app_data)
 
     def execute(self):
+        '''
+        ShowTruck command is showing every route assign to truck
+
+        Takes 1 parameter: 1) Truck_id
+
+        Return: String with detailed information about the routes
+        '''
         #super().execute()
         id_str = self.params[0]  
 

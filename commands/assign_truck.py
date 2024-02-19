@@ -17,6 +17,15 @@ class AssignTruck(BaseCommand):
         return self._models_factory
 
     def execute(self):
+        '''
+        AssignTruck command is assigning object of class Truck(Man, Scania, Artos) to object of class Route
+
+        Takes 2 or 3 parameters: 
+        Case(2) - 1) Name of class Trucks 2) Route_id  
+        Case(3) - 1) Name of class Trucks 2) Truck_id 3) Route_id
+
+        Return: String with information about the state of the command
+        '''
         #super().execute()
         if len(self.params) == 2:
             vehicle_str, id = self.params

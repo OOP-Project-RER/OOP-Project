@@ -8,6 +8,13 @@ class CheckRouteCommand(BaseCommand):
         super().__init__(params, app_data)       
 
     def execute(self):
+        '''
+        CheckRouteCommand is checking for routes between 2 locations 
+
+        Takes 2 locations as parameters: 1) Start_location 2) End_location
+
+        Return: String with information for every route between the 2 locations
+        '''
         #super().execute()
         
         start_location_str, end_lockation_str = self.params

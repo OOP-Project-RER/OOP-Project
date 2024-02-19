@@ -6,6 +6,13 @@ class RemovePackage(BaseCommand):
         super().__init__(params, app_data)
 
     def execute(self):
+        '''
+        RemovePackage command is removing assigned package from route
+
+        Takes 2 parameters: 1) Pakage_id 2) Route_id
+
+        Return: String with information for the state of the package
+        '''
     #super().execute()
         package_id_str, route_id_str = self.params
         package_id = self._try_parse_int(package_id_str)

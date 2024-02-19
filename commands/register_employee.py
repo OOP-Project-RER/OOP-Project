@@ -7,6 +7,15 @@ class RegisterEmployee(BaseCommand):
         super().__init__(params, app_data)
 
     def execute(self):
+        '''
+        RegisterEmployee command creates object of class Employee
+
+        Takes 4 or 5 parameters:
+        Case(4) - 1) Username 2)First_name 3) Last_name 4) Password
+        Case(5) - 1) Username 2)First_name 3) Last_name 4) Password 5) Employee_role
+
+        Return: String with information
+        '''
         #super().execute()
         self._throw_if_employee_logged_in()
 

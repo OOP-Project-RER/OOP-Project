@@ -8,6 +8,13 @@ class FindPackageCommand(BaseCommand):
 
     def execute(self):
         #super().execute()
+        '''
+        FindPackageCommand is finding package by the package id
+
+        Takes 1 integer as parameter: 1) Package_id
+
+        Return: String with detailed information for the package
+        '''
 
         p_id = self._try_parse_int(self.params[0])
 
