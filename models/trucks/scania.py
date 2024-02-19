@@ -23,5 +23,5 @@ class Scania(Trucks):
     @truck_id.setter
     def truck_id(self, value):
         if value > 1010:
-                raise ApplicationError('You don\'t have any more Scania trucks')
+            raise ApplicationError('You don\'t have any more Scania trucks')
         self._truck_id = value
