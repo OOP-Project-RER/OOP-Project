@@ -75,8 +75,8 @@ class Package_Should(unittest.TestCase):
     def test_current_location_after_arrival(self):
         # Arrange & Act
         package = Package(VALID_ID, VALID_START_LOCATION, VALID_END_LOCATION, VALID_WEIGHT, VALID_CUSTOMER_CONTACT)
-        package._departure_time = VALID_DEPARTURE_TIME
-        package._arriving_time = VALID_ARIVAL_TIME
+        package._departure_time = VALID_DEPARTURE_TIME - timedelta(minutes=90)
+        package._arriving_time = VALID_ARIVAL_TIME - timedelta(hours = 8)
         now = package._arriving_time + timedelta(minutes=90)
         expected_result = f'Reached end location: {VALID_END_LOCATION}'
         # Assert
