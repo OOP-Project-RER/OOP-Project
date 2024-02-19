@@ -1,8 +1,8 @@
 import unittest
-import datetime
 from errors.application_error import ApplicationError
 from models.package import Package
 from models.route import Route
+from datetime import datetime
 
 from models.trucks.trucks import Trucks
 
@@ -48,8 +48,9 @@ class AddRoute_Should(unittest.TestCase):
     def test_add_route_adds_route_properly(self):
         #Arrange
         truck = Trucks(VALID_ID, VALID_NAME, VALID_CAPACITY, VALID_MAX_RANGE, VALID_NUM_OF_TRUCKS)
-        route1 = Route(101, "20240212T0830", "Sydney", "Melbourne")
-        route2 = Route(102, "20240218T0830", "Melbourne", "Adelaide")
+    
+        route1 = Route(101, datetime.strptime("20240212T0830", "%Y%m%dT%H%M"), "Sydney", "Melbourne")
+        route2 = Route(102, datetime.strptime("20240218T0830", "%Y%m%dT%H%M"), "Melbourne", "Adelaide")
         #Act
         truck.add_route(route1)
         truck.add_route(route2)
@@ -60,7 +61,7 @@ class AddRoute_Should(unittest.TestCase):
 class View_Should(unittest.TestCase):
     def test_view_returns_correct_format(self):
         #Arrange
-        current_datetime = datetime.datetime.now()
+        current_datetime = datetime.now()
         truck = Trucks(VALID_ID, VALID_NAME, VALID_CAPACITY, VALID_MAX_RANGE, VALID_NUM_OF_TRUCKS)
         package1 = Package(1, "Sydney", "Melbourne", 2000.0, "David Bechkam dave@abv.bg")
         truck.add_package(package1)
