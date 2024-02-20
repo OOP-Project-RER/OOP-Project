@@ -116,8 +116,8 @@ class Route:
         
         return route_string
 
-    def calc_current_locations(self):
-        now = datetime.now()
+    def calc_current_locations(self, now=datetime.now()):
+        
 
         if now < list(self._stops_date_time.values())[0]:
             return f'Still in local hub: {list(self._stops_date_time.keys())[0]}'
@@ -158,3 +158,4 @@ class Route:
         calc_current_location = self.calc_current_locations()
 
         return f'Route #{self._route_id}\n{route_string}\nTotal distance: {self._total_distance}\nCurrent locations: {calc_current_location}'           
+        

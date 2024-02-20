@@ -1,41 +1,12 @@
 {
-    "employees": [
-        {
-            "_username": "dave",
-            "_first_name": "David",
-            "_last_name": "Bechkam",
-            "_password": "12345",
-            "_employee_role": "Employee"
-        }
-    ],
-    "logged_employee": {
-        "_username": "dave",
-        "_first_name": "David",
-        "_last_name": "Bechkam",
-        "_password": "12345",
-        "_employee_role": "Employee"
-    },
+    "employees": [],
+    "logged_employee": null,
     "all_packages_list": [
         {
-            "_package_id": 3,
+            "_package_id": 1,
             "_start_location": "Sydney",
-            "_end_location": "Melbourne",
-            "_package_weight": 4000.0,
-            "_contact_customer": {
-                "_first_name": "David",
-                "_last_name": "Bechkam",
-                "_email": "dave@abv.bg"
-            },
-            "_departure_time": null,
-            "_arriving_time": null,
-            "_status": "Unassign",
-            "_time_of_creating": "2024-02-19 11:32:43"
-        },
-        {
-            "_package_id": 4,
-            "_start_location": "Melbourne",
-            "_end_location": "Adelaide",
-            "_package_weight": 3350.0,
+            "_end_location": "Brisbane",
+            "_package_weight": 20000.0,
             "_contact_customer": {
                 "_first_name": "gosho",
                 "_last_name": "gosho",
@@ -44,13 +15,35 @@
             "_departure_time": null,
             "_arriving_time": null,
             "_status": "Unassign",
-            "_time_of_creating": "2024-02-19 14:06:48"
+            "_time_of_creating": "2024-02-20 10:16:40"
         }
     ],
     "all_routes_list": [
         {
-            "_route_id": 115,
-            "_date_time_departure": "2024-02-18 02:55:00",
+            "_route_id": 101,
+            "_date_time_departure": "2024-02-12 08:30:00",
+            "_locations": [
+                "Sydney",
+                "Melbourne",
+                "Adelaide"
+            ],
+            "_truck": null,
+            "_status": "Finished",
+            "_stops_date_time": {
+                "Sydney": "2024-02-12 08:30:00",
+                "Melbourne": "2024-02-12 18:34:49",
+                "Adelaide": "2024-02-13 02:54:49"
+            },
+            "weight_in_locations": {
+                "Sydney": 0,
+                "Melbourne": 0,
+                "Adelaide": 0
+            },
+            "_total_distance": 1602
+        },
+        {
+            "_route_id": 102,
+            "_date_time_departure": "2024-02-19 08:30:00",
             "_locations": [
                 "Sydney",
                 "Melbourne",
