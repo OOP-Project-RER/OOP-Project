@@ -1,6 +1,4 @@
-from errors.application_error import ApplicationError
 from models.package import Package
-#from models.route import Route
 from models.constants.status import Status
 
 
@@ -47,6 +45,9 @@ class Trucks:
     def add_route(self, route):
         '''Add object of class Route to list'''
         self._routes_list.append(route)
+    
+    def remove_package(self, package:Package):
+        self._packages.remove(package)
 
     def view(self):
         '''Return string with information for every package in list'''

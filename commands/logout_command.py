@@ -1,6 +1,6 @@
 from commands.base.base_command import BaseCommand
 from core.application_data import ApplicationData
-from errors.application_error import ApplicationError
+
 
 
 class LogoutCommand(BaseCommand):
