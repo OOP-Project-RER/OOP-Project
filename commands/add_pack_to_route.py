@@ -33,6 +33,8 @@ class AddPackToRoute(BaseCommand):
         self.app_data.check_if_package_locations_are_in_route_locations(package, route)
         try:
             self.app_data.check_if_package_weight_can_be_adde_to_route(package, route)
+        except ApplicationError as e:
+            raise e
         except:
             raise ApplicationError('You need to assign truck to the route before adding packages!')
 

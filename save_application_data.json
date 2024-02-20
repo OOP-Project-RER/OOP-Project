@@ -15,45 +15,34 @@
             "_departure_time": null,
             "_arriving_time": null,
             "_status": "Unassign",
-            "_time_of_creating": "2024-02-20 10:16:40"
+            "_time_of_creating": "2024-02-20 12:07:03"
         }
     ],
     "all_routes_list": [
         {
             "_route_id": 101,
-            "_date_time_departure": "2024-02-12 08:30:00",
+            "_date_time_departure": "2024-02-20 18:30:00",
             "_locations": [
                 "Sydney",
                 "Melbourne",
-                "Adelaide"
+                "Adelaide",
+                "Brisbane"
             ],
             "_truck": null,
-            "_status": "Finished",
+            "_status": "2024-02-20 12:06:51",
             "_stops_date_time": {
-                "Sydney": "2024-02-12 08:30:00",
-                "Melbourne": "2024-02-12 18:34:49",
-                "Adelaide": "2024-02-13 02:54:49"
+                "Sydney": "2024-02-20 18:30:00",
+                "Melbourne": "2024-02-21 04:34:49",
+                "Adelaide": "2024-02-21 12:54:49",
+                "Brisbane": "2024-02-22 11:03:47"
             },
             "weight_in_locations": {
                 "Sydney": 0,
                 "Melbourne": 0,
-                "Adelaide": 0
+                "Adelaide": 0,
+                "Brisbane": 0
             },
-            "_total_distance": 1602
-        },
-        {
-            "_route_id": 102,
-            "_date_time_departure": "2024-02-19 08:30:00",
-            "_locations": [
-                "Sydney",
-                "Melbourne",
-                "Adelaide"
-            ],
-            "_truck": {
-                "_truck_id": 1011,
-                "name": "Man",
-                "_capacity": 37000,
-                "_max_range": 10000,
-                "_num_of_trucks": 15,
-                "_routes_list": [
-                    
+            "_total_distance": 3529
+        }
+    ]
+}
