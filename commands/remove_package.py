@@ -1,6 +1,8 @@
 from commands.base.base_command import BaseCommand
 from core.application_data import ApplicationData
 from core.application_data import ApplicationError
+from models.constants.status import Status
+from datetime import datetime
 
 class RemovePackage(BaseCommand):
     def __init__(self, params: list[str], app_data: ApplicationData):
@@ -21,8 +23,12 @@ class RemovePackage(BaseCommand):
 
         route = self.app_data.find_route_by_id(route_id)
         package = self.app_data.find_package_by_id(package_id)
+        package.status = datetime.now()
+        if package.status == Status.IN_PROGRESS:
+            raise ApplicationError(f'Package #{package.package_id} is In progress and can\'t remove it!')
+        
         try:
-            route.truck._packages.remove(package)
+            route.truck.remove_package(package)
             route.remove_package(package)
         except:
             raise ApplicationError(f'Package #{package_id} is not on this route!')

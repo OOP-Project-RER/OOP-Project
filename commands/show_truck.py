@@ -1,6 +1,5 @@
 from commands.base.base_command import BaseCommand
 from core.application_data import ApplicationData
-from models.constants.locations import Locations
 
 class ShowTruck(BaseCommand):
     def __init__(self, params: list[str], app_data: ApplicationData):

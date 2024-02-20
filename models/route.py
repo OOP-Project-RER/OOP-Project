@@ -16,7 +16,7 @@ class Route:
         self.truck = None
         self._status = datetime.now()  
         self._stops_date_time, self.weight_in_locations = self.stops_info()
-        self._total_distance = self.total_distance()
+        self._total_distance = self.calc_total_distance()
     
     @property
     def route_id(self):
@@ -32,6 +32,7 @@ class Route:
     
     @status.setter
     def status(self, date_time : datetime):
+        '''Take datetime as parameter and depends on the day change the status'''
         if date_time < self.date_time_departure:
             self._status = Status.STANDING
             
@@ -47,6 +48,7 @@ class Route:
     
     #@date_time_departure.setter
     #def date_time_departure(self, input_datetime: str) -> datetime:
+    '''Restrict you to make route in the past and takes at least 1 hour from the moment on the creating the route'''
     #    #parsed time = datetime.strptime(input_datetime, "%Y%m%dT%H%M")
     #    
     #    if datetime.now() > input_datetime:
@@ -65,6 +67,7 @@ class Route:
     
     @truck.setter 
     def truck(self, value):
+        '''Restrict you from assigning 2 trucks for 1 route'''
         if value == None:
             self._truck = value
         
@@ -72,16 +75,22 @@ class Route:
             if self.truck == None:
                 self._truck = value
             else:
-                raise ApplicationError('Truck is already assign to this route!')    
+                raise ApplicationError('Truck is already assign to this route!')
+
+    @property
+    def total_distance(self):
+        return self._total_distance    
      
-    def add_truck(self, truck):
-        if truck.max_range < self._total_distance:
+    def add_truck(self, truck:Trucks) -> Trucks:
+        '''Check if the distance is not higher than the truck range before adding the truck for route'''
+        if truck.max_range < self.total_distance:
             raise ApplicationError(f'The distance is too high for truck {truck.name}!')
         self.truck = truck
 
         return self.truck 
 
-    def calculate_travel_time(self, stop, next_stop):
+    def calculate_travel_time(self, stop:Locations, next_stop:Locations) -> float:
+        '''Calculate the time to travel certain distance'''
         average_speed = 87
         distance = getattr(Locations, stop.lower())[next_stop]
         travel_time_hours = distance / average_speed
@@ -89,7 +98,10 @@ class Route:
         return travel_time_hours
     
     
-    def stops_info(self):
+    def stops_info(self) -> dict:
+        ''' Create 2 dict with keys every stop of the route. 
+        First dict is holding as values the time of arriving 
+        Second dict is holding as values the weight that is adding or removing from the truck on every stop'''
 
         info = {self.locations[0]: self._date_time_departure}
         weight_in_stops = {self.locations[0]: 0}
@@ -105,7 +117,8 @@ class Route:
     
         return info, weight_in_stops
 
-    def generate_route_string(self):
+    def generate_route_string(self) -> str:
+        '''Generate string with information for every stop arriving time'''
         route_string = ''
         
         for i, j in self._stops_date_time.items():
@@ -116,8 +129,10 @@ class Route:
         
         return route_string
 
-    def calc_current_locations(self, now=datetime.now()):
+    def calc_current_locations(self) -> str:
+        '''Return string with information for the current location of the route'''
         
+        now = datetime.now()
 
         if now < list(self._stops_date_time.values())[0]:
             return f'Still in local hub: {list(self._stops_date_time.keys())[0]}'
@@ -133,17 +148,20 @@ class Route:
                     return f'{distance_to_next_stop} km till {k}'
 
     def update_weight_in_stops(self, package : Package):
+        '''Updating dict for weight in every stop'''
         
         self.weight_in_locations[package.start_location] += package.package_weight
         self.weight_in_locations[package.end_location] -= package.package_weight
 
     def remove_package(self, package : Package):
+        '''Remove package from the route and upgrade the weight in every stop'''
         package._departure_time = None
         package._arriving_time = None
         self.weight_in_locations[package.start_location] -= package.package_weight
         self.weight_in_locations[package.end_location] += package.package_weight
 
-    def total_distance(self):
+    def calc_total_distance(self) -> int:
+        '''Calculate the total distance for the route'''
         total_distance = 0
         for i in range(len(self._locations)-1):
             current_location = self.locations[i]
@@ -154,6 +172,7 @@ class Route:
         return total_distance
 
     def __str__(self) -> str: 
+        '''Generate string with route ID, total distance and current location'''
         route_string = self.generate_route_string()
         calc_current_location = self.calc_current_locations()
 
