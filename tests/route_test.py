@@ -154,7 +154,7 @@ class TotalDistance_Sould(unittest.TestCase):
         route = Route(VALID_ID, datetime.strptime("20240210T0255", "%Y%m%dT%H%M"), "Sydney", "Melbourne", "Adelaide")
         expected_output = 1602
         # Assert
-        self.assertEqual(route.total_distance(), expected_output)
+        self.assertEqual(route.calc_total_distance(), expected_output)
 
 class Str_Should(unittest.TestCase):
     def test_str_returns_correct_format(self):
