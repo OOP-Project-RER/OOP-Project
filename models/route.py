@@ -129,10 +129,9 @@ class Route:
         
         return route_string
 
-    def calc_current_locations(self) -> str:
+    def calc_current_locations(self, now=datetime.now()) -> str:
         '''Return string with information for the current location of the route'''
         
-        now = datetime.now()
 
         if now < list(self._stops_date_time.values())[0]:
             return f'Still in local hub: {list(self._stops_date_time.keys())[0]}'
